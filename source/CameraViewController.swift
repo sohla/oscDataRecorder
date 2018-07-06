@@ -130,6 +130,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 	override func viewDidDisappear(_ animated: Bool) {
 		sessionQueue.async {
 			if self.setupResult == .success {
+                self.server.stop()
 				self.session.stopRunning()
 				self.removeObservers()
 			}
@@ -811,31 +812,20 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 	
 	func handle(_ message: OSCMessage!) {
 		
-		print([message.address,message.arguments])
-		
-//		if(message.address == "/gyrosc"){
-//
-//			if let cmd:String = message.arguments[0] as? String{
-//				NotificationCenter.default.post(
-//					name: Notification.Name(rawValue: cmd),
-//					object: nil,
-//					userInfo: nil)
-//			}
-//		}
-
-
 		if movieFileOutput.isRecording {
 		
 			let metadataItem = AVMutableMetadataItem()
 			metadataItem.identifier = AVMetadataIdentifierQuickTimeMetadataLocationISO6709
 			metadataItem.dataType = kCMMetadataDataType_QuickTimeMetadataLocation_ISO6709 as String
-
 			
-			let argsString = String(format: "pitch:\(message.arguments[0] as! String)\n roll:\(message.arguments[1] as! String)\n yaw:\(message.arguments[2] as! String)")
+            var dataString = (message.address as NSString).lastPathComponent
+            for arg in message.arguments {
+                dataString += ","
+                dataString += arg as! String
+            }
 			
+			metadataItem.value = dataString as NSString
 			
-			metadataItem.value = argsString as NSString
-			print(metadataItem.value)
 			
 			let metadataItemGroup = AVTimedMetadataGroup(items: [metadataItem], timeRange: CMTimeRangeMake(CMClockGetTime(CMClockGetHostTimeClock()), kCMTimeInvalid))
 			do {
@@ -844,6 +834,8 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 			catch {
 				print("Could not add timed metadata group: \(error)")
 			}
+            
+            print(metadataItemGroup.timeRange.start.seconds, metadataItem.value)
 
 		}
 		

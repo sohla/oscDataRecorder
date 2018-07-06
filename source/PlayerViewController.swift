@@ -277,6 +277,7 @@ class PlayerViewController: UIViewController, AVPlayerItemMetadataOutputPushDele
 									if itemDataType == String(kCMMetadataDataType_QuickTimeMetadataLocation_ISO6709) {
 										if let itemValue = metdataItem.value as? String {
 											self.locationOverlayLabel.text = itemValue
+                                            print(metdataItem.time.seconds, itemValue)
 										}
 									}
 									

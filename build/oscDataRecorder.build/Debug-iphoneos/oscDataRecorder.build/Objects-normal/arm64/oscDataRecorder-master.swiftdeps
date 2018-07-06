@@ -1,10 +1,10 @@
 version: "Apple Swift version 4.1 (swiftlang-902.0.48 clang-902.0.37.1)"
 options: "d4d8ac043a780672e38d4419ba8db30a"
-build_time: [1530878507, 757584000]
+build_time: [1530882381, 727180000]
 inputs:
   "/Users/soh_la/Develop/iOS/Projects/oscDataRecorder/source/AppDelegate.swift": [1487048104, 0]
   "/Users/soh_la/Develop/iOS/Projects/oscDataRecorder/source/PreviewView.swift": [1487048104, 0]
-  "/Users/soh_la/Develop/iOS/Projects/oscDataRecorder/source/PlayerViewController.swift": [1530878507, 0]
-  "/Users/soh_la/Develop/iOS/Projects/oscDataRecorder/source/CameraViewController.swift": [1530878320, 0]
+  "/Users/soh_la/Develop/iOS/Projects/oscDataRecorder/source/PlayerViewController.swift": [1530881985, 0]
+  "/Users/soh_la/Develop/iOS/Projects/oscDataRecorder/source/CameraViewController.swift": [1530882371, 0]
   "/Users/soh_la/Develop/iOS/Projects/oscDataRecorder/source/AssetGridViewCell.swift": [1487048104, 0]
   "/Users/soh_la/Develop/iOS/Projects/oscDataRecorder/source/AssetGridViewController.swift": [1487048104, 0]
