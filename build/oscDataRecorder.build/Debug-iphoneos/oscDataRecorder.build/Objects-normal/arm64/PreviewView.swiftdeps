@@ -1,0 +1,248 @@
+### Swift dependencies file v0 ###
+provides-top-level:
+- "PreviewView"
+provides-nominal:
+- "15oscDataRecorder11PreviewViewC"
+provides-member:
+- ["15oscDataRecorder11PreviewViewC", ""]
+provides-dynamic-lookup:
+- "layerClass"
+- "session"
+- "videoPreviewLayer"
+depends-top-level:
+- "AVCaptureSession"
+- "AVCaptureVideoPreviewLayer"
+- "AnyClass"
+- "AssignmentPrecedence"
+- "CastingPrecedence"
+- "PreviewView"
+- "UIView"
+depends-member:
+- !private ["So26AVCaptureVideoPreviewLayerC", "session"]
+- !private ["So7CALayerC", "session"]
+- !private ["So15CALayerDelegateP", "AVCaptureVideoPreviewLayer"]
+- ["So15CALayerDelegateP", ""]
+- !private ["So15CALayerDelegateP", "init"]
+- !private ["So15CALayerDelegateP", "layer"]
+- !private ["So15CALayerDelegateP", "videoPreviewLayer"]
+- !private ["So13CAMediaTimingP", "session"]
+- !private ["s7CVarArgP", "AVCaptureVideoPreviewLayer"]
+- ["s7CVarArgP", ""]
+- !private ["s7CVarArgP", "init"]
+- !private ["s7CVarArgP", "layer"]
+- !private ["s7CVarArgP", "session"]
+- !private ["s7CVarArgP", "videoPreviewLayer"]
+- !private ["s28CustomDebugStringConvertibleP", "AVCaptureVideoPreviewLayer"]
+- ["s28CustomDebugStringConvertibleP", ""]
+- !private ["s28CustomDebugStringConvertibleP", "init"]
+- !private ["s28CustomDebugStringConvertibleP", "layer"]
+- !private ["s28CustomDebugStringConvertibleP", "session"]
+- !private ["s28CustomDebugStringConvertibleP", "videoPreviewLayer"]
+- !private ["s23CustomStringConvertibleP", "AVCaptureVideoPreviewLayer"]
+- ["s23CustomStringConvertibleP", ""]
+- !private ["s23CustomStringConvertibleP", "init"]
+- !private ["s23CustomStringConvertibleP", "layer"]
+- !private ["s23CustomStringConvertibleP", "session"]
+- !private ["s23CustomStringConvertibleP", "videoPreviewLayer"]
+- !private ["s9EquatableP", "AVCaptureVideoPreviewLayer"]
+- ["s9EquatableP", ""]
+- !private ["s9EquatableP", "init"]
+- !private ["s9EquatableP", "layer"]
+- !private ["s9EquatableP", "session"]
+- !private ["s9EquatableP", "videoPreviewLayer"]
+- !private ["s8HashableP", "AVCaptureVideoPreviewLayer"]
+- ["s8HashableP", ""]
+- !private ["s8HashableP", "init"]
+- !private ["s8HashableP", "layer"]
+- !private ["s8HashableP", "session"]
+- !private ["s8HashableP", "videoPreviewLayer"]
+- !private ["So8NSCodingP", "AVCaptureVideoPreviewLayer"]
+- ["So8NSCodingP", ""]
+- !private ["So8NSCodingP", "init"]
+- !private ["So8NSCodingP", "layer"]
+- !private ["So8NSCodingP", "session"]
+- !private ["So8NSCodingP", "videoPreviewLayer"]
+- ["So8NSObjectC", "AVCaptureSession"]
+- ["So8NSObjectC", "AVCaptureVideoPreviewLayer"]
+- ["So8NSObjectC", "AnyClass"]
+- ["So8NSObjectC", "init"]
+- !private ["So8NSObjectC", "layer"]
+- ["So8NSObjectC", "layerClass"]
+- ["So8NSObjectC", "session"]
+- ["So8NSObjectC", "videoPreviewLayer"]
+- !private ["So16NSObjectProtocolP", "AVCaptureVideoPreviewLayer"]
+- ["So16NSObjectProtocolP", ""]
+- !private ["So16NSObjectProtocolP", "init"]
+- !private ["So16NSObjectProtocolP", "layer"]
+- !private ["So16NSObjectProtocolP", "session"]
+- !private ["So16NSObjectProtocolP", "videoPreviewLayer"]
+- !private ["So14NSSecureCodingP", "session"]
+- ["15oscDataRecorder11PreviewViewC", "AVCaptureSession"]
+- ["15oscDataRecorder11PreviewViewC", "AVCaptureVideoPreviewLayer"]
+- ["15oscDataRecorder11PreviewViewC", "AnyClass"]
+- ["15oscDataRecorder11PreviewViewC", "deinit"]
+- ["15oscDataRecorder11PreviewViewC", "init"]
+- !private ["15oscDataRecorder11PreviewViewC", "layer"]
+- ["15oscDataRecorder11PreviewViewC", "layerClass"]
+- ["15oscDataRecorder11PreviewViewC", "session"]
+- ["15oscDataRecorder11PreviewViewC", "videoPreviewLayer"]
+- !private ["So29UIAccessibilityIdentificationP", "AVCaptureVideoPreviewLayer"]
+- ["So29UIAccessibilityIdentificationP", ""]
+- !private ["So29UIAccessibilityIdentificationP", "init"]
+- !private ["So29UIAccessibilityIdentificationP", "layer"]
+- !private ["So29UIAccessibilityIdentificationP", "videoPreviewLayer"]
+- !private ["So12UIAppearanceP", "AVCaptureVideoPreviewLayer"]
+- ["So12UIAppearanceP", ""]
+- !private ["So12UIAppearanceP", "init"]
+- !private ["So12UIAppearanceP", "layer"]
+- !private ["So12UIAppearanceP", "videoPreviewLayer"]
+- !private ["So21UIAppearanceContainerP", "AVCaptureVideoPreviewLayer"]
+- ["So21UIAppearanceContainerP", ""]
+- !private ["So21UIAppearanceContainerP", "init"]
+- !private ["So21UIAppearanceContainerP", "layer"]
+- !private ["So21UIAppearanceContainerP", "videoPreviewLayer"]
+- !private ["So17UICoordinateSpaceP", "AVCaptureVideoPreviewLayer"]
+- ["So17UICoordinateSpaceP", ""]
+- !private ["So17UICoordinateSpaceP", "init"]
+- !private ["So17UICoordinateSpaceP", "layer"]
+- !private ["So17UICoordinateSpaceP", "videoPreviewLayer"]
+- !private ["So13UIDynamicItemP", "AVCaptureVideoPreviewLayer"]
+- ["So13UIDynamicItemP", ""]
+- !private ["So13UIDynamicItemP", "init"]
+- !private ["So13UIDynamicItemP", "layer"]
+- !private ["So13UIDynamicItemP", "videoPreviewLayer"]
+- !private ["So18UIFocusEnvironmentP", "AVCaptureVideoPreviewLayer"]
+- ["So18UIFocusEnvironmentP", ""]
+- !private ["So18UIFocusEnvironmentP", "init"]
+- !private ["So18UIFocusEnvironmentP", "layer"]
+- !private ["So18UIFocusEnvironmentP", "videoPreviewLayer"]
+- !private ["So11UIFocusItemP", "AVCaptureVideoPreviewLayer"]
+- ["So11UIFocusItemP", ""]
+- !private ["So11UIFocusItemP", "init"]
+- !private ["So11UIFocusItemP", "layer"]
+- !private ["So11UIFocusItemP", "videoPreviewLayer"]
+- !private ["So30UIPasteConfigurationSupportingP", "AVCaptureVideoPreviewLayer"]
+- ["So30UIPasteConfigurationSupportingP", ""]
+- !private ["So30UIPasteConfigurationSupportingP", "init"]
+- !private ["So30UIPasteConfigurationSupportingP", "layer"]
+- !private ["So30UIPasteConfigurationSupportingP", "videoPreviewLayer"]
+- ["So11UIResponderC", "AVCaptureSession"]
+- ["So11UIResponderC", "AVCaptureVideoPreviewLayer"]
+- ["So11UIResponderC", "AnyClass"]
+- ["So11UIResponderC", "init"]
+- !private ["So11UIResponderC", "layer"]
+- ["So11UIResponderC", "layerClass"]
+- ["So11UIResponderC", "session"]
+- ["So11UIResponderC", "videoPreviewLayer"]
+- !private ["So30UIResponderStandardEditActionsP", "AVCaptureVideoPreviewLayer"]
+- ["So30UIResponderStandardEditActionsP", ""]
+- !private ["So30UIResponderStandardEditActionsP", "init"]
+- !private ["So30UIResponderStandardEditActionsP", "layer"]
+- !private ["So30UIResponderStandardEditActionsP", "videoPreviewLayer"]
+- !private ["So18UITraitEnvironmentP", "AVCaptureVideoPreviewLayer"]
+- ["So18UITraitEnvironmentP", ""]
+- !private ["So18UITraitEnvironmentP", "init"]
+- !private ["So18UITraitEnvironmentP", "layer"]
+- !private ["So18UITraitEnvironmentP", "videoPreviewLayer"]
+- ["So6UIViewC", "AVCaptureSession"]
+- ["So6UIViewC", "AVCaptureVideoPreviewLayer"]
+- ["So6UIViewC", "AnyClass"]
+- ["So6UIViewC", ""]
+- ["So6UIViewC", "init"]
+- !private ["So6UIViewC", "layer"]
+- ["So6UIViewC", "layerClass"]
+- ["So6UIViewC", "session"]
+- ["So6UIViewC", "videoPreviewLayer"]
+- !private ["s37_DefaultCustomPlaygroundQuickLookableP", "AVCaptureVideoPreviewLayer"]
+- ["s37_DefaultCustomPlaygroundQuickLookableP", ""]
+- !private ["s37_DefaultCustomPlaygroundQuickLookableP", "init"]
+- !private ["s37_DefaultCustomPlaygroundQuickLookableP", "layer"]
+- !private ["s37_DefaultCustomPlaygroundQuickLookableP", "videoPreviewLayer"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "AVCaptureVideoPreviewLayer"]
+- ["10Foundation27_KeyValueCodingAndObservingP", ""]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "init"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "layer"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "session"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "videoPreviewLayer"]
+depends-nominal:
+- !private "So26AVCaptureVideoPreviewLayerC"
+- !private "So7CALayerC"
+- "So15CALayerDelegateP"
+- !private "So13CAMediaTimingP"
+- "s7CVarArgP"
+- "s28CustomDebugStringConvertibleP"
+- "s23CustomStringConvertibleP"
+- "s9EquatableP"
+- "s8HashableP"
+- "So8NSCodingP"
+- "So8NSObjectC"
+- "So16NSObjectProtocolP"
+- !private "So14NSSecureCodingP"
+- "15oscDataRecorder11PreviewViewC"
+- "So29UIAccessibilityIdentificationP"
+- "So12UIAppearanceP"
+- "So21UIAppearanceContainerP"
+- "So17UICoordinateSpaceP"
+- "So13UIDynamicItemP"
+- "So18UIFocusEnvironmentP"
+- "So11UIFocusItemP"
+- "So30UIPasteConfigurationSupportingP"
+- "So11UIResponderC"
+- "So30UIResponderStandardEditActionsP"
+- "So18UITraitEnvironmentP"
+- "So6UIViewC"
+- "s37_DefaultCustomPlaygroundQuickLookableP"
+- "10Foundation27_KeyValueCodingAndObservingP"
+depends-dynamic-lookup:
+depends-external:
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/Dispatch.apinotesc"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/ObjectiveC.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/ModelIO.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/CoreMedia.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/simd.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/CoreImage.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/QuartzCore.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/Dispatch.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/Metal.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/Darwin.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/CoreLocation.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/Foundation.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/AVFoundation.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/CoreFoundation.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/CoreAudio.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/CoreGraphics.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/Photos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/Swift.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/UIKit.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/GLKit.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/SceneKit.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/SwiftOnoneSupport.swiftmodule"
+- "/Users/soh_la/Develop/iOS/Projects/oscDataRecorder/build/Debug-iphoneos/CocoaAsyncSocket/CocoaAsyncSocket.framework/Headers/CocoaAsyncSocket-umbrella.h"
+- "/Users/soh_la/Develop/iOS/Projects/oscDataRecorder/build/Debug-iphoneos/OSCKit/OSCKit.framework/Headers/OSCKit-umbrella.h"
+- "/Users/soh_la/Develop/iOS/Projects/oscDataRecorder/build/Debug-iphoneos/OSCKit/OSCKit.framework/Headers/OSCMessage.h"
+- "/Users/soh_la/Develop/iOS/Projects/oscDataRecorder/build/Debug-iphoneos/OSCKit/OSCKit.framework/Headers/OSCProtocol.h"
+- "/Users/soh_la/Develop/iOS/Projects/oscDataRecorder/build/Debug-iphoneos/OSCKit/OSCKit.framework/Headers/OSCServer.h"
+- "/Users/soh_la/Develop/iOS/Projects/oscDataRecorder/build/Debug-iphoneos/CocoaAsyncSocket/CocoaAsyncSocket.framework/Headers/GCDAsyncSocket.h"
+- "/Users/soh_la/Develop/iOS/Projects/oscDataRecorder/build/Debug-iphoneos/CocoaAsyncSocket/CocoaAsyncSocket.framework/Headers/GCDAsyncUdpSocket.h"
+- "/Users/soh_la/Develop/iOS/Projects/oscDataRecorder/build/Debug-iphoneos/OSCKit/OSCKit.framework/Headers/OSCKit.h"
+- "/Users/soh_la/Develop/iOS/Projects/oscDataRecorder/build/Debug-iphoneos/OSCKit/OSCKit.framework/Headers/OSCClient.h"
+- "/Users/soh_la/Develop/iOS/Projects/oscDataRecorder/build/Debug-iphoneos/CocoaAsyncSocket/CocoaAsyncSocket.framework/Modules/module.modulemap"
+- "/Users/soh_la/Develop/iOS/Projects/oscDataRecorder/build/Debug-iphoneos/OSCKit/OSCKit.framework/Modules/module.modulemap"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/usr/include/objc/ObjectiveC.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/ModelIO.framework/Headers/ModelIO.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/OpenGLES.framework/Headers/OpenGLES.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/CoreImage.framework/Headers/CoreImage.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/QuartzCore.framework/Headers/QuartzCore.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/Metal.framework/Headers/Metal.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/usr/include/Darwin.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/CoreLocation.framework/Headers/CoreLocation.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/AVFoundation.framework/Headers/AVFoundation.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/CoreGraphics.framework/Headers/CoreGraphics.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/Photos.framework/Headers/Photos.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIKit.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/GLKit.framework/Headers/GLKit.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/SceneKit.framework/Headers/SceneKit.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/CoreText.framework/Headers/CoreText.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/AudioToolbox.framework/Headers/AudioToolbox.apinotes"
+interface-hash: "d2dfda62ca6fa843fd604106f4752cd2"

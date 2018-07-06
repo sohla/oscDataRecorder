@@ -1,0 +1,122 @@
+{
+  'version': 0,
+  'case-sensitive': 'false',
+  'roots': [
+    {
+      'type': 'directory',
+      'name': "/Users/soh_la/Develop/iOS/Projects/oscDataRecorder/build/Debug-iphoneos/CocoaAsyncSocket/CocoaAsyncSocket.framework/Headers",
+      'contents': [
+        {
+          'type': 'file',
+          'name': "CocoaAsyncSocket-Swift.h",
+          'external-contents': "/Users/soh_la/Develop/iOS/Projects/oscDataRecorder/build/Debug-iphoneos/CocoaAsyncSocket/CocoaAsyncSocket.framework/Headers/CocoaAsyncSocket-Swift.h"
+        },
+        {
+          'type': 'file',
+          'name': "CocoaAsyncSocket-umbrella.h",
+          'external-contents': "/Users/soh_la/Develop/iOS/Projects/oscDataRecorder/Pods/Target Support Files/CocoaAsyncSocket/CocoaAsyncSocket-umbrella.h"
+        },
+        {
+          'type': 'file',
+          'name': "GCDAsyncSocket.h",
+          'external-contents': "/Users/soh_la/Develop/iOS/Projects/oscDataRecorder/Pods/CocoaAsyncSocket/Source/GCD/GCDAsyncSocket.h"
+        },
+        {
+          'type': 'file',
+          'name': "GCDAsyncUdpSocket.h",
+          'external-contents': "/Users/soh_la/Develop/iOS/Projects/oscDataRecorder/Pods/CocoaAsyncSocket/Source/GCD/GCDAsyncUdpSocket.h"
+        }
+      ]
+    },
+    {
+      'type': 'directory',
+      'name': "/Users/soh_la/Develop/iOS/Projects/oscDataRecorder/build/Debug-iphoneos/CocoaAsyncSocket/CocoaAsyncSocket.framework/Modules",
+      'contents': [
+        {
+          'type': 'file',
+          'name': "module.modulemap",
+          'external-contents': "/Users/soh_la/Develop/iOS/Projects/oscDataRecorder/build/Pods.build/Debug-iphoneos/CocoaAsyncSocket.build/module.modulemap"
+        }
+      ]
+    },
+    {
+      'type': 'directory',
+      'name': "/Users/soh_la/Develop/iOS/Projects/oscDataRecorder/build/Debug-iphoneos/OSCKit/OSCKit.framework/Headers",
+      'contents': [
+        {
+          'type': 'file',
+          'name': "OSCClient.h",
+          'external-contents': "/Users/soh_la/Develop/iOS/Projects/oscDataRecorder/Pods/OSCKit/OSCKit/OSCClient.h"
+        },
+        {
+          'type': 'file',
+          'name': "OSCKit-Swift.h",
+          'external-contents': "/Users/soh_la/Develop/iOS/Projects/oscDataRecorder/build/Debug-iphoneos/OSCKit/OSCKit.framework/Headers/OSCKit-Swift.h"
+        },
+        {
+          'type': 'file',
+          'name': "OSCKit-umbrella.h",
+          'external-contents': "/Users/soh_la/Develop/iOS/Projects/oscDataRecorder/Pods/Target Support Files/OSCKit/OSCKit-umbrella.h"
+        },
+        {
+          'type': 'file',
+          'name': "OSCKit.h",
+          'external-contents': "/Users/soh_la/Develop/iOS/Projects/oscDataRecorder/Pods/OSCKit/OSCKit/OSCKit.h"
+        },
+        {
+          'type': 'file',
+          'name': "OSCMessage.h",
+          'external-contents': "/Users/soh_la/Develop/iOS/Projects/oscDataRecorder/Pods/OSCKit/OSCKit/OSCMessage.h"
+        },
+        {
+          'type': 'file',
+          'name': "OSCProtocol.h",
+          'external-contents': "/Users/soh_la/Develop/iOS/Projects/oscDataRecorder/Pods/OSCKit/OSCKit/OSCProtocol.h"
+        },
+        {
+          'type': 'file',
+          'name': "OSCServer.h",
+          'external-contents': "/Users/soh_la/Develop/iOS/Projects/oscDataRecorder/Pods/OSCKit/OSCKit/OSCServer.h"
+        }
+      ]
+    },
+    {
+      'type': 'directory',
+      'name': "/Users/soh_la/Develop/iOS/Projects/oscDataRecorder/build/Debug-iphoneos/OSCKit/OSCKit.framework/Modules",
+      'contents': [
+        {
+          'type': 'file',
+          'name': "module.modulemap",
+          'external-contents': "/Users/soh_la/Develop/iOS/Projects/oscDataRecorder/build/Pods.build/Debug-iphoneos/OSCKit.build/module.modulemap"
+        }
+      ]
+    },
+    {
+      'type': 'directory',
+      'name': "/Users/soh_la/Develop/iOS/Projects/oscDataRecorder/build/Debug-iphoneos/Pods_oscDataRecorder.framework/Headers",
+      'contents': [
+        {
+          'type': 'file',
+          'name': "Pods-oscDataRecorder-umbrella.h",
+          'external-contents': "/Users/soh_la/Develop/iOS/Projects/oscDataRecorder/Pods/Target Support Files/Pods-oscDataRecorder/Pods-oscDataRecorder-umbrella.h"
+        },
+        {
+          'type': 'file',
+          'name': "Pods_oscDataRecorder-Swift.h",
+          'external-contents': "/Users/soh_la/Develop/iOS/Projects/oscDataRecorder/build/Debug-iphoneos/Pods_oscDataRecorder.framework/Headers/Pods_oscDataRecorder-Swift.h"
+        }
+      ]
+    },
+    {
+      'type': 'directory',
+      'name': "/Users/soh_la/Develop/iOS/Projects/oscDataRecorder/build/Debug-iphoneos/Pods_oscDataRecorder.framework/Modules",
+      'contents': [
+        {
+          'type': 'file',
+          'name': "module.modulemap",
+          'external-contents': "/Users/soh_la/Develop/iOS/Projects/oscDataRecorder/build/Pods.build/Debug-iphoneos/Pods-oscDataRecorder.build/module.modulemap"
+        }
+      ]
+    }
+  ]
+}
