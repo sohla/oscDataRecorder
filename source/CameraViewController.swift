@@ -81,11 +81,11 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 		}
 		
 		// Set up Core Location so that we can record a location metadata track.
-		locationManager.delegate = self
-		locationManager.requestWhenInUseAuthorization()
-		locationManager.distanceFilter = kCLDistanceFilterNone
-		locationManager.headingFilter = 5.0
-		locationManager.desiredAccuracy = kCLLocationAccuracyBest
+//        locationManager.delegate = self
+//        locationManager.requestWhenInUseAuthorization()
+//        locationManager.distanceFilter = kCLDistanceFilterNone
+//        locationManager.headingFilter = 5.0
+//        locationManager.desiredAccuracy = kCLLocationAccuracyBest
 		
 		
 
@@ -465,7 +465,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 		sessionQueue.async { [unowned self] in
 			if !self.movieFileOutput.isRecording {
 				// Begin location updates.
-				self.locationManager.startUpdatingLocation()
+				//self.locationManager.startUpdatingLocation()
 				
 				if UIDevice.current.isMultitaskingSupported {
 					/*
@@ -490,7 +490,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 			}
 			else {
 				self.movieFileOutput.stopRecording()
-				self.locationManager.stopUpdatingLocation()
+				//self.locationManager.stopUpdatingLocation()
 			}
 		}
 	}
@@ -611,33 +611,33 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 		}
 		
 		// Face metadata
-		if !isConnectionActiveWithInputPort(AVMetadataIdentifierQuickTimeMetadataDetectedFace) {
-			connectSpecificMetadataPort(AVMetadataIdentifierQuickTimeMetadataDetectedFace)
-		}
+//        if !isConnectionActiveWithInputPort(AVMetadataIdentifierQuickTimeMetadataDetectedFace) {
+//            connectSpecificMetadataPort(AVMetadataIdentifierQuickTimeMetadataDetectedFace)
+//        }
 	}
 	
 	/**
 		Connect a specified video input port to the output of AVCaptureSession.
 		This is necessary because connections for certain ports are not added automatically on addInput.
 	*/
-	private func connectSpecificMetadataPort(_ metadataIdentifier: String) {
-		
-		// Iterate over the videoDeviceInput's ports (individual streams of media data) and find the port that matches metadataIdentifier.
-		for inputPort in videoDeviceInput.ports as! [AVCaptureInputPort] {
-			
-			guard (inputPort.formatDescription != nil) && (CMFormatDescriptionGetMediaType(inputPort.formatDescription) == kCMMediaType_Metadata),
-				let metadataIdentifiers = CMMetadataFormatDescriptionGetIdentifiers(inputPort.formatDescription) as NSArray? else {
-					continue
-			}
-			
-			if metadataIdentifiers.contains(metadataIdentifier) {
-				// Add an AVCaptureConnection to connect the input port to the AVCaptureOutput (movieFileOutput).
-				if let connection = AVCaptureConnection(inputPorts: [inputPort], output: movieFileOutput) {
-					session.add(connection)
-				}
-			}
-		}
-	}
+//    private func connectSpecificMetadataPort(_ metadataIdentifier: String) {
+//
+//        // Iterate over the videoDeviceInput's ports (individual streams of media data) and find the port that matches metadataIdentifier.
+//        for inputPort in videoDeviceInput.ports as! [AVCaptureInputPort] {
+//
+//            guard (inputPort.formatDescription != nil) && (CMFormatDescriptionGetMediaType(inputPort.formatDescription) == kCMMediaType_Metadata),
+//                let metadataIdentifiers = CMMetadataFormatDescriptionGetIdentifiers(inputPort.formatDescription) as NSArray? else {
+//                    continue
+//            }
+//
+//            if metadataIdentifiers.contains(metadataIdentifier) {
+//                // Add an AVCaptureConnection to connect the input port to the AVCaptureOutput (movieFileOutput).
+//                if let connection = AVCaptureConnection(inputPorts: [inputPort], output: movieFileOutput) {
+//                    session.add(connection)
+//                }
+//            }
+//        }
+//    }
 	
 	/**
 		Iterates through all the movieFileOutput’s connections and returns true if the
@@ -850,41 +850,41 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 	}
 	// MARK: Location
 	
-	private let locationManager = CLLocationManager()
-	
-	func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-		
-		// If we are recording a movie, then send the location to the AVCaptureMetadataInput for
-		// location data so that it can be put into a timed metadata track
-		if false { //movieFileOutput.isRecording {
-			if let newLocation = locations.last, CLLocationCoordinate2DIsValid(newLocation.coordinate) {
-				var iso6709Geolocation: String
-				let newLocationMetadataItem = AVMutableMetadataItem()
-				newLocationMetadataItem.identifier = AVMetadataIdentifierQuickTimeMetadataLocationISO6709
-				newLocationMetadataItem.dataType = kCMMetadataDataType_QuickTimeMetadataLocation_ISO6709 as String
-				
-				// CoreLocation objects contain altitude information as well if the verticalAccuracy is positive.
-				if newLocation.verticalAccuracy < 0.0 {
-					iso6709Geolocation = String(format: "%+08.4lf%+09.4lf/", newLocation.coordinate.latitude, newLocation.coordinate.longitude)
-				}
-				else {
-					iso6709Geolocation = String(format: "%+08.4lf%+09.4lf%+08.3lf/", newLocation.coordinate.latitude, newLocation.coordinate.longitude, newLocation.altitude)
-				}
-				
-				let c = CMClockGetTime(CMClockGetHostTimeClock())
-				iso6709Geolocation = String(format: "%f",c.seconds)
-				newLocationMetadataItem.value = iso6709Geolocation as NSString
-				
-				let metadataItemGroup = AVTimedMetadataGroup(items: [newLocationMetadataItem], timeRange: CMTimeRangeMake(CMClockGetTime(CMClockGetHostTimeClock()), kCMTimeInvalid))
-				do {
-					try locationMetadataInput?.append(metadataItemGroup)
-				}
-				catch {
-					print("Could not add timed metadata group: \(error)")
-				}
-			}
-		}
-	}
+//    private let locationManager = CLLocationManager()
+//
+//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+//
+//        // If we are recording a movie, then send the location to the AVCaptureMetadataInput for
+//        // location data so that it can be put into a timed metadata track
+//        if false { //movieFileOutput.isRecording {
+//            if let newLocation = locations.last, CLLocationCoordinate2DIsValid(newLocation.coordinate) {
+//                var iso6709Geolocation: String
+//                let newLocationMetadataItem = AVMutableMetadataItem()
+//                newLocationMetadataItem.identifier = AVMetadataIdentifierQuickTimeMetadataLocationISO6709
+//                newLocationMetadataItem.dataType = kCMMetadataDataType_QuickTimeMetadataLocation_ISO6709 as String
+//
+//                // CoreLocation objects contain altitude information as well if the verticalAccuracy is positive.
+//                if newLocation.verticalAccuracy < 0.0 {
+//                    iso6709Geolocation = String(format: "%+08.4lf%+09.4lf/", newLocation.coordinate.latitude, newLocation.coordinate.longitude)
+//                }
+//                else {
+//                    iso6709Geolocation = String(format: "%+08.4lf%+09.4lf%+08.3lf/", newLocation.coordinate.latitude, newLocation.coordinate.longitude, newLocation.altitude)
+//                }
+//
+//                let c = CMClockGetTime(CMClockGetHostTimeClock())
+//                iso6709Geolocation = String(format: "%f",c.seconds)
+//                newLocationMetadataItem.value = iso6709Geolocation as NSString
+//
+//                let metadataItemGroup = AVTimedMetadataGroup(items: [newLocationMetadataItem], timeRange: CMTimeRangeMake(CMClockGetTime(CMClockGetHostTimeClock()), kCMTimeInvalid))
+//                do {
+//                    try locationMetadataInput?.append(metadataItemGroup)
+//                }
+//                catch {
+//                    print("Could not add timed metadata group: \(error)")
+//                }
+//            }
+//        }
+//    }
 	
 }
 

@@ -245,8 +245,6 @@ SWIFT_CLASS("_TtC15oscDataRecorder23AssetGridViewController")
 @class AVCaptureFileOutput;
 @class NSNotification;
 @class OSCMessage;
-@class CLLocationManager;
-@class CLLocation;
 
 SWIFT_CLASS("_TtC15oscDataRecorder20CameraViewController")
 @interface CameraViewController : UIViewController <AVCaptureFileOutputRecordingDelegate, CLLocationManagerDelegate, OSCServerDelegate>
@@ -267,7 +265,6 @@ SWIFT_CLASS("_TtC15oscDataRecorder20CameraViewController")
 - (void)sessionInterruptionEndedWithNotification:(NSNotification * _Nonnull)notification;
 - (void)deviceOrientationDidChange;
 - (void)handleMessage:(OSCMessage * _Null_unspecified)message;
-- (void)locationManager:(CLLocationManager * _Nonnull)manager didUpdateLocations:(NSArray<CLLocation *> * _Nonnull)locations;
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
 @end

@@ -93,7 +93,7 @@ class PlayerViewController: UIViewController, AVPlayerItemMetadataOutputPushDele
 			self.setUpPlayer(for: asset)
 			self.playButton.isEnabled = true
 			self.pauseButton.isEnabled = false
-			self.removeAllSublayers(from: self.facesLayer)
+//            self.removeAllSublayers(from: self.facesLayer)
 		}
 	}
 	
@@ -152,9 +152,9 @@ class PlayerViewController: UIViewController, AVPlayerItemMetadataOutputPushDele
 			
 			let playerLayer = AVPlayerLayer(player: player)
 			playerLayer.backgroundColor = UIColor.darkGray.cgColor
-			playerLayer.addSublayer(facesLayer)
+//            playerLayer.addSublayer(facesLayer)
 			playerView.layer.addSublayer(playerLayer)
-			facesLayer.frame = playerLayer.videoRect;
+//            facesLayer.frame = playerLayer.videoRect;
 			
 			self.playerLayer = playerLayer
 		}
@@ -178,7 +178,7 @@ class PlayerViewController: UIViewController, AVPlayerItemMetadataOutputPushDele
 		seekToZeroBeforePlay = true
 		playButton.isEnabled = true
 		pauseButton.isEnabled = false
-		removeAllSublayers(from: facesLayer)
+		//removeAllSublayers(from: facesLayer)
 	}
 	
 	@IBOutlet private weak var playButton: UIBarButtonItem!
@@ -220,7 +220,7 @@ class PlayerViewController: UIViewController, AVPlayerItemMetadataOutputPushDele
 		}
 		else {
 			honorTimedMetadataTracksDuringPlayback = false
-			removeAllSublayers(from: facesLayer)
+			//removeAllSublayers(from: facesLayer)
 			locationOverlayLabel.text = ""
 		}
 	}
@@ -232,17 +232,18 @@ class PlayerViewController: UIViewController, AVPlayerItemMetadataOutputPushDele
 				
 				// Sometimes the face/location track wouldn't contain any items because of scene change, we should remove previously drawn faceRects/locationOverlay in that case.
 				if metadataGroup.items.count == 0 {
-					if self.track(track.assetTrack, hasMetadataIdentifier: AVMetadataIdentifierQuickTimeMetadataDetectedFace) {
-						self.removeAllSublayers(from: self.facesLayer)
-					}
-					else if self.track(track.assetTrack, hasMetadataIdentifier: AVMetadataIdentifierQuickTimeMetadataVideoOrientation) {
+//                    if self.track(track.assetTrack, hasMetadataIdentifier: AVMetadataIdentifierQuickTimeMetadataDetectedFace) {
+//                        self.removeAllSublayers(from: self.facesLayer)
+//                    }
+//                    else
+                    if self.track(track.assetTrack, hasMetadataIdentifier: AVMetadataIdentifierQuickTimeMetadataVideoOrientation) {
 						self.locationOverlayLabel.text = ""
 					}
 				}
 				else {
 					if self.honorTimedMetadataTracksDuringPlayback {
 						
-						var faces = [AVMetadataObject]()
+						//var faces = [AVMetadataObject]()
 						
 						for metdataItem in metadataGroup.items {
 							guard let itemIdentifier = metdataItem.identifier, let itemDataType = metdataItem.dataType else {
@@ -250,10 +251,10 @@ class PlayerViewController: UIViewController, AVPlayerItemMetadataOutputPushDele
 							}
 							
 							switch itemIdentifier {
-								case AVMetadataIdentifierQuickTimeMetadataDetectedFace:
-									if let itemValue = metdataItem.value as? AVMetadataObject {
-										faces.append(itemValue)
-									}
+//                                case AVMetadataIdentifierQuickTimeMetadataDetectedFace:
+//                                    if let itemValue = metdataItem.value as? AVMetadataObject {
+//                                        faces.append(itemValue)
+//                                    }
 									
 								case AVMetadataIdentifierQuickTimeMetadataVideoOrientation:
 									if itemDataType == String(kCMMetadataBaseDataType_SInt16) {
@@ -265,7 +266,7 @@ class PlayerViewController: UIViewController, AVPlayerItemMetadataOutputPushDele
 												let rotationTransform = CATransform3DMakeAffineTransform(orientationTransform)
 												
 												// Remove faceBoxes before applying transform and then re-draw them as we get new face coordinates.
-												self.removeAllSublayers(from: self.facesLayer)
+												//self.removeAllSublayers(from: self.facesLayer)
 												self.playerLayer?.transform = rotationTransform
 												self.playerLayer?.frame = self.playerView.layer.bounds
 											}
@@ -284,9 +285,9 @@ class PlayerViewController: UIViewController, AVPlayerItemMetadataOutputPushDele
 							}
 						}
 						
-						if faces.count > 0 {
-							self.drawFaceMetadataRects(faces)
-						}
+//                        if faces.count > 0 {
+//                            self.drawFaceMetadataRects(faces)
+//                        }
 					}
 				}
 			}
@@ -304,39 +305,39 @@ class PlayerViewController: UIViewController, AVPlayerItemMetadataOutputPushDele
 		return false
 	}
 	
-	private let facesLayer = CALayer()
-	
-	private func drawFaceMetadataRects(_ faces: [AVMetadataObject]) {
-		guard let playerLayer = playerLayer else { return }
-		
-		DispatchQueue.main.async {
-			
-			let viewRect = playerLayer.videoRect
-			self.facesLayer.frame = viewRect
-			self.facesLayer.masksToBounds = true
-			self.removeAllSublayers(from: self.facesLayer)
-			
-			for face in faces {
-				let faceBox = CALayer()
-				let faceRect = face.bounds
-				let viewFaceOrigin = CGPoint(x: faceRect.origin.x * viewRect.size.width, y: faceRect.origin.y * viewRect.size.height)
-				let viewFaceSize = CGSize(width: faceRect.size.width * viewRect.size.width, height: faceRect.size.height * viewRect.size.height)
-				let viewFaceBounds = CGRect(x: viewFaceOrigin.x, y: viewFaceOrigin.y, width: viewFaceSize.width, height: viewFaceSize.height)
-				
-				CATransaction.begin()
-				CATransaction.setDisableActions(true)
-				self.facesLayer.addSublayer(faceBox)
-				faceBox.masksToBounds = true
-				faceBox.borderWidth = 2.0
-				faceBox.borderColor = UIColor(red: CGFloat(0.3), green: CGFloat(0.6), blue: CGFloat(0.9), alpha: CGFloat(0.7)).cgColor
-				faceBox.cornerRadius = 5.0
-				faceBox.frame = viewFaceBounds
-				CATransaction.commit()
-				
-				PlayerViewController.updateAnimation(for: self.facesLayer, removeAnimation: true)
-			}
-		}
-	}
+//    private let facesLayer = CALayer()
+//
+//    private func drawFaceMetadataRects(_ faces: [AVMetadataObject]) {
+//        guard let playerLayer = playerLayer else { return }
+//
+//        DispatchQueue.main.async {
+//
+//            let viewRect = playerLayer.videoRect
+//            self.facesLayer.frame = viewRect
+//            self.facesLayer.masksToBounds = true
+//            self.removeAllSublayers(from: self.facesLayer)
+//
+//            for face in faces {
+//                let faceBox = CALayer()
+//                let faceRect = face.bounds
+//                let viewFaceOrigin = CGPoint(x: faceRect.origin.x * viewRect.size.width, y: faceRect.origin.y * viewRect.size.height)
+//                let viewFaceSize = CGSize(width: faceRect.size.width * viewRect.size.width, height: faceRect.size.height * viewRect.size.height)
+//                let viewFaceBounds = CGRect(x: viewFaceOrigin.x, y: viewFaceOrigin.y, width: viewFaceSize.width, height: viewFaceSize.height)
+//
+//                CATransaction.begin()
+//                CATransaction.setDisableActions(true)
+//                self.facesLayer.addSublayer(faceBox)
+//                faceBox.masksToBounds = true
+//                faceBox.borderWidth = 2.0
+//                faceBox.borderColor = UIColor(red: CGFloat(0.3), green: CGFloat(0.6), blue: CGFloat(0.9), alpha: CGFloat(0.7)).cgColor
+//                faceBox.cornerRadius = 5.0
+//                faceBox.frame = viewFaceBounds
+//                CATransaction.commit()
+//
+//                PlayerViewController.updateAnimation(for: self.facesLayer, removeAnimation: true)
+//            }
+//        }
+//    }
 	
 	@IBOutlet private weak var locationOverlayLabel: UILabel!
 	
