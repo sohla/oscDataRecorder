@@ -10,7 +10,7 @@ import UIKit
 import AVFoundation
 import CoreMedia
 import ImageIO
-import SceneKit
+
 
 class PlayerViewController: UIViewController, AVPlayerItemMetadataOutputPushDelegate {
 	
@@ -19,8 +19,6 @@ class PlayerViewController: UIViewController, AVPlayerItemMetadataOutputPushDele
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		skView.scene?.background.contents = UIColor.clear
-		skView.backgroundColor = UIColor.clear
 		
 		playButton.isEnabled = false
 		pauseButton.isEnabled = false
@@ -30,7 +28,10 @@ class PlayerViewController: UIViewController, AVPlayerItemMetadataOutputPushDele
 		let metadataQueue = DispatchQueue(label: "com.example.metadataqueue", attributes: [])
 		itemMetadataOutput.setDelegate(self, queue: metadataQueue)
 	}
-	
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        print(segue)
+    }
+
 	override func viewDidDisappear(_ animated: Bool) {
 		super.viewDidDisappear(animated)
 		
@@ -72,7 +73,6 @@ class PlayerViewController: UIViewController, AVPlayerItemMetadataOutputPushDele
 	
 	// MARK: Player
 	
-    @IBOutlet weak var skView: SCNView!
     private var player: AVPlayer?
 	
 	private var seekToZeroBeforePlay = false

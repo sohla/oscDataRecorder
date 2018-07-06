@@ -240,6 +240,7 @@ SWIFT_CLASS("_TtC15oscDataRecorder23AssetGridViewController")
 
 @class OSCServer;
 @protocol UIViewControllerTransitionCoordinator;
+@class UIStoryboardSegue;
 @class PreviewView;
 @class UIButton;
 @class AVCaptureFileOutput;
@@ -253,6 +254,7 @@ SWIFT_CLASS("_TtC15oscDataRecorder20CameraViewController")
 - (void)viewWillAppear:(BOOL)animated;
 - (void)viewDidDisappear:(BOOL)animated;
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id <UIViewControllerTransitionCoordinator> _Nonnull)coordinator;
+- (void)prepareForSegue:(UIStoryboardSegue * _Nonnull)segue sender:(id _Nullable)sender;
 @property (nonatomic, weak) IBOutlet PreviewView * _Null_unspecified previewView;
 - (IBAction)resumeInterruptedSession:(UIButton * _Nonnull)resumeButton;
 - (IBAction)changeCamera:(UIButton * _Nonnull)cameraButton;
@@ -269,13 +271,22 @@ SWIFT_CLASS("_TtC15oscDataRecorder20CameraViewController")
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
 @end
 
+@class SCNView;
+
+SWIFT_CLASS("_TtC15oscDataRecorder20DeviceViewController")
+@interface DeviceViewController : UIViewController
+@property (nonatomic, weak) IBOutlet SCNView * _Null_unspecified skView;
+- (void)viewDidLoad;
+- (void)didReceiveMemoryWarning;
+- (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
+@end
+
 
 @interface AVCaptureDeviceDiscoverySession (SWIFT_EXTENSION(oscDataRecorder))
 - (NSInteger)uniqueDevicePositionsCount SWIFT_WARN_UNUSED_RESULT;
 @end
 
-@class UIStoryboardSegue;
-@class SCNView;
 @class AVPlayerItemMetadataOutput;
 @class AVTimedMetadataGroup;
 @class AVPlayerItemTrack;
@@ -283,10 +294,10 @@ SWIFT_CLASS("_TtC15oscDataRecorder20CameraViewController")
 SWIFT_CLASS("_TtC15oscDataRecorder20PlayerViewController")
 @interface PlayerViewController : UIViewController <AVPlayerItemMetadataOutputPushDelegate>
 - (void)viewDidLoad;
+- (void)prepareForSegue:(UIStoryboardSegue * _Nonnull)segue sender:(id _Nullable)sender;
 - (void)viewDidDisappear:(BOOL)animated;
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id <UIViewControllerTransitionCoordinator> _Nonnull)coordinator;
 - (IBAction)unwindBackToPlayerWithSegue:(UIStoryboardSegue * _Nonnull)segue;
-@property (nonatomic, weak) IBOutlet SCNView * _Null_unspecified skView;
 /// Called when the player item has played to its end time.
 - (void)playerItemDidReachEnd:(NSNotification * _Nonnull)notification;
 - (void)metadataOutput:(AVPlayerItemMetadataOutput * _Nonnull)output didOutputTimedMetadataGroups:(NSArray<AVTimedMetadataGroup *> * _Nonnull)groups fromPlayerItemTrack:(AVPlayerItemTrack * _Nonnull)track;

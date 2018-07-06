@@ -152,6 +152,15 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 		}
 	}
 	
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        print(segue.identifier)
+        
+        if segue.identifier == "deviceRecorderSegue" {
+            print(segue.destination)
+        }
+    }
+
 	// MARK: Session Management
 	
 	private enum SessionSetupResult {
