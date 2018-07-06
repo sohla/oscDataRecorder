@@ -28,8 +28,14 @@ class PlayerViewController: UIViewController, AVPlayerItemMetadataOutputPushDele
 		let metadataQueue = DispatchQueue(label: "com.example.metadataqueue", attributes: [])
 		itemMetadataOutput.setDelegate(self, queue: metadataQueue)
 	}
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        print(segue)
+
+        print(segue.identifier)
+        
+        if segue.identifier == "devicePlayerSegue" {
+            print(segue.destination)
+        }
     }
 
 	override func viewDidDisappear(_ animated: Bool) {

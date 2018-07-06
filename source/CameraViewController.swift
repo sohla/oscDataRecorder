@@ -10,10 +10,10 @@ import UIKit
 import AVFoundation
 import CoreLocation
 import Photos
-
+import SceneKit
 import OSCKit
 
-class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelegate, CLLocationManagerDelegate, OSCServerDelegate {
+class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelegate, CLLocationManagerDelegate, OSCServerDelegate, DeviceViewControllerDelegate {
 	
 	let server: OSCServer = OSCServer.init()
 	
@@ -157,10 +157,19 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
         print(segue.identifier)
         
         if segue.identifier == "deviceRecorderSegue" {
-            print(segue.destination)
+            let c = segue.destination as! DeviceViewController
+            c.delegate = self
         }
     }
 
+    func updateWithData() -> DeviceData {
+        
+        let quat = SCNQuaternion(1,2,3,4)
+        let rrat = SCNVector3(5,6,7)
+        let dd = DeviceData(quat: quat, rrat: rrat)
+
+        return dd
+    }
 	// MARK: Session Management
 	
 	private enum SessionSetupResult {
