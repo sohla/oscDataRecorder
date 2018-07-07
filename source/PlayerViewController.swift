@@ -219,7 +219,7 @@ class PlayerViewController: UIViewController, AVPlayerItemMetadataOutputPushDele
 
 	private let itemMetadataOutput = AVPlayerItemMetadataOutput(identifiers: nil)
 	
-	private var honorTimedMetadataTracksDuringPlayback = false
+	private var honorTimedMetadataTracksDuringPlayback = true
 	
 	@IBOutlet private weak var honorTimedMetadataTracksSwitch: UISwitch!
 	

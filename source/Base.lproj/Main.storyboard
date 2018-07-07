@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -185,7 +184,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VPX-gO-AEB">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="622"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="32C-3r-ZrH">
@@ -207,7 +206,7 @@
                             </label>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="frV-sr-hfx">
                                 <rect key="frame" x="0.0" y="623" width="375" height="44"/>
-                                <color key="backgroundColor" red="0.7019608021" green="0.7019608021" blue="0.7019608021" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <items>
                                     <barButtonItem systemItem="play" id="zdW-cY-8y7">
                                         <connections>
@@ -225,8 +224,8 @@
                                             <rect key="frame" x="127" y="5.5" width="181" height="33"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Honor timed metadata" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="puJ-KS-O9U">
-                                                    <rect key="frame" x="8" y="6" width="173" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Metadata " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="puJ-KS-O9U">
+                                                    <rect key="frame" x="-5" y="6" width="173" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.95320391410000005" green="0.85132551349999996" blue="0.1685891625" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -236,7 +235,7 @@
                                         </view>
                                     </barButtonItem>
                                     <barButtonItem style="plain" id="3xN-Yy-3MO">
-                                        <switch key="customView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="xnR-vK-2mQ" userLabel="honorTimedMetadataTracksSwitch">
+                                        <switch key="customView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="xnR-vK-2mQ" userLabel="honorTimedMetadataTracksSwitch">
                                             <rect key="frame" x="308" y="6.5" width="51" height="31"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <connections>
@@ -246,7 +245,7 @@
                                     </barButtonItem>
                                 </items>
                                 <color key="tintColor" red="0.95320391414141414" green="0.85132551354074104" blue="0.16858916250943651" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="barTintColor" red="0.7019608021" green="0.7019608021" blue="0.7019608021" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="barTintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </toolbar>
                             <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="S4j-lh-Xbq">
                                 <rect key="frame" x="0.0" y="64" width="375" height="559"/>
@@ -256,17 +255,17 @@
                                 </connections>
                             </containerView>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="32C-3r-ZrH" firstAttribute="leading" secondItem="PuO-6Q-VB0" secondAttribute="leadingMargin" id="1uY-2t-KiU"/>
                             <constraint firstItem="frV-sr-hfx" firstAttribute="trailing" secondItem="VPX-gO-AEB" secondAttribute="trailing" id="6Y3-jT-joS"/>
                             <constraint firstAttribute="bottom" secondItem="frV-sr-hfx" secondAttribute="bottom" id="Btd-8o-hwr"/>
-                            <constraint firstItem="frV-sr-hfx" firstAttribute="top" secondItem="VPX-gO-AEB" secondAttribute="bottom" constant="1" id="LB9-If-t0L"/>
                             <constraint firstItem="32C-3r-ZrH" firstAttribute="trailing" secondItem="PuO-6Q-VB0" secondAttribute="trailingMargin" id="Vp6-E1-IHq"/>
                             <constraint firstAttribute="trailing" secondItem="frV-sr-hfx" secondAttribute="trailing" id="VyA-6F-oZA"/>
                             <constraint firstItem="VPX-gO-AEB" firstAttribute="top" secondItem="PuO-6Q-VB0" secondAttribute="top" id="cUR-Uu-Kal"/>
                             <constraint firstItem="frV-sr-hfx" firstAttribute="leading" secondItem="VPX-gO-AEB" secondAttribute="leading" id="ewd-6a-tz2"/>
                             <constraint firstItem="32C-3r-ZrH" firstAttribute="top" secondItem="SB1-ax-C8k" secondAttribute="bottom" constant="8" id="f0h-6k-d8m"/>
+                            <constraint firstItem="DcQ-8C-zsN" firstAttribute="top" secondItem="VPX-gO-AEB" secondAttribute="bottom" id="ie2-2O-cuB"/>
                             <constraint firstItem="frV-sr-hfx" firstAttribute="leading" secondItem="PuO-6Q-VB0" secondAttribute="leading" id="r0C-d8-Ozc"/>
                         </constraints>
                     </view>
@@ -298,11 +297,11 @@
                         <viewControllerLayoutGuide type="bottom" id="0Kf-pc-wqg"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="tv2-Ga-QGr">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="546"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="559"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" sceneName="SceneKit Scene.scn" translatesAutoresizingMaskIntoConstraints="NO" id="VMY-ii-HbF">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="546"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="559"/>
                             </sceneKitView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -377,7 +376,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="7Lq-tt-uig"/>
+        <segue reference="9hj-h4-Etn"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
