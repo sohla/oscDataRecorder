@@ -13,7 +13,7 @@ import Photos
 import SceneKit
 import OSCKit
 
-class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelegate, CLLocationManagerDelegate, OSCServerDelegate, DeviceViewControllerDelegate {
+class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelegate, CLLocationManagerDelegate, OSCServerDelegate {
 	
 	let server: OSCServer = OSCServer.init()
 	
@@ -158,18 +158,10 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
         
         if segue.identifier == "deviceRecorderSegue" {
             let c = segue.destination as! DeviceViewController
-            c.delegate = self
+            delegate = c
         }
     }
 
-    func updateWithData() -> DeviceData {
-        
-        let quat = SCNQuaternion(1,2,3,4)
-        let rrat = SCNVector3(5,6,7)
-        let dd = DeviceData(quat: quat, rrat: rrat)
-
-        return dd
-    }
 	// MARK: Session Management
 	
 	private enum SessionSetupResult {
@@ -629,34 +621,8 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 			locationMetadataInput = newLocationMetadataInput
 		}
 		
-		// Face metadata
-//        if !isConnectionActiveWithInputPort(AVMetadataIdentifierQuickTimeMetadataDetectedFace) {
-//            connectSpecificMetadataPort(AVMetadataIdentifierQuickTimeMetadataDetectedFace)
-//        }
 	}
-	
-	/**
-		Connect a specified video input port to the output of AVCaptureSession.
-		This is necessary because connections for certain ports are not added automatically on addInput.
-	*/
-//    private func connectSpecificMetadataPort(_ metadataIdentifier: String) {
-//
-//        // Iterate over the videoDeviceInput's ports (individual streams of media data) and find the port that matches metadataIdentifier.
-//        for inputPort in videoDeviceInput.ports as! [AVCaptureInputPort] {
-//
-//            guard (inputPort.formatDescription != nil) && (CMFormatDescriptionGetMediaType(inputPort.formatDescription) == kCMMediaType_Metadata),
-//                let metadataIdentifiers = CMMetadataFormatDescriptionGetIdentifiers(inputPort.formatDescription) as NSArray? else {
-//                    continue
-//            }
-//
-//            if metadataIdentifiers.contains(metadataIdentifier) {
-//                // Add an AVCaptureConnection to connect the input port to the AVCaptureOutput (movieFileOutput).
-//                if let connection = AVCaptureConnection(inputPorts: [inputPort], output: movieFileOutput) {
-//                    session.add(connection)
-//                }
-//            }
-//        }
-//    }
+
 	
 	/**
 		Iterates through all the movieFileOutput’s connections and returns true if the
@@ -826,9 +792,19 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 			}
 		}
 	}
+    
+    
 	// MARK: OSC Server delegate
-	
-	func handle(_ message: OSCMessage!) {
+    //private var deviceData = DeviceData()
+    var delegate: DeviceViewControllerDelegate?
+    
+    // cache all the values and update when ever any change
+    var gyro = SCNVector3()
+    var quat = SCNQuaternion()
+    var rrate = SCNVector3()
+    var accel = SCNVector3()
+
+    func handle(_ message: OSCMessage!) {
 		
 		if movieFileOutput.isRecording {
 		
@@ -853,48 +829,36 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 				print("Could not add timed metadata group: \(error)")
 			}
             
-            print(metadataItemGroup.timeRange.start.seconds, metadataItem.value)
+            //print(metadataItemGroup.timeRange.start.seconds, metadataItem.value)
 
 		}
+        
+        // convert to useful values
+        let values = message.arguments.map{ Float($0 as! String)!}
+        
+        switch (message.address as NSString).lastPathComponent {
+        case "gyro":
+            gyro = SCNVector3(x: values[0], y: values[1], z: values[2])
+        case "quat":
+            // needed to swap order for orientation to work  on node
+            quat = SCNQuaternion(x: values[2] , y: values[3], z: values[1], w: values[0])
+        case "rrate":
+            rrate = SCNVector3(x: values[0], y: values[1], z: values[2])
+        case "accel":
+            accel = SCNVector3(x: values[0], y: values[1], z: values[2])
+
+        default:
+            print("unable to store osc data")
+        }
+        
+        // update device data
+        let dd = DeviceData(gyro: gyro, quat: quat, rrate: rrate, accel: accel)
+
+        delegate?.updateWithData(dd)
+
 		
 	}
-	// MARK: Location
-	
-//    private let locationManager = CLLocationManager()
-//
-//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//
-//        // If we are recording a movie, then send the location to the AVCaptureMetadataInput for
-//        // location data so that it can be put into a timed metadata track
-//        if false { //movieFileOutput.isRecording {
-//            if let newLocation = locations.last, CLLocationCoordinate2DIsValid(newLocation.coordinate) {
-//                var iso6709Geolocation: String
-//                let newLocationMetadataItem = AVMutableMetadataItem()
-//                newLocationMetadataItem.identifier = AVMetadataIdentifierQuickTimeMetadataLocationISO6709
-//                newLocationMetadataItem.dataType = kCMMetadataDataType_QuickTimeMetadataLocation_ISO6709 as String
-//
-//                // CoreLocation objects contain altitude information as well if the verticalAccuracy is positive.
-//                if newLocation.verticalAccuracy < 0.0 {
-//                    iso6709Geolocation = String(format: "%+08.4lf%+09.4lf/", newLocation.coordinate.latitude, newLocation.coordinate.longitude)
-//                }
-//                else {
-//                    iso6709Geolocation = String(format: "%+08.4lf%+09.4lf%+08.3lf/", newLocation.coordinate.latitude, newLocation.coordinate.longitude, newLocation.altitude)
-//                }
-//
-//                let c = CMClockGetTime(CMClockGetHostTimeClock())
-//                iso6709Geolocation = String(format: "%f",c.seconds)
-//                newLocationMetadataItem.value = iso6709Geolocation as NSString
-//
-//                let metadataItemGroup = AVTimedMetadataGroup(items: [newLocationMetadataItem], timeRange: CMTimeRangeMake(CMClockGetTime(CMClockGetHostTimeClock()), kCMTimeInvalid))
-//                do {
-//                    try locationMetadataInput?.append(metadataItemGroup)
-//                }
-//                catch {
-//                    print("Could not add timed metadata group: \(error)")
-//                }
-//            }
-//        }
-//    }
+
 	
 }
 
