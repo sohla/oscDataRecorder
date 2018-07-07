@@ -795,7 +795,6 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
     
     
 	// MARK: OSC Server delegate
-    //private var deviceData = DeviceData()
     var delegate: DeviceViewControllerDelegate?
     
     // cache all the values and update when ever any change
@@ -806,33 +805,6 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 
     func handle(_ message: OSCMessage!) {
 		
-		if movieFileOutput.isRecording {
-		
-			let metadataItem = AVMutableMetadataItem()
-			metadataItem.identifier = AVMetadataIdentifierQuickTimeMetadataLocationISO6709
-			metadataItem.dataType = kCMMetadataDataType_QuickTimeMetadataLocation_ISO6709 as String
-			
-            var dataString = (message.address as NSString).lastPathComponent
-            for arg in message.arguments {
-                dataString += ","
-                dataString += arg as! String
-            }
-			
-			metadataItem.value = dataString as NSString
-			
-			
-			let metadataItemGroup = AVTimedMetadataGroup(items: [metadataItem], timeRange: CMTimeRangeMake(CMClockGetTime(CMClockGetHostTimeClock()), kCMTimeInvalid))
-			do {
-				try locationMetadataInput?.append(metadataItemGroup)
-			}
-			catch {
-				print("Could not add timed metadata group: \(error)")
-			}
-            
-            //print(metadataItemGroup.timeRange.start.seconds, metadataItem.value)
-
-		}
-        
         // convert to useful values
         let values = message.arguments.map{ Float($0 as! String)!}
         
@@ -846,20 +818,36 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
             rrate = SCNVector3(x: values[0], y: values[1], z: values[2])
         case "accel":
             accel = SCNVector3(x: values[0], y: values[1], z: values[2])
-
+            
         default:
             print("unable to store osc data")
         }
         
         // update device data
         let dd = DeviceData(gyro: gyro, quat: quat, rrate: rrate, accel: accel)
-
+        
         delegate?.updateWithData(dd)
 
+        
+		if movieFileOutput.isRecording {
 		
-	}
+            if let valString = dd.asJSON()[].rawString() {
 
-	
+                let metadataItem = AVMutableMetadataItem()
+                metadataItem.identifier = AVMetadataIdentifierQuickTimeMetadataLocationISO6709
+                metadataItem.dataType = kCMMetadataDataType_QuickTimeMetadataLocation_ISO6709 as String
+                metadataItem.value = valString as NSString
+
+                let metadataItemGroup = AVTimedMetadataGroup(items: [metadataItem], timeRange: CMTimeRangeMake(CMClockGetTime(CMClockGetHostTimeClock()), kCMTimeInvalid))
+                do {
+                    try locationMetadataInput?.append(metadataItemGroup)
+                }
+                catch {
+                    print("Could not add timed metadata group: \(error)")
+                }
+            }
+		}
+	}
 }
 
 extension UIDeviceOrientation {

@@ -8,7 +8,7 @@
 
 import UIKit
 import SceneKit
-
+import SwiftyJSON
 
 
 struct DeviceData {
@@ -18,6 +18,17 @@ struct DeviceData {
     var rrate: SCNVector3 = SCNVector3()
     var accel: SCNVector3 = SCNVector3()
     
+    func asJSON () -> JSON {
+        
+        let json: JSON = JSON([
+            "gyro": [gyro.x, gyro.y, gyro.z],
+            "quat": [quat.x, quat.y, quat.z, quat.w],
+            "rrate": [rrate.x, rrate.y, rrate.z],
+            "accel": [accel.x, accel.y, accel.z]
+
+        ])
+        return json
+    }
     func description() -> String {
         
         var s = ""
@@ -71,7 +82,7 @@ class DeviceViewController: UIViewController,DeviceViewControllerDelegate {
 
         //boxNode?.eulerAngles = dd.gyro
         boxNode?.orientation = dd.quat
-        print(dd.description())
+        //print(dd.asJSON()[].rawString())
 
     }
 
