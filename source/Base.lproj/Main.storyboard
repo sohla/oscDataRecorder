@@ -121,6 +121,11 @@
                     </view>
                     <navigationItem key="navigationItem" id="F9h-8I-BVW">
                         <barButtonItem key="backBarButtonItem" title="Camera" id="Dcw-Ao-32Z"/>
+                        <barButtonItem key="leftBarButtonItem" title="Reset" id="Oni-a8-gho">
+                            <connections>
+                                <action selector="onResetButton:" destination="vXZ-lx-hvc" id="XQG-Pi-4nS"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Player" id="dYu-hh-zbV">
                             <connections>
                                 <segue destination="xUS-yO-GIr" kind="show" id="Qhg-0O-UBy"/>
@@ -297,11 +302,11 @@
                         <viewControllerLayoutGuide type="bottom" id="0Kf-pc-wqg"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="tv2-Ga-QGr">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="559"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="546"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" sceneName="SceneKit Scene.scn" translatesAutoresizingMaskIntoConstraints="NO" id="VMY-ii-HbF">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="559"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="546"/>
                             </sceneKitView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -376,7 +381,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="9hj-h4-Etn"/>
+        <segue reference="7Lq-tt-uig"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

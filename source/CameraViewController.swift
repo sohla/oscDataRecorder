@@ -444,7 +444,8 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 	}
 	
 	// MARK: Recording Movies
-	
+    static let client:OSCClient = OSCClient()
+    
 	private let movieFileOutput = AVCaptureMovieFileOutput()
 	
 	private var backgroundRecordingID: UIBackgroundTaskIdentifier? = nil
@@ -506,7 +507,13 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 		}
 	}
 	
-	func capture(_ captureOutput: AVCaptureFileOutput!, didStartRecordingToOutputFileAt fileURL: URL!, fromConnections connections: [Any]!) {
+    @IBAction func onResetButton(_ sender: Any) {
+    
+        let msg: OSCMessage = OSCMessage(address: "/bounce", arguments: ["motionReset"])
+        CameraViewController.client.send(msg, to: "udp://10.0.0.57:51700")
+    }
+    
+    func capture(_ captureOutput: AVCaptureFileOutput!, didStartRecordingToOutputFileAt fileURL: URL!, fromConnections connections: [Any]!) {
 		// Enable the Record button to let the user stop the recording.
 		DispatchQueue.main.async {
 			self.recordButton.isEnabled = true;
