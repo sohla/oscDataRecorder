@@ -6,6 +6,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -121,11 +122,19 @@
                     </view>
                     <navigationItem key="navigationItem" id="F9h-8I-BVW">
                         <barButtonItem key="backBarButtonItem" title="Camera" id="Dcw-Ao-32Z"/>
-                        <barButtonItem key="leftBarButtonItem" title="Reset" id="Oni-a8-gho">
-                            <connections>
-                                <action selector="onResetButton:" destination="vXZ-lx-hvc" id="XQG-Pi-4nS"/>
-                            </connections>
-                        </barButtonItem>
+                        <leftBarButtonItems>
+                            <barButtonItem title="Reset" id="Oni-a8-gho">
+                                <connections>
+                                    <action selector="onResetButton:" destination="vXZ-lx-hvc" id="XQG-Pi-4nS"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="OSC" id="j2g-KZ-30e">
+                                <connections>
+                                    <action selector="onOSCButton:" destination="vXZ-lx-hvc" id="IfG-Uc-QhN"/>
+                                    <segue destination="9uh-4L-7FB" kind="show" id="FcU-jk-Wse"/>
+                                </connections>
+                            </barButtonItem>
+                        </leftBarButtonItems>
                         <barButtonItem key="rightBarButtonItem" title="Player" id="dYu-hh-zbV">
                             <connections>
                                 <segue destination="xUS-yO-GIr" kind="show" id="Qhg-0O-UBy"/>
@@ -149,6 +158,54 @@
                 </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1695.2" y="-249.62518740629687"/>
+        </scene>
+        <!--OSC-->
+        <scene sceneID="0ZO-XF-ghQ">
+            <objects>
+                <viewController storyboardIdentifier="OSCViewControllerID" title="OSC" id="9uh-4L-7FB" customClass="OSCViewController" customModule="oscDataRecorder" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="qrZ-II-y6h"/>
+                        <viewControllerLayoutGuide type="bottom" id="eIH-f2-JOd"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="G2V-ch-lga">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text=" 555.555.555.555" borderStyle="roundedRect" adjustsFontSizeToFit="NO" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="5eC-ZB-Ecc">
+                                <rect key="frame" x="16" y="105" width="304" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="IP Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Gf-Ou-Zu9">
+                                <rect key="frame" x="16" y="72" width="82" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="57210" borderStyle="roundedRect" adjustsFontSizeToFit="NO" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="7Di-Pa-unm">
+                                <rect key="frame" x="16" y="196" width="304" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Port" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GUn-12-WlJ">
+                                <rect key="frame" x="16" y="167" width="33" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                    <size key="freeformSize" width="375" height="667"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="X0a-RG-bYJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="476" y="-1334.4827586206898"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="QXs-lS-hK4">

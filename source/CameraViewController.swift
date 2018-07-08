@@ -12,6 +12,7 @@ import CoreLocation
 import Photos
 import SceneKit
 import OSCKit
+import PopupDialog
 
 class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelegate, CLLocationManagerDelegate, OSCServerDelegate {
 	
@@ -507,6 +508,16 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 		}
 	}
 	
+    @IBAction func onOSCButton(_ sender: Any) {
+    
+//        let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "OSCViewControllerID")
+//        let popup = PopupDialog(viewController: vc)
+//
+//        self.present(popup, animated: true) {
+//            
+//        }
+    }
+    
     @IBAction func onResetButton(_ sender: Any) {
     
         let msg: OSCMessage = OSCMessage(address: "/bounce", arguments: ["motionReset"])

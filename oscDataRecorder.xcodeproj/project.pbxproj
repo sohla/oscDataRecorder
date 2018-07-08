@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D624E70B071DC102A0AF838D /* Pods_oscDataRecorder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 933C7661331C08A47524E385 /* Pods_oscDataRecorder.framework */; };
+		F00B4A9D20F25F8C003C513C /* OSCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00B4A9C20F25F8C003C513C /* OSCViewController.swift */; };
 		F0D410F520EFA5B9005468B1 /* DeviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D410F420EFA5B9005468B1 /* DeviceViewController.swift */; };
 		F0F0A58420EF89410033C9C9 /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F0A57720EF89410033C9C9 /* PreviewView.swift */; };
 		F0F0A58520EF89410033C9C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F0F0A57820EF89410033C9C9 /* Assets.xcassets */; };
@@ -26,6 +27,7 @@
 		140DF0DECBF2743371A7BCDD /* Pods-oscDataRecorder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-oscDataRecorder.debug.xcconfig"; path = "Pods/Target Support Files/Pods-oscDataRecorder/Pods-oscDataRecorder.debug.xcconfig"; sourceTree = "<group>"; };
 		933C7661331C08A47524E385 /* Pods_oscDataRecorder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_oscDataRecorder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC37692D339032A877930404 /* Pods-oscDataRecorder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-oscDataRecorder.release.xcconfig"; path = "Pods/Target Support Files/Pods-oscDataRecorder/Pods-oscDataRecorder.release.xcconfig"; sourceTree = "<group>"; };
+		F00B4A9C20F25F8C003C513C /* OSCViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSCViewController.swift; sourceTree = "<group>"; };
 		F053543520EF88970084370E /* oscDataRecorder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = oscDataRecorder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0D410F420EFA5B9005468B1 /* DeviceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceViewController.swift; sourceTree = "<group>"; };
 		F0F0A57720EF89410033C9C9 /* PreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
@@ -88,6 +90,7 @@
 				F0F0A57A20EF89410033C9C9 /* CameraViewController.swift */,
 				F0F0A57920EF89410033C9C9 /* PlayerViewController.swift */,
 				F0D410F420EFA5B9005468B1 /* DeviceViewController.swift */,
+				F00B4A9C20F25F8C003C513C /* OSCViewController.swift */,
 				F0F0A57F20EF89410033C9C9 /* AssetGridViewCell.swift */,
 				F0F0A58020EF89410033C9C9 /* AssetGridViewController.swift */,
 				F0F0A58120EF89410033C9C9 /* AppDelegate.swift */,
@@ -205,12 +208,14 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-oscDataRecorder/Pods-oscDataRecorder-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/CocoaAsyncSocket/CocoaAsyncSocket.framework",
 				"${BUILT_PRODUCTS_DIR}/OSCKit/OSCKit.framework",
+				"${BUILT_PRODUCTS_DIR}/PopupDialog/PopupDialog.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaAsyncSocket.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OSCKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PopupDialog.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -231,6 +236,7 @@
 				F0F0A58620EF89410033C9C9 /* PlayerViewController.swift in Sources */,
 				F0F0A58720EF89410033C9C9 /* CameraViewController.swift in Sources */,
 				F0F0A58A20EF89410033C9C9 /* AssetGridViewCell.swift in Sources */,
+				F00B4A9D20F25F8C003C513C /* OSCViewController.swift in Sources */,
 				F0F0A58B20EF89410033C9C9 /* AssetGridViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -380,7 +386,10 @@
 				DEVELOPMENT_TEAM = G9C3VREPPJ;
 				INFOPLIST_FILE = "$(SRCROOT)/source/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.sohla.oscDataRecorder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
@@ -397,7 +406,10 @@
 				DEVELOPMENT_TEAM = G9C3VREPPJ;
 				INFOPLIST_FILE = "$(SRCROOT)/source/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.sohla.oscDataRecorder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
