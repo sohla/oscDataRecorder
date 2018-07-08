@@ -285,32 +285,12 @@ class PlayerViewController: UIViewController, AVPlayerItemMetadataOutputPushDele
 								case AVMetadataIdentifierQuickTimeMetadataLocationISO6709:
 									if itemDataType == String(kCMMetadataDataType_QuickTimeMetadataLocation_ISO6709) {
 										if let itemValue = metdataItem.value as? String {
-											self.locationOverlayLabel.text = "no data"
-                                            //print(metdataItem.time.seconds, itemValue)
+
+                                            self.delegate?.handleJSONString(itemValue)
                                             
-                                            if let dataFromString = itemValue.data(using: .utf8, allowLossyConversion: false) {
-
-                                                let json = try! JSON(data: dataFromString)
-
-                                                //print(json)
-                                                
-                                                var quat = SCNQuaternion()
-                                                quat.x = json["quat"][0].floatValue
-                                                quat.y = json["quat"][1].floatValue
-                                                quat.z = json["quat"][2].floatValue
-                                                quat.w = json["quat"][3].floatValue
-                                                
-                                                var gyro = SCNVector3()
-                                                var rrate = SCNVector3()
-                                                var accel = SCNVector3()
-                                                
-                                                // update device data
-                                                let dd = DeviceData(gyro: gyro, quat: quat, rrate: rrate, accel: accel)
-                                                
-                                                self.delegate?.updateWithData(dd)
-                                                self.locationOverlayLabel.text = "has data"
-
-                                            }
+                                            self.delegate?.updateDevice()
+                                            
+                                            self.locationOverlayLabel.text = "has data"
 										}
 									}
 									

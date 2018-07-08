@@ -797,41 +797,16 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 	// MARK: OSC Server delegate
     var delegate: DeviceViewControllerDelegate?
     
-    // cache all the values and update when ever any change
-    var gyro = SCNVector3()
-    var quat = SCNQuaternion()
-    var rrate = SCNVector3()
-    var accel = SCNVector3()
 
     func handle(_ message: OSCMessage!) {
-		
-        // convert to useful values
-        let values = message.arguments.map{ Float($0 as! String)!}
-        
-        switch (message.address as NSString).lastPathComponent {
-        case "gyro":
-            gyro = SCNVector3(x: values[0], y: values[1], z: values[2])
-        case "quat":
-            // needed to swap order for orientation to work  on node
-            quat = SCNQuaternion(x: values[2] , y: values[3], z: values[1], w: values[0])
-        case "rrate":
-            rrate = SCNVector3(x: values[0], y: values[1], z: values[2])
-        case "accel":
-            accel = SCNVector3(x: values[0], y: values[1], z: values[2])
-            
-        default:
-            print("unable to store osc data")
-        }
-        
-        // update device data
-        let dd = DeviceData(gyro: gyro, quat: quat, rrate: rrate, accel: accel)
-        
-        delegate?.updateWithData(dd)
 
+        delegate?.handleOSCMessage(message)
+
+        delegate?.updateDevice()
         
 		if movieFileOutput.isRecording {
 		
-            if let valString = dd.asJSON()[].rawString() {
+            if let valString = delegate?.getJSONString() {
 
                 let metadataItem = AVMutableMetadataItem()
                 metadataItem.identifier = AVMetadataIdentifierQuickTimeMetadataLocationISO6709
