@@ -2,27 +2,23 @@ PODS:
   - CocoaAsyncSocket (7.6.3)
   - OSCKit (0.3.5):
     - CocoaAsyncSocket (~> 7.3)
-  - PopupDialog (0.5.4)
   - SwiftyJSON (4.1.0)
 
 DEPENDENCIES:
   - OSCKit
-  - PopupDialog (~> 0.5.4)
   - SwiftyJSON (~> 4.0)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - CocoaAsyncSocket
     - OSCKit
-    - PopupDialog
     - SwiftyJSON
 
 SPEC CHECKSUMS:
   CocoaAsyncSocket: eafaa68a7e0ec99ead0a7b35015e0bf25d2c8987
   OSCKit: 4470dbd30bc792dcf66dc4e7b5d1ec7174add33c
-  PopupDialog: 75cf955693590b0cb2fdde00223fb65d99c57247
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
 
-PODFILE CHECKSUM: 0dce5d4b0aa351b8b46d508740216d8845ec8de5
+PODFILE CHECKSUM: 5bdb3c7a4a0c4afd2ea76cb0426ad3b95b4a9865
 
 COCOAPODS: 1.5.0
