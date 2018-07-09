@@ -12,7 +12,6 @@ import CoreLocation
 import Photos
 import SceneKit
 import OSCKit
-import PopupDialog
 
 class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelegate, CLLocationManagerDelegate, OSCServerDelegate {
 	
@@ -80,16 +79,6 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 		sessionQueue.async {
 			self.configureSession()
 		}
-		
-		// Set up Core Location so that we can record a location metadata track.
-//        locationManager.delegate = self
-//        locationManager.requestWhenInUseAuthorization()
-//        locationManager.distanceFilter = kCLDistanceFilterNone
-//        locationManager.headingFilter = 5.0
-//        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-		
-		
-
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -154,9 +143,6 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 	}
 	
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        print(segue.identifier)
-        
         if segue.identifier == "deviceRecorderSegue" {
             let c = segue.destination as! DeviceViewController
             delegate = c

@@ -30,21 +30,6 @@ struct DeviceData {
         ])
         return json
     }
-//    func description() -> String {
-//        
-//        var s = ""
-//        s += "gyro{"
-//        s += String(gyro.x) + "," + String(gyro.y) + "," + String(gyro.z) + "}, "
-//        s += "quat{"
-//        s += String(quat.x) + "," + String(quat.y) + "," + String(quat.z) + "," + String(quat.w) + "}, "
-//        s += "rrate{"
-//        s += String(rrate.x) + "," + String(rrate.y) + "," + String(rrate.z) + "}, "
-//        s += "accel{"
-//        s += String(accel.x) + "," + String(accel.y) + "," + String(accel.z) + "}"
-//
-//        return s
-//        
-//    }
 }
 
 protocol DeviceViewControllerDelegate {
