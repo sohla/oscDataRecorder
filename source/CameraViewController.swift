@@ -496,6 +496,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 	
     @IBAction func onOSCButton(_ sender: Any) {
     
+        // tell the delegate
 //        let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "OSCViewControllerID")
 //        let popup = PopupDialog(viewController: vc)
 //
@@ -807,6 +808,14 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
         delegate?.handleOSCMessage(message)
 
         delegate?.updateDevice()
+        
+        // this is amazing! if we connect this device (select Player) to bouce:
+        // we can pass on all the data THRU this app
+        
+        self.delegate?.sendOSCMessage()
+        
+        //
+        //
         
 		if movieFileOutput.isRecording {
 		

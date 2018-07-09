@@ -36,6 +36,7 @@ class PlayerViewController: UIViewController, AVPlayerItemMetadataOutputPushDele
             let c = segue.destination as! DeviceViewController
             delegate = c
 
+            delegate?.sendOSCConnect()
         }
     }
 
@@ -291,6 +292,8 @@ class PlayerViewController: UIViewController, AVPlayerItemMetadataOutputPushDele
                                             self.delegate?.updateDevice()
                                             
                                             self.locationOverlayLabel.text = "has data"
+                                            
+                                            self.delegate?.sendOSCMessage()
 										}
 									}
 									

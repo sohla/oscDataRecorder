@@ -38,6 +38,9 @@ protocol DeviceViewControllerDelegate {
     func handleOSCMessage(_ msg:OSCMessage)
     func handleJSONString(_ jsonString:String)
     func getJSONString() -> String?
+    
+    func sendOSCConnect()
+    func sendOSCMessage()
 }
 
 class DeviceViewController: UIViewController,DeviceViewControllerDelegate {
@@ -45,6 +48,8 @@ class DeviceViewController: UIViewController,DeviceViewControllerDelegate {
     @IBOutlet weak var skView: SCNView!
     
     var deviceData = DeviceData()
+    
+    static let client:OSCClient = OSCClient()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -118,6 +123,32 @@ class DeviceViewController: UIViewController,DeviceViewControllerDelegate {
 
     func getJSONString() -> String? {
         return deviceData.asJSON()[].rawString()
+    }
+    
+    func sendOSCMessage() {
+        
+        let address = "udp://10.0.0.56:57120"
+        
+        //• should we bundle this up?
+        var msg: OSCMessage = OSCMessage(address: "/gyrosc/gyro", arguments: [deviceData.gyro.x, deviceData.gyro.y, deviceData.gyro.z])
+        DeviceViewController.client.send(msg, to: address)
+
+        msg = OSCMessage(address: "/gyrosc/rrate", arguments: [deviceData.rrate.x, deviceData.rrate.y, deviceData.rrate.z])
+        DeviceViewController.client.send(msg, to: address)
+
+        msg = OSCMessage(address: "/gyrosc/accel", arguments: [deviceData.accel.x, deviceData.accel.y, deviceData.accel.z])
+        DeviceViewController.client.send(msg, to: address)
+
+        msg = OSCMessage(address: "/gyrosc/quat", arguments: [deviceData.quat.w, deviceData.quat.z, deviceData.quat.x, deviceData.quat.y])
+        DeviceViewController.client.send(msg, to: address)
+
+    }
+    
+    func sendOSCConnect() {
+    
+        let address = "udp://10.0.0.56:57120"
+        let msg: OSCMessage = OSCMessage(address: "/gyrosc/button", arguments: [1.0])
+        DeviceViewController.client.send(msg, to: address)
     }
 
 }
