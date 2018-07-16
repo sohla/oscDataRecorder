@@ -508,7 +508,9 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
     @IBAction func onResetButton(_ sender: Any) {
     
         let msg: OSCMessage = OSCMessage(address: "/bounce", arguments: ["motionReset"])
-        CameraViewController.client.send(msg, to: "udp://10.0.0.57:51700")
+        
+        //•• SET ADDRESS and PORT of the touch device you want to reset
+        CameraViewController.client.send(msg, to: "udp://169.254.38.187:51700")
     }
     
     func capture(_ captureOutput: AVCaptureFileOutput!, didStartRecordingToOutputFileAt fileURL: URL!, fromConnections connections: [Any]!) {
@@ -805,6 +807,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 
     func handle(_ message: OSCMessage!) {
 
+        print(message.address)
         delegate?.handleOSCMessage(message)
 
         delegate?.updateDevice()

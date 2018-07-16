@@ -127,8 +127,12 @@ class DeviceViewController: UIViewController,DeviceViewControllerDelegate {
     
     func sendOSCMessage() {
         
-        let address = "udp://10.0.0.56:57120"
-        
+        //•• SET ADDRESS AND PORT of receiver (laptop)
+        let address = "udp://169.254.191.233:57120"
+//        let address = "udp://169.254.251.179:57120"
+//        let address = "udp://169.254.77.15:57121"
+//        let address = "udp://192.168.10.2:57121"
+
         //• should we bundle this up?
         var msg: OSCMessage = OSCMessage(address: "/gyrosc/gyro", arguments: [deviceData.gyro.x, deviceData.gyro.y, deviceData.gyro.z])
         DeviceViewController.client.send(msg, to: address)
@@ -146,7 +150,12 @@ class DeviceViewController: UIViewController,DeviceViewControllerDelegate {
     
     func sendOSCConnect() {
     
-        let address = "udp://10.0.0.56:57120"
+        //•• SET ADDRESS AND PORT of receiver (laptop)
+        let address = "udp://169.254.191.233:57120"
+//        let address = "udp://169.254.251.179:57120"
+//        let address = "udp://169.254.77.15:57121"
+//        let address = "udp://192.168.10.2:57121"
+
         let msg: OSCMessage = OSCMessage(address: "/gyrosc/button", arguments: [1.0])
         DeviceViewController.client.send(msg, to: address)
     }
