@@ -58,7 +58,7 @@
                                         </connections>
                                     </button>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wc9-zH-fpT">
-                                        <rect key="frame" x="136.5" y="319.5" width="118" height="28"/>
+                                        <rect key="frame" x="137" y="320" width="118" height="28"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
                                         <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
                                         <state key="normal" title="Tap to resume"/>
@@ -72,14 +72,13 @@
                                         </connections>
                                     </button>
                                     <label hidden="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Camera Unavailable" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vm0-Ha-odG">
-                                        <rect key="frame" x="119.5" y="323.5" width="152" height="20.5"/>
+                                        <rect key="frame" x="120" y="323" width="152" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yjI-HS-4pY">
+                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yjI-HS-4pY">
                                         <rect key="frame" x="8" y="72" width="375" height="546"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                         <connections>
                                             <segue destination="C1a-Ab-5aP" kind="embed" identifier="deviceRecorderSegue" id="7Lq-tt-uig"/>
                                         </connections>
@@ -88,14 +87,18 @@
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <gestureRecognizers/>
                                 <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="yjI-HS-4pY" secondAttribute="bottom" constant="49" id="01j-3Z-CT0"/>
                                     <constraint firstItem="ghq-cJ-efm" firstAttribute="leading" secondItem="sVI-mX-69Q" secondAttribute="leading" constant="32" id="0nI-0S-hWy"/>
                                     <constraint firstItem="f4y-iM-g40" firstAttribute="leading" secondItem="ghq-cJ-efm" secondAttribute="trailing" constant="112" id="7Pw-Wr-5HB"/>
                                     <constraint firstAttribute="bottom" secondItem="f4y-iM-g40" secondAttribute="bottom" constant="12" id="BA6-dJ-gYh"/>
+                                    <constraint firstItem="yjI-HS-4pY" firstAttribute="leading" secondItem="sVI-mX-69Q" secondAttribute="leading" constant="8" id="CvR-71-3sp"/>
+                                    <constraint firstAttribute="trailing" secondItem="yjI-HS-4pY" secondAttribute="trailing" constant="8" id="JPL-zM-rP7"/>
                                     <constraint firstItem="ghq-cJ-efm" firstAttribute="bottom" secondItem="f4y-iM-g40" secondAttribute="bottom" id="Pcp-Mf-qun"/>
                                     <constraint firstItem="Vm0-Ha-odG" firstAttribute="centerX" secondItem="sVI-mX-69Q" secondAttribute="centerX" id="Q24-Dg-okF"/>
                                     <constraint firstItem="Vm0-Ha-odG" firstAttribute="centerX" secondItem="sVI-mX-69Q" secondAttribute="centerX" id="TM4-W5-F4l"/>
                                     <constraint firstItem="ghq-cJ-efm" firstAttribute="top" secondItem="f4y-iM-g40" secondAttribute="top" id="UgL-8V-UzF"/>
                                     <constraint firstAttribute="bottom" secondItem="ghq-cJ-efm" secondAttribute="bottom" constant="12" id="Yv9-cm-jU1"/>
+                                    <constraint firstItem="yjI-HS-4pY" firstAttribute="top" secondItem="sVI-mX-69Q" secondAttribute="top" constant="72" id="kdX-kJ-SRY"/>
                                     <constraint firstItem="ghq-cJ-efm" firstAttribute="width" secondItem="f4y-iM-g40" secondAttribute="width" id="kzL-MU-qDu"/>
                                     <constraint firstAttribute="trailing" secondItem="f4y-iM-g40" secondAttribute="trailing" constant="32" id="m6q-ES-gu8"/>
                                     <constraint firstItem="wc9-zH-fpT" firstAttribute="centerY" secondItem="sVI-mX-69Q" secondAttribute="centerY" id="oLu-OE-D08"/>
@@ -309,9 +312,8 @@
                                 <color key="tintColor" red="0.95320391414141414" green="0.85132551354074104" blue="0.16858916250943651" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="barTintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </toolbar>
-                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="S4j-lh-Xbq">
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S4j-lh-Xbq">
                                 <rect key="frame" x="0.0" y="64" width="375" height="559"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <connections>
                                     <segue destination="C1a-Ab-5aP" kind="embed" identifier="devicePlayerSegue" id="9hj-h4-Etn"/>
                                 </connections>
@@ -320,13 +322,17 @@
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="32C-3r-ZrH" firstAttribute="leading" secondItem="PuO-6Q-VB0" secondAttribute="leadingMargin" id="1uY-2t-KiU"/>
+                            <constraint firstAttribute="trailing" secondItem="S4j-lh-Xbq" secondAttribute="trailing" id="1y6-bM-jwP"/>
                             <constraint firstItem="frV-sr-hfx" firstAttribute="trailing" secondItem="VPX-gO-AEB" secondAttribute="trailing" id="6Y3-jT-joS"/>
                             <constraint firstAttribute="bottom" secondItem="frV-sr-hfx" secondAttribute="bottom" id="Btd-8o-hwr"/>
+                            <constraint firstItem="DcQ-8C-zsN" firstAttribute="top" secondItem="S4j-lh-Xbq" secondAttribute="bottom" constant="44" id="E6E-et-OUg"/>
+                            <constraint firstItem="S4j-lh-Xbq" firstAttribute="top" secondItem="SB1-ax-C8k" secondAttribute="bottom" id="T1U-uf-s0C"/>
                             <constraint firstItem="32C-3r-ZrH" firstAttribute="trailing" secondItem="PuO-6Q-VB0" secondAttribute="trailingMargin" id="Vp6-E1-IHq"/>
                             <constraint firstAttribute="trailing" secondItem="frV-sr-hfx" secondAttribute="trailing" id="VyA-6F-oZA"/>
                             <constraint firstItem="VPX-gO-AEB" firstAttribute="top" secondItem="PuO-6Q-VB0" secondAttribute="top" id="cUR-Uu-Kal"/>
                             <constraint firstItem="frV-sr-hfx" firstAttribute="leading" secondItem="VPX-gO-AEB" secondAttribute="leading" id="ewd-6a-tz2"/>
                             <constraint firstItem="32C-3r-ZrH" firstAttribute="top" secondItem="SB1-ax-C8k" secondAttribute="bottom" constant="8" id="f0h-6k-d8m"/>
+                            <constraint firstItem="S4j-lh-Xbq" firstAttribute="leading" secondItem="PuO-6Q-VB0" secondAttribute="leading" id="hNB-yY-VAQ"/>
                             <constraint firstItem="DcQ-8C-zsN" firstAttribute="top" secondItem="VPX-gO-AEB" secondAttribute="bottom" id="ie2-2O-cuB"/>
                             <constraint firstItem="frV-sr-hfx" firstAttribute="leading" secondItem="PuO-6Q-VB0" secondAttribute="leading" id="r0C-d8-Ozc"/>
                         </constraints>
@@ -359,11 +365,11 @@
                         <viewControllerLayoutGuide type="bottom" id="0Kf-pc-wqg"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="tv2-Ga-QGr">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="546"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="559"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" sceneName="SceneKit Scene.scn" translatesAutoresizingMaskIntoConstraints="NO" id="VMY-ii-HbF">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="546"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="559"/>
                             </sceneKitView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -438,7 +444,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="7Lq-tt-uig"/>
+        <segue reference="9hj-h4-Etn"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
