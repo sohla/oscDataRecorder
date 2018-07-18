@@ -92,7 +92,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 					self.addObservers()
 					self.session.startRunning()
 					self.isSessionRunning = self.session.isRunning
-					self.server.listen(57200)
+					self.server.listen(57201)
 				
 				case .notAuthorized:
 					DispatchQueue.main.async {
@@ -510,7 +510,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
         let msg: OSCMessage = OSCMessage(address: "/bounce", arguments: ["motionReset"])
         
         //•• SET ADDRESS and PORT of the touch device you want to reset
-        CameraViewController.client.send(msg, to: "udp://169.254.38.187:51700")
+        CameraViewController.client.send(msg, to: "udp://169.254.60.42:51700")
     }
     
     func capture(_ captureOutput: AVCaptureFileOutput!, didStartRecordingToOutputFileAt fileURL: URL!, fromConnections connections: [Any]!) {

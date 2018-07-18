@@ -128,7 +128,7 @@ class DeviceViewController: UIViewController,DeviceViewControllerDelegate {
     func sendOSCMessage() {
         
         //•• SET ADDRESS AND PORT of receiver (laptop)
-        let address = "udp://169.254.191.233:57120"
+        let address = "udp://169.254.50.189:57120"
 //        let address = "udp://169.254.251.179:57120"
 //        let address = "udp://169.254.77.15:57121"
 //        let address = "udp://192.168.10.2:57121"
@@ -151,7 +151,7 @@ class DeviceViewController: UIViewController,DeviceViewControllerDelegate {
     func sendOSCConnect() {
     
         //•• SET ADDRESS AND PORT of receiver (laptop)
-        let address = "udp://169.254.191.233:57120"
+        let address = "udp://169.254.50.189:57120"
 //        let address = "udp://169.254.251.179:57120"
 //        let address = "udp://169.254.77.15:57121"
 //        let address = "udp://192.168.10.2:57121"
