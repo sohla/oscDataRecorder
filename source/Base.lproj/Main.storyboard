@@ -205,6 +205,10 @@
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
                     <size key="freeformSize" width="375" height="667"/>
+                    <connections>
+                        <outlet property="ipAddressTextField" destination="5eC-ZB-Ecc" id="r3o-Mx-cG6"/>
+                        <outlet property="portTextField" destination="7Di-Pa-unm" id="oDr-sU-QcW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X0a-RG-bYJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

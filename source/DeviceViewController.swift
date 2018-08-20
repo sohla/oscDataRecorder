@@ -132,35 +132,56 @@ class DeviceViewController: UIViewController,DeviceViewControllerDelegate {
 //        let address = "udp://169.254.50.189:57120"
 //        let address = "udp://169.254.251.179:57120"
 //        let address = "udp://169.254.77.15:57121"
-        let address = "udp://10.224.15.22:57120"
+        
+        
+        //let address = "udp://10.224.15.22:57120"
+        
+        
+        if let ip = UserDefaults.standard.string(forKey: "ipAddress"){
+            if let port = UserDefaults.standard.string(forKey: "portAddress"){
 
-        //• should we bundle this up?
-        var msg: OSCMessage = OSCMessage(address: "/gyrosc/gyro", arguments: [deviceData.gyro.x, deviceData.gyro.y, deviceData.gyro.z])
-        DeviceViewController.client.send(msg, to: address)
+                let address = "udp://"+ip+":"+port
 
-        msg = OSCMessage(address: "/gyrosc/rrate", arguments: [deviceData.rrate.x, deviceData.rrate.y, deviceData.rrate.z])
-        DeviceViewController.client.send(msg, to: address)
+                //• should we bundle this up?
+                var msg: OSCMessage = OSCMessage(address: "/gyrosc/gyro", arguments: [deviceData.gyro.x, deviceData.gyro.y, deviceData.gyro.z])
+                DeviceViewController.client.send(msg, to: address)
+                
+                msg = OSCMessage(address: "/gyrosc/rrate", arguments: [deviceData.rrate.x, deviceData.rrate.y, deviceData.rrate.z])
+                DeviceViewController.client.send(msg, to: address)
+                
+                msg = OSCMessage(address: "/gyrosc/accel", arguments: [deviceData.accel.x, deviceData.accel.y, deviceData.accel.z])
+                DeviceViewController.client.send(msg, to: address)
+                
+                msg = OSCMessage(address: "/gyrosc/quat", arguments: [deviceData.quat.w, deviceData.quat.z, deviceData.quat.x, deviceData.quat.y])
+                DeviceViewController.client.send(msg, to: address)
 
-        msg = OSCMessage(address: "/gyrosc/accel", arguments: [deviceData.accel.x, deviceData.accel.y, deviceData.accel.z])
-        DeviceViewController.client.send(msg, to: address)
+            }
 
-        msg = OSCMessage(address: "/gyrosc/quat", arguments: [deviceData.quat.w, deviceData.quat.z, deviceData.quat.x, deviceData.quat.y])
-        DeviceViewController.client.send(msg, to: address)
+        }
+        
 
     }
     
     func sendOSCConnect() {
     
         //•• SET ADDRESS AND PORT of receiver (laptop)
-        let address = "udp://10.224.15.22:57120"
+//        let address = "udp://10.224.15.22:57120"
 //        let address = "udp://10.1.1.4:57120"
 //        let address = "udp://169.254.50.189:57120"
 //        let address = "udp://169.254.251.179:57120"
 //        let address = "udp://169.254.77.15:57121"
 //        let address = "udp://192.168.10.2:57121"
 
-        let msg: OSCMessage = OSCMessage(address: "/gyrosc/button", arguments: [1.0])
-        DeviceViewController.client.send(msg, to: address)
+        if let ip = UserDefaults.standard.string(forKey: "ipAddress"){
+            if let port = UserDefaults.standard.string(forKey: "portAddress"){
+
+                let address = "udp://"+ip+":"+port
+                
+                let msg: OSCMessage = OSCMessage(address: "/gyrosc/button", arguments: [1.0])
+                DeviceViewController.client.send(msg, to: address)
+
+            }
+        }
     }
 
 }
