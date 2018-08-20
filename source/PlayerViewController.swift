@@ -187,9 +187,20 @@ class PlayerViewController: UIViewController, AVPlayerItemMetadataOutputPushDele
 		playButton.isEnabled = true
 		pauseButton.isEnabled = false
 		//removeAllSublayers(from: facesLayer)
+        playButtonTapped(playButton)
 	}
 	
-	@IBOutlet private weak var playButton: UIBarButtonItem!
+    
+    
+    @IBAction func backButtonTapped(_ sender: Any) {
+    
+        let current = player?.currentTime()
+        let jump = CMTimeMakeWithSeconds(10.0, (player?.currentTime().timescale)!)
+        let newTime = CMTimeSubtract(current!, jump)
+        player?.seek(to: newTime)
+        
+    }
+    @IBOutlet private weak var playButton: UIBarButtonItem!
 	
 	@IBAction private func playButtonTapped(_ sender: AnyObject) {
 		if seekToZeroBeforePlay {

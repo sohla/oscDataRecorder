@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="PDV-RU-4h7">
-    <device id="retina4_7" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="PDV-RU-4h7">
+    <device id="retina4_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -19,14 +19,14 @@
                         <viewControllerLayoutGuide type="bottom" id="tvj-7s-n29"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sVI-mX-69Q" customClass="PreviewView" customModule="oscDataRecorder" customModuleProvider="target">
-                                <rect key="frame" x="-8" y="0.0" width="391" height="667"/>
+                                <rect key="frame" x="-4" y="0.0" width="675" height="375"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f4y-iM-g40">
-                                        <rect key="frame" x="251.5" y="619" width="107.5" height="36"/>
+                                        <rect key="frame" x="393.5" y="327" width="249.5" height="36"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <state key="normal" title="Camera">
@@ -42,7 +42,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ghq-cJ-efm">
-                                        <rect key="frame" x="32" y="619" width="107.5" height="36"/>
+                                        <rect key="frame" x="32" y="327" width="249.5" height="36"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <state key="normal" title="Record">
@@ -58,7 +58,7 @@
                                         </connections>
                                     </button>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wc9-zH-fpT">
-                                        <rect key="frame" x="137" y="320" width="118" height="28"/>
+                                        <rect key="frame" x="279" y="174" width="118" height="28"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
                                         <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
                                         <state key="normal" title="Tap to resume"/>
@@ -72,13 +72,13 @@
                                         </connections>
                                     </button>
                                     <label hidden="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Camera Unavailable" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vm0-Ha-odG">
-                                        <rect key="frame" x="120" y="323" width="152" height="21"/>
+                                        <rect key="frame" x="262" y="177" width="152" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yjI-HS-4pY">
-                                        <rect key="frame" x="8" y="72" width="375" height="546"/>
+                                        <rect key="frame" x="8" y="72" width="659" height="254"/>
                                         <connections>
                                             <segue destination="C1a-Ab-5aP" kind="embed" identifier="deviceRecorderSegue" id="7Lq-tt-uig"/>
                                         </connections>
@@ -219,7 +219,7 @@
                     <nil key="simulatedStatusBarMetrics"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="x2G-YY-cY2">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="667" height="32"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="0.8517203283" green="0.79981006499999996" blue="0.058039445410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
@@ -245,15 +245,15 @@
                         <viewControllerLayoutGuide type="bottom" id="DcQ-8C-zsN"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="PuO-6Q-VB0">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VPX-gO-AEB">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="32C-3r-ZrH">
-                                <rect key="frame" x="16" y="72" width="343" height="120"/>
+                                <rect key="frame" x="20" y="40" width="627" height="120"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="245" id="CZ9-3B-qND"/>
                                     <constraint firstAttribute="height" constant="31" id="qCc-w2-hv7"/>
@@ -270,27 +270,35 @@
                                 </variation>
                             </label>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="frV-sr-hfx">
-                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="342" width="667" height="33"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <items>
+                                    <barButtonItem title="⟲" id="qeC-RY-LPh">
+                                        <connections>
+                                            <action selector="backButtonTapped:" destination="xUS-yO-GIr" id="vhW-Pc-9oF"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="wzE-QL-qKg"/>
                                     <barButtonItem systemItem="play" id="zdW-cY-8y7">
                                         <connections>
                                             <action selector="playButtonTapped:" destination="xUS-yO-GIr" id="4CT-uF-mbG"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="3af-O1-cXS"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="BGR-HY-Wh4"/>
                                     <barButtonItem systemItem="pause" id="Unk-Wh-6gy">
                                         <connections>
                                             <action selector="pauseButtonTapped:" destination="xUS-yO-GIr" id="0Yh-72-JeE"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="SOa-QZ-AoJ"/>
+                                    <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="3nm-oj-nbO"/>
                                     <barButtonItem style="plain" id="x7r-jh-Hd3">
                                         <view key="customView" contentMode="scaleToFill" id="nou-Zu-Bhb">
-                                            <rect key="frame" x="127" y="5.5" width="181" height="33"/>
+                                            <rect key="frame" x="373" y="0.0" width="181" height="33"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Metadata " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="puJ-KS-O9U">
-                                                    <rect key="frame" x="-5" y="6" width="173" height="21"/>
+                                                    <rect key="frame" x="76" y="6" width="92" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.95320391410000005" green="0.85132551349999996" blue="0.1685891625" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -299,9 +307,10 @@
                                             </subviews>
                                         </view>
                                     </barButtonItem>
+                                    <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="teG-21-9ck"/>
                                     <barButtonItem style="plain" id="3xN-Yy-3MO">
                                         <switch key="customView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="xnR-vK-2mQ" userLabel="honorTimedMetadataTracksSwitch">
-                                            <rect key="frame" x="308" y="6.5" width="51" height="31"/>
+                                            <rect key="frame" x="596" y="1" width="51" height="31"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <connections>
                                                 <action selector="toggleHonorTimedMetadataTracksDuringPlayback:" destination="xUS-yO-GIr" eventType="valueChanged" id="fWw-d7-bhq"/>
@@ -313,7 +322,7 @@
                                 <color key="barTintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </toolbar>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S4j-lh-Xbq">
-                                <rect key="frame" x="0.0" y="64" width="375" height="559"/>
+                                <rect key="frame" x="0.0" y="32" width="667" height="299"/>
                                 <connections>
                                     <segue destination="C1a-Ab-5aP" kind="embed" identifier="devicePlayerSegue" id="9hj-h4-Etn"/>
                                 </connections>
@@ -365,11 +374,11 @@
                         <viewControllerLayoutGuide type="bottom" id="0Kf-pc-wqg"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="tv2-Ga-QGr">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="559"/>
+                        <rect key="frame" x="0.0" y="0.0" width="667" height="299"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" sceneName="SceneKit Scene.scn" translatesAutoresizingMaskIntoConstraints="NO" id="VMY-ii-HbF">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="559"/>
+                                <rect key="frame" x="0.0" y="0.0" width="667" height="299"/>
                             </sceneKitView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -394,7 +403,7 @@
             <objects>
                 <collectionViewController id="hTa-EV-72v" customClass="AssetGridViewController" customModule="oscDataRecorder" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="2k2-E9-axS">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1" minimumInteritemSpacing="1" id="2XO-72-xDp">
