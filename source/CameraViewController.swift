@@ -507,10 +507,18 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
     
     @IBAction func onResetButton(_ sender: Any) {
     
-        let msg: OSCMessage = OSCMessage(address: "/bounce", arguments: ["motionReset"])
-        
-        //•• SET ADDRESS and PORT of the touch device you want to reset
-        CameraViewController.client.send(msg, to: "udp://169.254.60.42:51700")
+
+        if let ip = UserDefaults.standard.string(forKey: "ipAddress"){
+            if let port = UserDefaults.standard.string(forKey: "portAddress"){
+                
+                let address = "udp://"+ip+":"+port
+                
+                let msg: OSCMessage = OSCMessage(address: "/bounce", arguments: ["motionReset"])
+                //•• SET ADDRESS and PORT of the touch device you want to reset NOT TESTED
+                CameraViewController.client.send(msg, to: address)
+
+            }
+        }
     }
     
     func capture(_ captureOutput: AVCaptureFileOutput!, didStartRecordingToOutputFileAt fileURL: URL!, fromConnections connections: [Any]!) {
