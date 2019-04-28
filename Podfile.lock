@@ -2,14 +2,14 @@ PODS:
   - CocoaAsyncSocket (7.6.3)
   - OSCKit (0.3.5):
     - CocoaAsyncSocket (~> 7.3)
-  - SwiftyJSON (4.1.0)
+  - SwiftyJSON (5.0.0)
 
 DEPENDENCIES:
   - OSCKit
-  - SwiftyJSON (~> 4.0)
+  - SwiftyJSON
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/cocoapods/specs.git:
     - CocoaAsyncSocket
     - OSCKit
     - SwiftyJSON
@@ -17,8 +17,8 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   CocoaAsyncSocket: eafaa68a7e0ec99ead0a7b35015e0bf25d2c8987
   OSCKit: 4470dbd30bc792dcf66dc4e7b5d1ec7174add33c
-  SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
+  SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
 
-PODFILE CHECKSUM: 5bdb3c7a4a0c4afd2ea76cb0426ad3b95b4a9865
+PODFILE CHECKSUM: 8b508a4d3d5a692583b521a1a111f4c4461dac65
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.6.1

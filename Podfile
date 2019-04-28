@@ -7,5 +7,5 @@ target 'oscDataRecorder' do
 
   # Pods for oscDataRecorder
   pod 'OSCKit'
-  pod 'SwiftyJSON', '~> 4.0'
+  pod 'SwiftyJSON'
 end
