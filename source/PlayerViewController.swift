@@ -49,7 +49,7 @@ class PlayerViewController: UIViewController, AVPlayerItemMetadataOutputPushDele
 			playButton.isEnabled = true
 			pauseButton.isEnabled = false
 			seekToZeroBeforePlay = false
-			player?.seek(to: kCMTimeZero)
+            player?.seek(to: CMTime.zero)
 		}
 	}
 	
@@ -109,35 +109,35 @@ class PlayerViewController: UIViewController, AVPlayerItemMetadataOutputPushDele
 		let mutableComposition = AVMutableComposition()
 		
 		// Create a mutableComposition for all the tracks present in the asset.
-		guard let sourceVideoTrack = asset.tracks(withMediaType: AVMediaTypeVideo).first else {
+        guard let sourceVideoTrack = asset.tracks(withMediaType: AVMediaType.video).first else {
 			print("Could not get video track from asset")
 			return
 		}
 		defaultVideoTransform = sourceVideoTrack.preferredTransform
 		
-		let sourceAudioTrack = asset.tracks(withMediaType: AVMediaTypeAudio).first
-		let mutableCompositionVideoTrack = mutableComposition.addMutableTrack(withMediaType: AVMediaTypeVideo, preferredTrackID: kCMPersistentTrackID_Invalid)
-		let mutableCompositionAudioTrack = mutableComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: kCMPersistentTrackID_Invalid)
+        let sourceAudioTrack = asset.tracks(withMediaType: AVMediaType.audio).first
+        let mutableCompositionVideoTrack = mutableComposition.addMutableTrack(withMediaType: AVMediaType.video, preferredTrackID: kCMPersistentTrackID_Invalid)
+        let mutableCompositionAudioTrack = mutableComposition.addMutableTrack(withMediaType: AVMediaType.audio, preferredTrackID: kCMPersistentTrackID_Invalid)
 		
 		do {
-			try mutableCompositionVideoTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, asset.duration), of: sourceVideoTrack, at: kCMTimeZero)
+            try mutableCompositionVideoTrack?.insertTimeRange(CMTimeRangeMake(start: CMTime.zero, duration: asset.duration), of: sourceVideoTrack, at: CMTime.zero)
 			if let sourceAudioTrack = sourceAudioTrack {
-				try mutableCompositionAudioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, asset.duration), of: sourceAudioTrack, at: kCMTimeZero)
+                try mutableCompositionAudioTrack?.insertTimeRange(CMTimeRangeMake(start: CMTime.zero, duration: asset.duration), of: sourceAudioTrack, at: CMTime.zero)
 			}
 		}
 		catch {
 			print("Could not insert time range into video/audio mutable composition: \(error)")
 		}
 		
-		for metadataTrack in asset.tracks(withMediaType: AVMediaTypeMetadata) {
-			if track(metadataTrack, hasMetadataIdentifier:AVMetadataIdentifierQuickTimeMetadataDetectedFace) ||
-				track(metadataTrack, hasMetadataIdentifier:AVMetadataIdentifierQuickTimeMetadataVideoOrientation) ||
-				track(metadataTrack, hasMetadataIdentifier:AVMetadataIdentifierQuickTimeMetadataLocationISO6709) {
+        for metadataTrack in asset.tracks(withMediaType: AVMediaType.metadata) {
+            if track(metadataTrack, hasMetadataIdentifier:AVMetadataIdentifier.quickTimeMetadataDetectedFace.rawValue) ||
+                track(metadataTrack, hasMetadataIdentifier:AVMetadataIdentifier.quickTimeMetadataVideoOrientation.rawValue) ||
+                track(metadataTrack, hasMetadataIdentifier:AVMetadataIdentifier.quickTimeMetadataLocationISO6709.rawValue) {
 				
-				let mutableCompositionMetadataTrack = mutableComposition.addMutableTrack(withMediaType: AVMediaTypeMetadata, preferredTrackID: kCMPersistentTrackID_Invalid)
+                let mutableCompositionMetadataTrack = mutableComposition.addMutableTrack(withMediaType: AVMediaType.metadata, preferredTrackID: kCMPersistentTrackID_Invalid)
 				
 				do {
-					try mutableCompositionMetadataTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, asset.duration), of: metadataTrack, at: kCMTimeZero)
+                    try mutableCompositionMetadataTrack?.insertTimeRange(CMTimeRangeMake(start: CMTime.zero, duration: asset.duration), of: metadataTrack, at: CMTime.zero)
 				}
 				catch let error as NSError {
 					print("Could not insert time range into metadata mutable composition: \(error)")
@@ -181,7 +181,7 @@ class PlayerViewController: UIViewController, AVPlayerItemMetadataOutputPushDele
 	}
 	
 	/// Called when the player item has played to its end time.
-	func playerItemDidReachEnd(_ notification: Notification) {
+    @objc func playerItemDidReachEnd(_ notification: Notification) {
 		// After the movie has played to its end time, seek back to time zero to play it again.
 		seekToZeroBeforePlay = true
 		playButton.isEnabled = true
@@ -195,7 +195,7 @@ class PlayerViewController: UIViewController, AVPlayerItemMetadataOutputPushDele
     @IBAction func backButtonTapped(_ sender: Any) {
     
         let current = player?.currentTime()
-        let jump = CMTimeMakeWithSeconds(10.0, (player?.currentTime().timescale)!)
+        let jump = CMTimeMakeWithSeconds(10.0, preferredTimescale: (player?.currentTime().timescale)!)
         let newTime = CMTimeSubtract(current!, jump)
         player?.seek(to: newTime)
         
@@ -205,7 +205,7 @@ class PlayerViewController: UIViewController, AVPlayerItemMetadataOutputPushDele
 	@IBAction private func playButtonTapped(_ sender: AnyObject) {
 		if seekToZeroBeforePlay {
 			seekToZeroBeforePlay = false
-			player?.seek(to: kCMTimeZero)
+            player?.seek(to: CMTime.zero)
 			
 			// Update the player layer to match the video's default transform.
 			playerLayer?.transform = CATransform3DMakeAffineTransform(defaultVideoTransform)
@@ -246,7 +246,7 @@ class PlayerViewController: UIViewController, AVPlayerItemMetadataOutputPushDele
 		}
 	}
 	
-	func metadataOutput(_ output: AVPlayerItemMetadataOutput, didOutputTimedMetadataGroups groups: [AVTimedMetadataGroup], from track: AVPlayerItemTrack) {
+    func metadataOutput(_ output: AVPlayerItemMetadataOutput, didOutputTimedMetadataGroups groups: [AVTimedMetadataGroup], from track: AVPlayerItemTrack?) {
 		for metadataGroup in groups {
 			
 			DispatchQueue.main.async {
@@ -257,7 +257,7 @@ class PlayerViewController: UIViewController, AVPlayerItemMetadataOutputPushDele
 //                        self.removeAllSublayers(from: self.facesLayer)
 //                    }
 //                    else
-                    if self.track(track.assetTrack, hasMetadataIdentifier: AVMetadataIdentifierQuickTimeMetadataVideoOrientation) {
+                    if self.track(track!.assetTrack!, hasMetadataIdentifier: AVMetadataIdentifier.quickTimeMetadataVideoOrientation.rawValue) {
 						self.locationOverlayLabel.text = ""
 					}
 				}
@@ -277,10 +277,10 @@ class PlayerViewController: UIViewController, AVPlayerItemMetadataOutputPushDele
 //                                        faces.append(itemValue)
 //                                    }
 									
-								case AVMetadataIdentifierQuickTimeMetadataVideoOrientation:
+                            case AVMetadataIdentifier.quickTimeMetadataVideoOrientation:
 									if itemDataType == String(kCMMetadataBaseDataType_SInt16) {
 										if let videoOrientationValue = metdataItem.value as? NSNumber {
-											let sourceVideoTrack = self.playerAsset!.tracks(withMediaType: AVMediaTypeVideo)[0]
+                                            let sourceVideoTrack = self.playerAsset!.tracks(withMediaType: AVMediaType.video)[0]
 											let videoDimensions = CMVideoFormatDescriptionGetDimensions(sourceVideoTrack.formatDescriptions[0] as! CMVideoFormatDescription)
 											if let videoOrientation = CGImagePropertyOrientation(rawValue: videoOrientationValue.uint32Value) {
 												let orientationTransform = self.affineTransform(for:videoOrientation, with:videoDimensions)
@@ -294,7 +294,7 @@ class PlayerViewController: UIViewController, AVPlayerItemMetadataOutputPushDele
 										}
 									}
 									
-								case AVMetadataIdentifierQuickTimeMetadataLocationISO6709:
+                            case AVMetadataIdentifier.quickTimeMetadataLocationISO6709:
 									if itemDataType == String(kCMMetadataDataType_QuickTimeMetadataLocation_ISO6709) {
 										if let itemValue = metdataItem.value as? String {
 
@@ -426,17 +426,17 @@ class PlayerViewController: UIViewController, AVPlayerItemMetadataOutputPushDele
 		
 		switch rotationDegrees {
 			case 90:
-				angle = CGFloat(M_PI / 2.0)
+				angle = CGFloat(Double.pi / 2.0)
 				tx = CGFloat(videoDimensions.height)
 				ty = 0.0
 				
 			case 180:
-				angle = CGFloat(M_PI)
+				angle = CGFloat(Double.pi)
 				tx = CGFloat(videoDimensions.width)
 				ty = CGFloat(videoDimensions.height)
 				
 			case 270:
-				angle = CGFloat(M_PI / -2.0)
+				angle = CGFloat(Double.pi / -2.0)
 				tx = 0.0
 				ty = CGFloat(videoDimensions.width)
 				

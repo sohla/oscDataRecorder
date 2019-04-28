@@ -68,24 +68,24 @@ class DeviceViewController: UIViewController,DeviceViewControllerDelegate {
     }
     
     func handleOSCMessage(_ message:OSCMessage){
-
+//••
         // convert to useful values
-        let values = message.arguments.map{ Float($0 as! String)!}
-        
-        switch (message.address as NSString).lastPathComponent {
-        case "gyro":
-            deviceData.gyro = SCNVector3(x: values[0], y: values[1], z: values[2])
-        case "quat":
-            // needed to swap order for orientation to work  on node
-            deviceData.quat = SCNQuaternion(x: values[2] , y: values[3], z: values[1], w: values[0])
-        case "rrate":
-            deviceData.rrate = SCNVector3(x: values[0], y: values[1], z: values[2])
-        case "accel":
-            deviceData.accel = SCNVector3(x: values[0], y: values[1], z: values[2])
-            
-        default:
-            print("unable to store osc data")
-        }
+//        let values = message.arguments.map{ Float($0 as! String)!}
+//
+//        switch (message.address as NSString).lastPathComponent {
+//        case "gyro":
+//            deviceData.gyro = SCNVector3(x: values[0], y: values[1], z: values[2])
+//        case "quat":
+//            // needed to swap order for orientation to work  on node
+//            deviceData.quat = SCNQuaternion(x: values[2] , y: values[3], z: values[1], w: values[0])
+//        case "rrate":
+//            deviceData.rrate = SCNVector3(x: values[0], y: values[1], z: values[2])
+//        case "accel":
+//            deviceData.accel = SCNVector3(x: values[0], y: values[1], z: values[2])
+//
+//        default:
+//            print("unable to store osc data")
+//        }
     }
     
     func handleJSONString(_ jsonString:String) {
