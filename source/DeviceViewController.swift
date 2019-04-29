@@ -58,7 +58,6 @@ class DeviceViewController: UIViewController,DeviceViewControllerDelegate {
         skView.backgroundColor = UIColor.clear
         
         let boxNode = skView.scene?.rootNode.childNode(withName: "box", recursively: true)
-        boxNode?.localTranslate(by: SCNVector3(x: 0.0, y: 0.0, z: -2.0))
 
     }
 
@@ -126,17 +125,7 @@ class DeviceViewController: UIViewController,DeviceViewControllerDelegate {
     }
     
     func sendOSCMessage() {
-        
-        //•• SET ADDRESS AND PORT of receiver (laptop)
-//        let address = "udp://10.1.1.4:57120"
-//        let address = "udp://169.254.50.189:57120"
-//        let address = "udp://169.254.251.179:57120"
-//        let address = "udp://169.254.77.15:57121"
-        
-        
-        //let address = "udp://10.224.15.22:57120"
-        
-        
+                
         if let ip = UserDefaults.standard.string(forKey: "ipAddress"){
             if let port = UserDefaults.standard.string(forKey: "portAddress"){
 
