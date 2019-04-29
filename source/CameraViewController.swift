@@ -15,15 +15,41 @@ import OSCKit
 
 class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelegate, CLLocationManagerDelegate, OSCServerDelegate {
 
-    func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
-        //••••
-    }
-    
 	
 	let server: OSCServer = OSCServer.init()
-	
+    static let client:OSCClient = OSCClient()
+
+    var delegate: DeviceViewControllerDelegate?
+    
+
+    private let session = AVCaptureSession()
+    private var isSessionRunning = false
+    private let sessionQueue = DispatchQueue(label: "session queue", attributes: [], target: nil) // Communicate with the session and other session objects on this queue.
+    private var setupResult: SessionSetupResult = .success
+    private var videoDeviceInput: AVCaptureDeviceInput!
+
+    private let movieFileOutput = AVCaptureMovieFileOutput()
+    private var backgroundRecordingID: UIBackgroundTaskIdentifier? = nil
+
+    private var sessionRunningObserveContext = 0
+    
+    private var locationMetadataInput: AVCaptureMetadataInput?
+
+    //------------------------------------------------------------------
+
+    @IBOutlet weak var previewView: PreviewView!
+    @IBOutlet private weak var cameraButton: UIButton!
+    @IBOutlet private weak var cameraUnavailableLabel: UILabel!
+    @IBOutlet private weak var recordButton: UIButton!
+    @IBOutlet private weak var resumeButton: UIButton!
+    @IBOutlet private weak var playerButton: UIBarButtonItem!
+
+
+
+    //------------------------------------------------------------------
 	// MARK: View Controller Life Cycle
-	
+    //------------------------------------------------------------------
+
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
@@ -154,25 +180,16 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
         }
     }
 
+    //------------------------------------------------------------------
 	// MARK: Session Management
-	
+    //------------------------------------------------------------------
+
 	private enum SessionSetupResult {
 		case success
 		case notAuthorized
 		case configurationFailed
 	}
-	
-	private let session = AVCaptureSession()
-	
-	private var isSessionRunning = false
-	
-	private let sessionQueue = DispatchQueue(label: "session queue", attributes: [], target: nil) // Communicate with the session and other session objects on this queue.
-	
-	private var setupResult: SessionSetupResult = .success
-	
-	private var videoDeviceInput: AVCaptureDeviceInput!
-	
-	@IBOutlet weak var previewView: PreviewView!
+
 	
 	// Call this on the session queue.
 	private func configureSession() {
@@ -312,12 +329,10 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 		}
 	}
 	
+    //------------------------------------------------------------------
 	// MARK: Device Configuration
-	
-	@IBOutlet private weak var cameraButton: UIButton!
-	
-	@IBOutlet private weak var cameraUnavailableLabel: UILabel!
-	
+    //------------------------------------------------------------------
+
     private let videoDeviceDiscoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera, .builtInDualCamera], mediaType: AVMediaType.video, position: .unspecified)
 	
 	@IBAction func changeCamera(_ cameraButton: UIButton) {
@@ -435,18 +450,10 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 		}
 	}
 	
+    //------------------------------------------------------------------
 	// MARK: Recording Movies
-    static let client:OSCClient = OSCClient()
-    
-	private let movieFileOutput = AVCaptureMovieFileOutput()
-	
-	private var backgroundRecordingID: UIBackgroundTaskIdentifier? = nil
-	
-	@IBOutlet private weak var recordButton: UIButton!
-	
-	@IBOutlet private weak var resumeButton: UIButton!
-	
-	@IBOutlet private weak var playerButton: UIBarButtonItem!
+    //------------------------------------------------------------------
+ 
 	
 	@IBAction private func toggleMovieRecording(_ recordButton: UIButton) {
 		/*
@@ -612,9 +619,10 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 		}
 	}
 	
+    //------------------------------------------------------------------
 	// MARK: Metadata Support
-	
-	private var locationMetadataInput: AVCaptureMetadataInput?
+    //------------------------------------------------------------------
+
 	
 	private func connectMetadataPorts() {
 		// Location metadata
@@ -662,10 +670,10 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 		return false
 	}
 	
+    //------------------------------------------------------------------
 	// MARK: KVO and Notifications
-	
-	private var sessionRunningObserveContext = 0
-	
+    //------------------------------------------------------------------
+
 	private func addObservers() {
 		session.addObserver(self, forKeyPath: "running", options: .new, context: &sessionRunningObserveContext)
 		
@@ -811,10 +819,9 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 	}
     
     
+    //------------------------------------------------------------------
 	// MARK: OSC Server delegate
-    var delegate: DeviceViewControllerDelegate?
-    
-
+    //------------------------------------------------------------------
     func handle(_ message: OSCMessage!) {
 
         print(message.address)
@@ -849,6 +856,12 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
             }
 		}
 	}
+    
+    func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
+        //••••
+    }
+    
+
 }
 
 extension UIDeviceOrientation {
@@ -888,3 +901,5 @@ extension AVCaptureDevice.DiscoverySession {
 		return uniqueDevicePositions.count
 	}
 }
+
+
