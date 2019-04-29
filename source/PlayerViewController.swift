@@ -15,8 +15,32 @@ import SwiftyJSON
 
 class PlayerViewController: UIViewController, AVPlayerItemMetadataOutputPushDelegate {
 	
+    
+    private var player: AVPlayer?
+    private var seekToZeroBeforePlay = false
+    private var playerAsset: AVAsset?
+    private var playerLayer: AVPlayerLayer?
+    private var defaultVideoTransform = CGAffineTransform.identity
+
+    var delegate: DeviceViewControllerDelegate?
+    private let itemMetadataOutput = AVPlayerItemMetadataOutput(identifiers: nil)
+    private var honorTimedMetadataTracksDuringPlayback = true
+    @IBOutlet private weak var honorTimedMetadataTracksSwitch: UISwitch!
+
+    //------------------------------------------------------------------
+    
+    @IBOutlet private weak var playerView: UIView!
+    @IBOutlet private weak var locationOverlayLabel: UILabel!
+
+    @IBOutlet private weak var pauseButton: UIBarButtonItem!
+    @IBOutlet private weak var playButton: UIBarButtonItem!
+
+    
+    
+    //------------------------------------------------------------------
 	// MARK: View Controller Life Cycle
-	
+    //------------------------------------------------------------------
+
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
@@ -66,8 +90,10 @@ class PlayerViewController: UIViewController, AVPlayerItemMetadataOutputPushDele
 			completion: nil)
 	}
 	
+    //------------------------------------------------------------------
 	// MARK: Segue
-	
+    //------------------------------------------------------------------
+
 	@IBAction func unwindBackToPlayer(segue: UIStoryboardSegue) {
 		// Pull any data from the view controller which initiated the unwind segue.
 		let assetGridViewController = segue.source as! AssetGridViewController
@@ -79,20 +105,10 @@ class PlayerViewController: UIViewController, AVPlayerItemMetadataOutputPushDele
 		}
 	}
 	
+    //------------------------------------------------------------------
 	// MARK: Player
-	
-    private var player: AVPlayer?
-	
-	private var seekToZeroBeforePlay = false
-	
-	private var playerAsset: AVAsset?
-	
-	@IBOutlet private weak var playerView: UIView!
-	
-	private var playerLayer: AVPlayerLayer?
-	
-	private var defaultVideoTransform = CGAffineTransform.identity
-	
+    //------------------------------------------------------------------
+
 	private func setUpPlayback(for asset: AVAsset) {
 		DispatchQueue.main.async {
 			if let currentItem = self.player?.currentItem {
@@ -160,10 +176,7 @@ class PlayerViewController: UIViewController, AVPlayerItemMetadataOutputPushDele
 			
 			let playerLayer = AVPlayerLayer(player: player)
 			playerLayer.backgroundColor = UIColor.darkGray.cgColor
-//            playerLayer.addSublayer(facesLayer)
 			playerView.layer.addSublayer(playerLayer)
-//            facesLayer.frame = playerLayer.videoRect;
-			
 			self.playerLayer = playerLayer
 		}
 		
@@ -200,7 +213,6 @@ class PlayerViewController: UIViewController, AVPlayerItemMetadataOutputPushDele
         player?.seek(to: newTime)
         
     }
-    @IBOutlet private weak var playButton: UIBarButtonItem!
 	
 	@IBAction private func playButtonTapped(_ sender: AnyObject) {
 		if seekToZeroBeforePlay {
@@ -217,7 +229,6 @@ class PlayerViewController: UIViewController, AVPlayerItemMetadataOutputPushDele
 		pauseButton.isEnabled = true
 	}
 	
-	@IBOutlet private weak var pauseButton: UIBarButtonItem!
 	
 	@IBAction private func pauseButtonTapped(_ sender: AnyObject) {
 		player?.pause()
@@ -225,15 +236,10 @@ class PlayerViewController: UIViewController, AVPlayerItemMetadataOutputPushDele
 		pauseButton.isEnabled = false
 	}
 	
+    //------------------------------------------------------------------
 	// MARK: Timed Metadata
-	
-    var delegate: DeviceViewControllerDelegate?
+    //------------------------------------------------------------------
 
-	private let itemMetadataOutput = AVPlayerItemMetadataOutput(identifiers: nil)
-	
-	private var honorTimedMetadataTracksDuringPlayback = true
-	
-	@IBOutlet private weak var honorTimedMetadataTracksSwitch: UISwitch!
 	
 	@IBAction private func toggleHonorTimedMetadataTracksDuringPlayback(_ sender: AnyObject) {
 		if honorTimedMetadataTracksSwitch.isOn {
@@ -241,7 +247,6 @@ class PlayerViewController: UIViewController, AVPlayerItemMetadataOutputPushDele
 		}
 		else {
 			honorTimedMetadataTracksDuringPlayback = false
-			//removeAllSublayers(from: facesLayer)
 			locationOverlayLabel.text = ""
 		}
 	}
@@ -253,10 +258,6 @@ class PlayerViewController: UIViewController, AVPlayerItemMetadataOutputPushDele
 				
 				// Sometimes the face/location track wouldn't contain any items because of scene change, we should remove previously drawn faceRects/locationOverlay in that case.
 				if metadataGroup.items.count == 0 {
-//                    if self.track(track.assetTrack, hasMetadataIdentifier: AVMetadataIdentifierQuickTimeMetadataDetectedFace) {
-//                        self.removeAllSublayers(from: self.facesLayer)
-//                    }
-//                    else
                     if self.track(track!.assetTrack!, hasMetadataIdentifier: AVMetadataIdentifier.quickTimeMetadataVideoOrientation.rawValue) {
 						self.locationOverlayLabel.text = ""
 					}
@@ -264,20 +265,14 @@ class PlayerViewController: UIViewController, AVPlayerItemMetadataOutputPushDele
 				else {
 					if self.honorTimedMetadataTracksDuringPlayback {
 						
-						//var faces = [AVMetadataObject]()
-						
 						for metdataItem in metadataGroup.items {
 							guard let itemIdentifier = metdataItem.identifier, let itemDataType = metdataItem.dataType else {
 								continue
 							}
 							
 							switch itemIdentifier {
-//                                case AVMetadataIdentifierQuickTimeMetadataDetectedFace:
-//                                    if let itemValue = metdataItem.value as? AVMetadataObject {
-//                                        faces.append(itemValue)
-//                                    }
 									
-                            case AVMetadataIdentifier.quickTimeMetadataVideoOrientation:
+                                case AVMetadataIdentifier.quickTimeMetadataVideoOrientation:
 									if itemDataType == String(kCMMetadataBaseDataType_SInt16) {
 										if let videoOrientationValue = metdataItem.value as? NSNumber {
                                             let sourceVideoTrack = self.playerAsset!.tracks(withMediaType: AVMediaType.video)[0]
@@ -294,7 +289,7 @@ class PlayerViewController: UIViewController, AVPlayerItemMetadataOutputPushDele
 										}
 									}
 									
-                            case AVMetadataIdentifier.quickTimeMetadataLocationISO6709:
+                                case AVMetadataIdentifier.quickTimeMetadataLocationISO6709:
 									if itemDataType == String(kCMMetadataDataType_QuickTimeMetadataLocation_ISO6709) {
 										if let itemValue = metdataItem.value as? String {
 
@@ -312,16 +307,14 @@ class PlayerViewController: UIViewController, AVPlayerItemMetadataOutputPushDele
 									print("Timed metadata: unrecognized metadata identifier \(itemIdentifier)")
 							}
 						}
-						
-//                        if faces.count > 0 {
-//                            self.drawFaceMetadataRects(faces)
-//                        }
 					}
 				}
 			}
 		}
 	}
 	
+    //------------------------------------------------------------------
+
 	private func track(_ track: AVAssetTrack, hasMetadataIdentifier metadataIdentifier: String) -> Bool {
 		let formatDescription = track.formatDescriptions[0] as! CMFormatDescription
 		if let metadataIdentifiers = CMMetadataFormatDescriptionGetIdentifiers(formatDescription) as NSArray? {
@@ -333,74 +326,8 @@ class PlayerViewController: UIViewController, AVPlayerItemMetadataOutputPushDele
 		return false
 	}
 	
-//    private let facesLayer = CALayer()
-//
-//    private func drawFaceMetadataRects(_ faces: [AVMetadataObject]) {
-//        guard let playerLayer = playerLayer else { return }
-//
-//        DispatchQueue.main.async {
-//
-//            let viewRect = playerLayer.videoRect
-//            self.facesLayer.frame = viewRect
-//            self.facesLayer.masksToBounds = true
-//            self.removeAllSublayers(from: self.facesLayer)
-//
-//            for face in faces {
-//                let faceBox = CALayer()
-//                let faceRect = face.bounds
-//                let viewFaceOrigin = CGPoint(x: faceRect.origin.x * viewRect.size.width, y: faceRect.origin.y * viewRect.size.height)
-//                let viewFaceSize = CGSize(width: faceRect.size.width * viewRect.size.width, height: faceRect.size.height * viewRect.size.height)
-//                let viewFaceBounds = CGRect(x: viewFaceOrigin.x, y: viewFaceOrigin.y, width: viewFaceSize.width, height: viewFaceSize.height)
-//
-//                CATransaction.begin()
-//                CATransaction.setDisableActions(true)
-//                self.facesLayer.addSublayer(faceBox)
-//                faceBox.masksToBounds = true
-//                faceBox.borderWidth = 2.0
-//                faceBox.borderColor = UIColor(red: CGFloat(0.3), green: CGFloat(0.6), blue: CGFloat(0.9), alpha: CGFloat(0.7)).cgColor
-//                faceBox.cornerRadius = 5.0
-//                faceBox.frame = viewFaceBounds
-//                CATransaction.commit()
-//
-//                PlayerViewController.updateAnimation(for: self.facesLayer, removeAnimation: true)
-//            }
-//        }
-//    }
-	
-	@IBOutlet private weak var locationOverlayLabel: UILabel!
-	
-	// MARK: Animation Utilities
-	
-	class private func updateAnimation(for layer: CALayer, removeAnimation remove: Bool) {
-		if remove {
-			layer.removeAnimation(forKey: "animateOpacity")
-		}
-		
-		if layer.animation(forKey: "animateOpacity") == nil {
-			layer.isHidden = false
-			let opacityAnimation = CABasicAnimation(keyPath: "opacity")
-			opacityAnimation.duration = 0.3
-			opacityAnimation.repeatCount = 1.0
-			opacityAnimation.autoreverses = true
-			opacityAnimation.fromValue = 1.0
-			opacityAnimation.toValue = 0.0
-			layer.add(opacityAnimation, forKey: "animateOpacity")
-		}
-	}
-	
-	private func removeAllSublayers(from layer: CALayer) {
-		CATransaction.begin()
-		CATransaction.setDisableActions(true)
-		
-		if let sublayers = layer.sublayers {
-			for layer in sublayers {
-				layer.removeFromSuperlayer()
-			}
-		}
-		
-		CATransaction.commit()
-	}
-	
+    //------------------------------------------------------------------
+
 	private func affineTransform(for videoOrientation: CGImagePropertyOrientation, with videoDimensions: CMVideoDimensions) -> CGAffineTransform {
 		var transform = CGAffineTransform.identity
 		
