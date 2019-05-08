@@ -147,8 +147,6 @@ class DeviceViewController: UIViewController,DeviceViewControllerDelegate {
             }
 
         }
-        
-
     }
     
     func sendOSCConnect() {
