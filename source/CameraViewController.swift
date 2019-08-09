@@ -535,16 +535,17 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
             }
         }
     }
-    
-    func capture(_ captureOutput: AVCaptureFileOutput!, didStartRecordingToOutputFileAt fileURL: URL!, fromConnections connections: [Any]!) {
+
+    func fileOutput(_ output: AVCaptureFileOutput, didStartRecordingTo fileURL: URL, from connections: [AVCaptureConnection]) {
+//    func capture(_ captureOutput: AVCaptureFileOutput!, didStartRecordingToOutputFileAt fileURL: URL!, fromConnections connections: [Any]!) {
 		// Enable the Record button to let the user stop the recording.
 		DispatchQueue.main.async {
 			self.recordButton.isEnabled = true;
 			self.recordButton.setTitle(NSLocalizedString("Stop", comment: "Recording button stop title"), for: [])
 		}
 	}
-	
-	func capture(_ captureOutput: AVCaptureFileOutput!, didFinishRecordingToOutputFileAt outputFileURL: URL!, fromConnections connections: [Any]!, error: Error!) {
+    func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?){
+//    func capture(_ captureOutput: AVCaptureFileOutput!, didFinishRecordingToOutputFileAt outputFileURL: URL!, fromConnections connections: [Any]!, error: Error!) {
 		/*
 			Note that currentBackgroundRecordingID is used to end the background task
 			associated with this recording. This allows a new recording to be started,
@@ -579,7 +580,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 		
 		if error != nil {
             print("Movie file finishing error: \(String(describing: error))")
-			success = (((error as NSError).userInfo[AVErrorRecordingSuccessfullyFinishedKey] as AnyObject).boolValue)!
+            success = (((error as! NSError).userInfo[AVErrorRecordingSuccessfullyFinishedKey] as AnyObject).boolValue)!
 		}
 		
 		if success {
@@ -827,7 +828,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
     //------------------------------------------------------------------
     func handle(_ message: OSCMessage!) {
 
-        print(message.address)
+        //print(message.address)
         delegate?.handleOSCMessage(message)
 
         delegate?.updateDevice()
@@ -860,9 +861,9 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 		}
 	}
     
-    func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
-        //••••
-    }
+//    func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
+//        //••••
+//    }
     
 
 }

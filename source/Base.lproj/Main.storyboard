@@ -377,11 +377,11 @@
                         <viewControllerLayoutGuide type="bottom" id="0Kf-pc-wqg"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="tv2-Ga-QGr">
-                        <rect key="frame" x="0.0" y="0.0" width="659" height="254"/>
+                        <rect key="frame" x="0.0" y="0.0" width="667" height="299"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" sceneName="SceneKit Scene.scn" translatesAutoresizingMaskIntoConstraints="NO" id="VMY-ii-HbF">
-                                <rect key="frame" x="0.0" y="0.0" width="659" height="254"/>
+                                <rect key="frame" x="0.0" y="0.0" width="667" height="299"/>
                             </sceneKitView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -456,7 +456,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="7Lq-tt-uig"/>
+        <segue reference="9hj-h4-Etn"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

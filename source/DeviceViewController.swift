@@ -18,6 +18,7 @@ struct DeviceData {
     var quat: SCNQuaternion = SCNQuaternion()
     var rrate: SCNVector3 = SCNVector3()
     var accel: SCNVector3 = SCNVector3()
+    var amp: Float = 0
     
     func asJSON () -> JSON {
         
@@ -25,7 +26,8 @@ struct DeviceData {
             "gyro": [gyro.x, gyro.y, gyro.z],
             "quat": [quat.x, quat.y, quat.z, quat.w],
             "rrate": [rrate.x, rrate.y, rrate.z],
-            "accel": [accel.x, accel.y, accel.z]
+            "accel": [accel.x, accel.y, accel.z],
+            "amp": amp
 
         ])
         return json
@@ -57,8 +59,6 @@ class DeviceViewController: UIViewController,DeviceViewControllerDelegate {
         skView.scene?.background.contents = UIColor.clear
         skView.backgroundColor = UIColor.clear
         
-        let boxNode = skView.scene?.rootNode.childNode(withName: "box", recursively: true)
-
     }
 
     override func didReceiveMemoryWarning() {
@@ -81,6 +81,9 @@ class DeviceViewController: UIViewController,DeviceViewControllerDelegate {
                 deviceData.rrate = SCNVector3(x: values[0], y: values[1], z: values[2])
             case "accel":
                 deviceData.accel = SCNVector3(x: values[0], y: values[1], z: values[2])
+
+            case "amp":
+                deviceData.amp = values[0]
 
             default:
                 print("unable to store osc data")
@@ -109,6 +112,8 @@ class DeviceViewController: UIViewController,DeviceViewControllerDelegate {
             deviceData.accel.x = json["accel"][0].floatValue
             deviceData.accel.y = json["accel"][1].floatValue
             deviceData.accel.z = json["accel"][2].floatValue
+
+            deviceData.amp = json["amp"].floatValue
 
         }
     }
@@ -142,6 +147,9 @@ class DeviceViewController: UIViewController,DeviceViewControllerDelegate {
                 DeviceViewController.client.send(msg, to: address)
                 
                 msg = OSCMessage(address: "/gyrosc/quat", arguments: [deviceData.quat.w, deviceData.quat.z, deviceData.quat.x, deviceData.quat.y])
+                DeviceViewController.client.send(msg, to: address)
+
+                msg = OSCMessage(address: "/gyrosc/amp", arguments: [deviceData.amp])
                 DeviceViewController.client.send(msg, to: address)
 
             }
