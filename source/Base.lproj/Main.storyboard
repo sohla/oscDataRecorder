@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="PDV-RU-4h7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="PDV-RU-4h7">
     <device id="retina4_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -59,7 +57,7 @@
                                         </connections>
                                     </button>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wc9-zH-fpT">
-                                        <rect key="frame" x="279" y="174" width="118" height="28"/>
+                                        <rect key="frame" x="278.5" y="173.5" width="118" height="28"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
                                         <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
                                         <state key="normal" title="Tap to resume"/>
@@ -73,7 +71,7 @@
                                         </connections>
                                     </button>
                                     <label hidden="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Camera Unavailable" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vm0-Ha-odG">
-                                        <rect key="frame" x="262" y="177" width="152" height="21"/>
+                                        <rect key="frame" x="261.5" y="177" width="152" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -161,7 +159,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1695.2" y="-249.62518740629687"/>
+            <point key="canvasLocation" x="747" y="-42"/>
         </scene>
         <!--OSC-->
         <scene sceneID="0ZO-XF-ghQ">
@@ -213,7 +211,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X0a-RG-bYJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="476" y="-1334.4827586206898"/>
+            <point key="canvasLocation" x="1461" y="-1025"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="QXs-lS-hK4">
@@ -239,7 +237,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S21-Km-orI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="815.625" y="-248.2394366197183"/>
+            <point key="canvasLocation" x="19" y="-42"/>
         </scene>
         <!--Player View Controller-->
         <scene sceneID="mbq-fA-0qG">
@@ -368,7 +366,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l0Q-Yw-gVs" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2447.1999999999998" y="-249.62518740629687"/>
+            <point key="canvasLocation" x="2005" y="-42"/>
         </scene>
         <!--Device View Controller-->
         <scene sceneID="YNp-Ii-pxD">
@@ -401,7 +399,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dB6-sc-W50" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2102" y="551"/>
+            <point key="canvasLocation" x="1402" y="991"/>
         </scene>
         <!--Videos-->
         <scene sceneID="CYb-UJ-EVE">
@@ -454,7 +452,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="frC-q5-yxv" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="ZjP-YP-TyN" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3204" y="-249"/>
+            <point key="canvasLocation" x="2756" y="-42"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
