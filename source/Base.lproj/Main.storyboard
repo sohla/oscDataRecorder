@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="PDV-RU-4h7">
-    <device id="retina4_7" orientation="landscape">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="PDV-RU-4h7">
+    <device id="retina4_7" orientation="landscape" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -24,7 +22,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sVI-mX-69Q" customClass="PreviewView" customModule="oscDataRecorder" customModuleProvider="target">
                                 <rect key="frame" x="-4" y="0.0" width="675" height="375"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f4y-iM-g40">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f4y-iM-g40">
                                         <rect key="frame" x="393.5" y="327" width="249.5" height="36"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -40,7 +38,7 @@
                                             <action selector="changeCamera:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="2Lf-Vl-wCY"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ghq-cJ-efm">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ghq-cJ-efm">
                                         <rect key="frame" x="32" y="327" width="249.5" height="36"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -56,7 +54,7 @@
                                             <action selector="toggleMovieRecording:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="2wa-Oy-RfQ"/>
                                         </connections>
                                     </button>
-                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wc9-zH-fpT">
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wc9-zH-fpT">
                                         <rect key="frame" x="278.5" y="173.5" width="118" height="28"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
                                         <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
@@ -82,6 +80,12 @@
                                             <segue destination="C1a-Ab-5aP" kind="embed" identifier="deviceRecorderSegue" id="7Lq-tt-uig"/>
                                         </connections>
                                     </containerView>
+                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="bUX-kl-s5X">
+                                        <rect key="frame" x="32" y="363" width="150" height="4"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="150" id="iw4-9j-Lqd"/>
+                                        </constraints>
+                                    </progressView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <gestureRecognizers/>
@@ -91,7 +95,9 @@
                                     <constraint firstItem="f4y-iM-g40" firstAttribute="leading" secondItem="ghq-cJ-efm" secondAttribute="trailing" constant="112" id="7Pw-Wr-5HB"/>
                                     <constraint firstAttribute="bottom" secondItem="f4y-iM-g40" secondAttribute="bottom" constant="12" id="BA6-dJ-gYh"/>
                                     <constraint firstItem="yjI-HS-4pY" firstAttribute="leading" secondItem="sVI-mX-69Q" secondAttribute="leading" constant="8" id="CvR-71-3sp"/>
+                                    <constraint firstAttribute="bottom" secondItem="bUX-kl-s5X" secondAttribute="bottom" constant="8" id="EoN-Wy-jTl"/>
                                     <constraint firstAttribute="trailing" secondItem="yjI-HS-4pY" secondAttribute="trailing" constant="8" id="JPL-zM-rP7"/>
+                                    <constraint firstItem="bUX-kl-s5X" firstAttribute="leading" secondItem="sVI-mX-69Q" secondAttribute="leading" constant="32" id="PEQ-2C-KPK"/>
                                     <constraint firstItem="ghq-cJ-efm" firstAttribute="bottom" secondItem="f4y-iM-g40" secondAttribute="bottom" id="Pcp-Mf-qun"/>
                                     <constraint firstItem="Vm0-Ha-odG" firstAttribute="centerX" secondItem="sVI-mX-69Q" secondAttribute="centerX" id="Q24-Dg-okF"/>
                                     <constraint firstItem="Vm0-Ha-odG" firstAttribute="centerX" secondItem="sVI-mX-69Q" secondAttribute="centerX" id="TM4-W5-F4l"/>
@@ -146,6 +152,7 @@
                     <connections>
                         <outlet property="cameraButton" destination="f4y-iM-g40" id="UG1-1g-xMf"/>
                         <outlet property="cameraUnavailableLabel" destination="Vm0-Ha-odG" id="b1a-ue-V4u"/>
+                        <outlet property="dataLevel" destination="bUX-kl-s5X" id="V8q-Ta-ni7"/>
                         <outlet property="playerButton" destination="dYu-hh-zbV" id="50L-Ii-5sk"/>
                         <outlet property="previewView" destination="sVI-mX-69Q" id="UGh-um-teZ"/>
                         <outlet property="recordButton" destination="ghq-cJ-efm" id="Tcb-VB-crw"/>
@@ -189,7 +196,6 @@
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="57210" borderStyle="roundedRect" adjustsFontSizeToFit="NO" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="7Di-Pa-unm">
                                 <rect key="frame" x="16" y="196" width="304" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -273,7 +279,7 @@
                                 </variation>
                             </label>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="frV-sr-hfx">
-                                <rect key="frame" x="0.0" y="342" width="667" height="33"/>
+                                <rect key="frame" x="0.0" y="343" width="667" height="32"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <items>
                                     <barButtonItem title="⟲" id="qeC-RY-LPh">
@@ -297,7 +303,7 @@
                                     <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="3nm-oj-nbO"/>
                                     <barButtonItem style="plain" id="x7r-jh-Hd3">
                                         <view key="customView" contentMode="scaleToFill" id="nou-Zu-Bhb">
-                                            <rect key="frame" x="373" y="0.0" width="181" height="33"/>
+                                            <rect key="frame" x="373" y="0.0" width="181" height="32"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Metadata " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="puJ-KS-O9U">
@@ -313,7 +319,7 @@
                                     <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="teG-21-9ck"/>
                                     <barButtonItem style="plain" id="3xN-Yy-3MO">
                                         <switch key="customView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="xnR-vK-2mQ" userLabel="honorTimedMetadataTracksSwitch">
-                                            <rect key="frame" x="596" y="1" width="51" height="31"/>
+                                            <rect key="frame" x="596" y="0.5" width="51" height="31"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <connections>
                                                 <action selector="toggleHonorTimedMetadataTracksDuringPlayback:" destination="xUS-yO-GIr" eventType="valueChanged" id="fWw-d7-bhq"/>
@@ -377,11 +383,11 @@
                         <viewControllerLayoutGuide type="bottom" id="0Kf-pc-wqg"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="tv2-Ga-QGr">
-                        <rect key="frame" x="0.0" y="0.0" width="667" height="299"/>
+                        <rect key="frame" x="0.0" y="0.0" width="659" height="254"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" sceneName="SceneKit Scene.scn" translatesAutoresizingMaskIntoConstraints="NO" id="VMY-ii-HbF">
-                                <rect key="frame" x="0.0" y="0.0" width="667" height="299"/>
+                                <rect key="frame" x="0.0" y="0.0" width="659" height="254"/>
                             </sceneKitView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -456,7 +462,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="9hj-h4-Etn"/>
+        <segue reference="7Lq-tt-uig"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

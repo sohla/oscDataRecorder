@@ -11,6 +11,8 @@ import SceneKit
 import OSCKit
 import SwiftyJSON
 
+import CoreMotion
+
 
 struct DeviceData {
     
@@ -68,16 +70,38 @@ class DeviceViewController: UIViewController,DeviceViewControllerDelegate {
     
     func handleOSCMessage(_ message:OSCMessage){
 
+        
         // convert to useful values
-        let values = message.arguments!.map{ Float($0 as! String)!}
+        //let values = message.arguments!.map{ Float($0 as! String)!}
+        let values: Array<Float> = message.arguments!.map({ $0 as! Float })
+        
+        
+        
+/*
+         https://stackoverflow.com/questions/23503151/how-to-update-quaternion-based-on-3d-gyro-data
 
+*/
+        
+        
         switch (message.address as NSString).lastPathComponent {
             case "gyro":
                 deviceData.gyro = SCNVector3(x: values[0], y: values[1], z: values[2])
-            case "quat":
-                // needed to swap order for orientation to work  on node
-                deviceData.quat = SCNQuaternion(x: values[2] , y: values[3], z: values[1], w: values[0])
-            case "rrate":
+
+                //•• HACK for bee's
+                let w = cos(deviceData.gyro.x/2) * cos(deviceData.gyro.y/2) * cos(deviceData.gyro.z/2) + sin(deviceData.gyro.x/2) * sin(deviceData.gyro.y/2) * sin(deviceData.gyro.z/2)
+                let x = sin(deviceData.gyro.x/2) * cos(deviceData.gyro.y/2) * cos(deviceData.gyro.z/2) - cos(deviceData.gyro.x/2) * sin(deviceData.gyro.y/2) * sin(deviceData.gyro.z/2)
+                let y = cos(deviceData.gyro.x/2) * sin(deviceData.gyro.y/2) * cos(deviceData.gyro.z/2) + sin(deviceData.gyro.x/2) * cos(deviceData.gyro.y/2) * sin(deviceData.gyro.z/2)
+                let z = cos(deviceData.gyro.x/2) * cos(deviceData.gyro.y/2) * sin(deviceData.gyro.z/2) - sin(deviceData.gyro.x/2) * sin(deviceData.gyro.y/2) * cos(deviceData.gyro.z/2)
+
+                deviceData.quat = SCNQuaternion(x: x, y: y, z: z, w: w)
+                // •• END HACK
+        
+        
+//            case "quat":
+//                // needed to swap order for orientation to work  on node
+//                deviceData.quat = SCNQuaternion(x: values[2] , y: values[3], z: values[1], w: values[0])
+
+        case "rrate":
                 deviceData.rrate = SCNVector3(x: values[0], y: values[1], z: values[2])
             case "accel":
                 deviceData.accel = SCNVector3(x: values[0], y: values[1], z: values[2])
@@ -122,6 +146,7 @@ class DeviceViewController: UIViewController,DeviceViewControllerDelegate {
     func updateDevice(){
 
         let boxNode = skView.scene?.rootNode.childNode(withName: "box", recursively: true)
+        
         boxNode?.orientation = deviceData.quat
     }
 

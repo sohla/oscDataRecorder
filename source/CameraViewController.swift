@@ -44,7 +44,8 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
     @IBOutlet private weak var resumeButton: UIButton!
     @IBOutlet private weak var playerButton: UIBarButtonItem!
 
-
+    @IBOutlet weak var dataLevel: UIProgressView!
+    
 
     //------------------------------------------------------------------
 	// MARK: View Controller Life Cycle
@@ -828,12 +829,18 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
     //------------------------------------------------------------------
     func handle(_ message: OSCMessage!) {
 
+        
+        //•• HACK for bees
+        let values: Array<Float> = message.arguments!.map({ $0 as! Float })
+        dataLevel.progress = abs(values[0] / 35.0)
+        //•• end hack
+        
         //print(message.address)
         delegate?.handleOSCMessage(message)
 
         delegate?.updateDevice()
         
-        // this is amazing! if we connect this device (select Player) to bouce:
+        // this is amazing! if we connect this device (select Player) to boucne:
         // we can pass on all the data THRU this app
         
         self.delegate?.sendOSCMessage()
