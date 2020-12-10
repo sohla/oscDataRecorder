@@ -834,7 +834,6 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
         let values: Array<Float> = message.arguments!.map({ $0 as! Float })
         dataLevel.progress = abs(values[0] / 35.0)
         //•• end hack
-        
         //print(message.address)
         delegate?.handleOSCMessage(message)
 
