@@ -122,8 +122,8 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 				case .success:
 					// Only set up observers and start running the session if setup succeeded.
 					self.addObservers()
-                    if(self.session.canSetSessionPreset(.low)) {
-                        self.session.sessionPreset = .low
+                    if(self.session.canSetSessionPreset(.medium)) {
+                        self.session.sessionPreset = .medium
                     }
 					self.session.startRunning()
 					self.isSessionRunning = self.session.isRunning
