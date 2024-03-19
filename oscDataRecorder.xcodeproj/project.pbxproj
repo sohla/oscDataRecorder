@@ -3,12 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D624E70B071DC102A0AF838D /* Pods_oscDataRecorder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 933C7661331C08A47524E385 /* Pods_oscDataRecorder.framework */; };
 		F00B4A9D20F25F8C003C513C /* OSCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00B4A9C20F25F8C003C513C /* OSCViewController.swift */; };
+		F04647582BA7DE4800D9685F /* OSCKit in Frameworks */ = {isa = PBXBuildFile; productRef = F04647572BA7DE4800D9685F /* OSCKit */; };
+		F046475B2BA7DE5C00D9685F /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = F046475A2BA7DE5C00D9685F /* SwiftyJSON */; };
 		F0D410F520EFA5B9005468B1 /* DeviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D410F420EFA5B9005468B1 /* DeviceViewController.swift */; };
 		F0F0A58420EF89410033C9C9 /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F0A57720EF89410033C9C9 /* PreviewView.swift */; };
 		F0F0A58520EF89410033C9C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F0F0A57820EF89410033C9C9 /* Assets.xcassets */; };
@@ -23,9 +24,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		140DF0DECBF2743371A7BCDD /* Pods-oscDataRecorder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-oscDataRecorder.debug.xcconfig"; path = "Pods/Target Support Files/Pods-oscDataRecorder/Pods-oscDataRecorder.debug.xcconfig"; sourceTree = "<group>"; };
-		933C7661331C08A47524E385 /* Pods_oscDataRecorder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_oscDataRecorder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		EC37692D339032A877930404 /* Pods-oscDataRecorder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-oscDataRecorder.release.xcconfig"; path = "Pods/Target Support Files/Pods-oscDataRecorder/Pods-oscDataRecorder.release.xcconfig"; sourceTree = "<group>"; };
 		F00B4A9C20F25F8C003C513C /* OSCViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSCViewController.swift; sourceTree = "<group>"; };
 		F053543520EF88970084370E /* oscDataRecorder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = oscDataRecorder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0D410F420EFA5B9005468B1 /* DeviceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceViewController.swift; sourceTree = "<group>"; };
@@ -47,28 +45,19 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D624E70B071DC102A0AF838D /* Pods_oscDataRecorder.framework in Frameworks */,
+				F046475B2BA7DE5C00D9685F /* SwiftyJSON in Frameworks */,
+				F04647582BA7DE4800D9685F /* OSCKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		A33CAB3F435D9A3287EDD3FD /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				140DF0DECBF2743371A7BCDD /* Pods-oscDataRecorder.debug.xcconfig */,
-				EC37692D339032A877930404 /* Pods-oscDataRecorder.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		F053542C20EF88970084370E = {
 			isa = PBXGroup;
 			children = (
 				F0F0A57620EF89410033C9C9 /* source */,
 				F053543620EF88980084370E /* Products */,
-				A33CAB3F435D9A3287EDD3FD /* Pods */,
 				F390C5AED0140BDD5B056CFE /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -104,7 +93,6 @@
 		F390C5AED0140BDD5B056CFE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				933C7661331C08A47524E385 /* Pods_oscDataRecorder.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -116,17 +104,19 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F053544720EF889A0084370E /* Build configuration list for PBXNativeTarget "oscDataRecorder" */;
 			buildPhases = (
-				09947E67B9B6EF495B85635B /* [CP] Check Pods Manifest.lock */,
 				F053543120EF88970084370E /* Sources */,
 				F053543220EF88970084370E /* Frameworks */,
 				F053543320EF88970084370E /* Resources */,
-				A000A4935085E69068D0872A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = oscDataRecorder;
+			packageProductDependencies = (
+				F04647572BA7DE4800D9685F /* OSCKit */,
+				F046475A2BA7DE5C00D9685F /* SwiftyJSON */,
+			);
 			productName = oscDataRecorder;
 			productReference = F053543520EF88970084370E /* oscDataRecorder.app */;
 			productType = "com.apple.product-type.application";
@@ -155,6 +145,10 @@
 				Base,
 			);
 			mainGroup = F053542C20EF88970084370E;
+			packageReferences = (
+				F04647562BA7DE4800D9685F /* XCRemoteSwiftPackageReference "OSCKit" */,
+				F04647592BA7DE5C00D9685F /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+			);
 			productRefGroup = F053543620EF88980084370E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -177,44 +171,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		09947E67B9B6EF495B85635B /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-oscDataRecorder-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A000A4935085E69068D0872A /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-oscDataRecorder/Pods-oscDataRecorder-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-oscDataRecorder/Pods-oscDataRecorder-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-oscDataRecorder/Pods-oscDataRecorder-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		F053543120EF88970084370E /* Sources */ = {
@@ -370,9 +326,9 @@
 		};
 		F053544820EF889A0084370E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 140DF0DECBF2743371A7BCDD /* Pods-oscDataRecorder.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G9C3VREPPJ;
 				INFOPLIST_FILE = "$(SRCROOT)/source/Info.plist";
@@ -381,8 +337,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.sohla.oscDataRecorder;
+				PRODUCT_BUNDLE_IDENTIFIER = oscDataRecorder.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -390,9 +347,9 @@
 		};
 		F053544920EF889A0084370E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EC37692D339032A877930404 /* Pods-oscDataRecorder.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G9C3VREPPJ;
 				INFOPLIST_FILE = "$(SRCROOT)/source/Info.plist";
@@ -401,8 +358,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.sohla.oscDataRecorder;
+				PRODUCT_BUNDLE_IDENTIFIER = oscDataRecorder.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -430,6 +388,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		F04647562BA7DE4800D9685F /* XCRemoteSwiftPackageReference "OSCKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SammySmallman/OSCKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.2.0;
+			};
+		};
+		F04647592BA7DE5C00D9685F /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F04647572BA7DE4800D9685F /* OSCKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F04647562BA7DE4800D9685F /* XCRemoteSwiftPackageReference "OSCKit" */;
+			productName = OSCKit;
+		};
+		F046475A2BA7DE5C00D9685F /* SwiftyJSON */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F04647592BA7DE5C00D9685F /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
+			productName = SwiftyJSON;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = F053542D20EF88970084370E /* Project object */;
 }

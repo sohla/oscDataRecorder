@@ -1,6 +1,6 @@
 /*
 	Copyright (C) 2017 Apple Inc. All Rights Reserved.
-	See LICENSE.txt for this sample’s licensing information
+	See LICENSE.txt for this sample’s licensing information	
 	
 	Abstract:
 	View controller for camera interface.
@@ -13,11 +13,12 @@ import Photos
 import SceneKit
 import OSCKit
 
-class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelegate, CLLocationManagerDelegate, OSCServerDelegate {
+class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelegate, CLLocationManagerDelegate, OSCUdpServerDelegate {
+ 
 
 	
-	let server: OSCServer = OSCServer.init()
-    static let client:OSCClient = OSCClient()
+    let server = OSCUdpServer(port: 57201)
+//    static let client:OSCClient = OSCClient()
 
     var delegate: DeviceViewControllerDelegate?
     
@@ -127,8 +128,11 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
                     }
 					self.session.startRunning()
 					self.isSessionRunning = self.session.isRunning
-					self.server.listen(57201)
-				
+                    do {
+                        try self.server.startListening()
+                    } catch {
+                        print(error.localizedDescription)
+                    }
 				case .notAuthorized:
 					DispatchQueue.main.async {
 						let message = NSLocalizedString("AVMetadataRecordPlay doesn’t have permission to use the camera, please change privacy settings", comment: "Alert message when the user has denied access to the camera")
@@ -155,7 +159,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 	override func viewDidDisappear(_ animated: Bool) {
 		sessionQueue.async {
 			if self.setupResult == .success {
-                self.server.stop()
+                self.server.stopListening()
 				self.session.stopRunning()
 				self.removeObservers()
 			}
@@ -202,6 +206,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 		}
 		
 		session.beginConfiguration()
+        
 		
 		// Add video input.
 		do {
@@ -219,7 +224,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 				// In some cases where users break their phones, the back wide angle camera is not available. In this case, we should default to the front wide angle camera.
 				defaultVideoDevice = frontCameraDevice
 			}
-			
+            
             let videoDeviceInput = try AVCaptureDeviceInput(device: defaultVideoDevice!)
 			
 			if session.canAddInput(videoDeviceInput) {
@@ -529,9 +534,9 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
                 
                 let address = "udp://"+ip+":"+port
                 
-                let msg: OSCMessage = OSCMessage(address: "/bounce", arguments: ["motionReset"])
-                //•• SET ADDRESS and PORT of the touch device you want to reset NOT TESTED
-                CameraViewController.client.send(msg, to: address)
+//                let msg: OSCMessage = OSCMessage(address: "/bounce", arguments: ["motionReset"])
+//                //•• SET ADDRESS and PORT of the touch device you want to reset NOT TESTED
+//                CameraViewController.client.send(msg, to: address)
 
             }
         }
@@ -823,49 +828,57 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 		}
 	}
     
-    
+    func server(_ server: OSCUdpServer, didReadData data: Data, with error: any Error) {
+        print(data)
+    }
+
+    func server(_ server: OSCUdpServer, socketDidCloseWithError error: (any Error)?) {
+    }
+
+    func server(_ server: OSCUdpServer, didReceivePacket packet: any OSCPacket, fromHost host: String, port: UInt16) {
+    }
     //------------------------------------------------------------------
 	// MARK: OSC Server delegate
     //------------------------------------------------------------------
-    func handle(_ message: OSCMessage!) {
-
-        
-        //•• HACK for bees
-        let values: Array<Float> = message.arguments!.map({ $0 as! Float })
-        dataLevel.progress = abs(values[0] / 35.0)
-        //•• end hack
-        //print(message.address)
-        delegate?.handleOSCMessage(message)
-
-        delegate?.updateDevice()
-        
-        // this is amazing! if we connect this device (select Player) to boucne:
-        // we can pass on all the data THRU this app
-        
-        self.delegate?.sendOSCMessage()
-        
-        //
-        //
-        
-		if movieFileOutput.isRecording {
-		
-            if let valString = delegate?.getJSONString() {
-
-                let metadataItem = AVMutableMetadataItem()
-                metadataItem.identifier = AVMetadataIdentifier.quickTimeMetadataLocationISO6709
-                metadataItem.dataType = kCMMetadataDataType_QuickTimeMetadataLocation_ISO6709 as String
-                metadataItem.value = valString as NSString
-
-                let metadataItemGroup = AVTimedMetadataGroup(items: [metadataItem], timeRange: CMTimeRangeMake(start: CMClockGetTime(CMClockGetHostTimeClock()), duration: CMTime.invalid))
-                do {
-                    try locationMetadataInput?.append(metadataItemGroup)
-                }
-                catch {
-                    print("Could not add timed metadata group: \(error)")
-                }
-            }
-		}
-	}
+//    func handle(_ message: OSCMessage!) {
+//
+//        
+//        //•• HACK for bees
+//        let values: Array<Float> = message.arguments!.map({ $0 as! Float })
+//        dataLevel.progress = abs(values[0] / 35.0)
+//        //•• end hack
+//        //print(message.address)
+//        delegate?.handleOSCMessage(message)
+//
+//        delegate?.updateDevice()
+//        
+//        // this is amazing! if we connect this device (select Player) to boucne:
+//        // we can pass on all the data THRU this app
+//        
+//        self.delegate?.sendOSCMessage()
+//        
+//        //
+//        //
+//        
+//		if movieFileOutput.isRecording {
+//		
+//            if let valString = delegate?.getJSONString() {
+//
+//                let metadataItem = AVMutableMetadataItem()
+//                metadataItem.identifier = AVMetadataIdentifier.quickTimeMetadataLocationISO6709
+//                metadataItem.dataType = kCMMetadataDataType_QuickTimeMetadataLocation_ISO6709 as String
+//                metadataItem.value = valString as NSString
+//
+//                let metadataItemGroup = AVTimedMetadataGroup(items: [metadataItem], timeRange: CMTimeRangeMake(start: CMClockGetTime(CMClockGetHostTimeClock()), duration: CMTime.invalid))
+//                do {
+//                    try locationMetadataInput?.append(metadataItemGroup)
+//                }
+//                catch {
+//                    print("Could not add timed metadata group: \(error)")
+//                }
+//            }
+//		}
+//	}
     
 //    func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
 //        //••••

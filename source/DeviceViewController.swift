@@ -47,25 +47,108 @@ protocol DeviceViewControllerDelegate {
     func sendOSCMessage()
 }
 
-class DeviceViewController: UIViewController,DeviceViewControllerDelegate {
-
+class DeviceViewController: UIViewController, DeviceViewControllerDelegate, OSCUdpClientDelegate {
+    
     @IBOutlet weak var skView: SCNView!
     
     var deviceData = DeviceData()
     
-    static let client:OSCClient = OSCClient()
-
+    let client = OSCUdpClient(host: "127.0.0.1", port: 57120)
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        self.client.delegate = self
+        
         skView.scene?.background.contents = UIColor.clear
         skView.backgroundColor = UIColor.clear
         
+        if let ip = UserDefaults.standard.string(forKey: "ipAddress"){
+            let port = UserDefaults.standard.integer(forKey: "portAddress")
+            self.client.host = ip
+            self.client.port = UInt16(port)
+        }
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    
+    
+    func updateDevice(){
+        
+        let boxNode = skView.scene?.rootNode.childNode(withName: "box", recursively: true)
+        
+        boxNode?.orientation = deviceData.quat
+    }
+    
+    func getJSONString() -> String? {
+        return deviceData.asJSON()[].rawString()
+    }
+    
+    func sendOSCMessage() {
+        
+        //        if let ip = UserDefaults.standard.string(forKey: "ipAddress"){
+        //            if let port = UserDefaults.standard.string(forKey: "portAddress"){
+        //
+        //                let address = "udp://"+ip+":"+port
+        //
+        //                //• should we bundle this up?
+        //                var msg: OSCMessage = OSCMessage(address: "/gyrosc/gyro", arguments: [deviceData.gyro.x, deviceData.gyro.y, deviceData.gyro.z])
+        //                DeviceViewController.client.send(msg, to: address)
+        //
+        //                msg = OSCMessage(address: "/gyrosc/rrate", arguments: [deviceData.rrate.x, deviceData.rrate.y, deviceData.rrate.z])
+        //                DeviceViewController.client.send(msg, to: address)
+        //
+        //                msg = OSCMessage(address: "/gyrosc/accel", arguments: [deviceData.accel.x, deviceData.accel.y, deviceData.accel.z])
+        //                DeviceViewController.client.send(msg, to: address)
+        //
+        //                msg = OSCMessage(address: "/gyrosc/quat", arguments: [deviceData.quat.w, deviceData.quat.z, deviceData.quat.x, deviceData.quat.y])
+        //                DeviceViewController.client.send(msg, to: address)
+        //
+        //                msg = OSCMessage(address: "/gyrosc/amp", arguments: [deviceData.amp])
+        //                DeviceViewController.client.send(msg, to: address)
+        //
+        //            }
+        //
+        //        }
+        
+        var msg = try! OSCMessage(with: "/gyrosc/gyro", arguments: [deviceData.gyro.x, deviceData.gyro.y, deviceData.gyro.z])
+        try? self.client.send(msg)
+        
+        msg = try! OSCMessage(with: "/gyrosc/rrate", arguments: [deviceData.rrate.x, deviceData.rrate.y, deviceData.rrate.z])
+        try? self.client.send(msg)
+        
+        msg = try! OSCMessage(with: "/gyrosc/accel", arguments: [deviceData.accel.x, deviceData.accel.y, deviceData.accel.z])
+        try? self.client.send(msg)
+        
+        msg = try! OSCMessage(with: "/gyrosc/quat", arguments: [deviceData.quat.w, deviceData.quat.z, deviceData.quat.x, deviceData.quat.y])
+        try? self.client.send(msg)
+        
+        msg = try! OSCMessage(with: "/gyrosc/amp", arguments: [deviceData.amp])
+        try? self.client.send(msg)
+    }
+    
+    func sendOSCConnect() {
+        let msg = try! OSCMessage(with: "/gyrosc/button", arguments: [1.0])
+        try? self.client.send(msg)
+    }
+    
+    
+    // DELEGATE
+    func client(_ client: OSCUdpClient, socketDidCloseWithError error: any Error) {
+        
+    }
+    
+    func client(_ client: OSCUdpClient, didSendPacket packet: any OSCPacket, fromHost host: String?, port: UInt16?) {
+        
+    }
+    
+    func client(_ client: OSCUdpClient, didNotSendPacket packet: any OSCPacket, fromHost host: String?, port: UInt16?, error: (any Error)?) {
+        
     }
     
     func handleOSCMessage(_ message:OSCMessage){
@@ -73,45 +156,45 @@ class DeviceViewController: UIViewController,DeviceViewControllerDelegate {
         
         // convert to useful values
         //let values = message.arguments!.map{ Float($0 as! String)!}
-        let values: Array<Float> = message.arguments!.map({ $0 as! Float })
-        
-        
-        
-/*
-         https://stackoverflow.com/questions/23503151/how-to-update-quaternion-based-on-3d-gyro-data
-
-*/
-        
-        
-        switch (message.address as NSString).lastPathComponent {
-            case "gyro":
-                deviceData.gyro = SCNVector3(x: values[0], y: values[1], z: values[2])
-
-                //•• HACK for bee's
-                let w = cos(deviceData.gyro.x/2) * cos(deviceData.gyro.y/2) * cos(deviceData.gyro.z/2) + sin(deviceData.gyro.x/2) * sin(deviceData.gyro.y/2) * sin(deviceData.gyro.z/2)
-                let x = sin(deviceData.gyro.x/2) * cos(deviceData.gyro.y/2) * cos(deviceData.gyro.z/2) - cos(deviceData.gyro.x/2) * sin(deviceData.gyro.y/2) * sin(deviceData.gyro.z/2)
-                let y = cos(deviceData.gyro.x/2) * sin(deviceData.gyro.y/2) * cos(deviceData.gyro.z/2) + sin(deviceData.gyro.x/2) * cos(deviceData.gyro.y/2) * sin(deviceData.gyro.z/2)
-                let z = cos(deviceData.gyro.x/2) * cos(deviceData.gyro.y/2) * sin(deviceData.gyro.z/2) - sin(deviceData.gyro.x/2) * sin(deviceData.gyro.y/2) * cos(deviceData.gyro.z/2)
-
-                deviceData.quat = SCNQuaternion(x: x, y: y, z: z, w: w)
-                // •• END HACK
-        
-        
-//            case "quat":
-//                // needed to swap order for orientation to work  on node
-//                deviceData.quat = SCNQuaternion(x: values[2] , y: values[3], z: values[1], w: values[0])
-
-        case "rrate":
-                deviceData.rrate = SCNVector3(x: values[0], y: values[1], z: values[2])
-            case "accel":
-                deviceData.accel = SCNVector3(x: values[0], y: values[1], z: values[2])
-
-            case "amp":
-                deviceData.amp = values[0]
-
-            default:
-                print("unable to store osc data")
-        }
+//        let values: Array<Float> = message.arguments!.map({ $0 as! Float })
+//
+//
+//
+///*
+//         https://stackoverflow.com/questions/23503151/how-to-update-quaternion-based-on-3d-gyro-data
+//
+//*/
+//
+//
+//        switch (message.address as NSString).lastPathComponent {
+//            case "gyro":
+//                deviceData.gyro = SCNVector3(x: values[0], y: values[1], z: values[2])
+//
+//                //•• HACK for bee's
+//                let w = cos(deviceData.gyro.x/2) * cos(deviceData.gyro.y/2) * cos(deviceData.gyro.z/2) + sin(deviceData.gyro.x/2) * sin(deviceData.gyro.y/2) * sin(deviceData.gyro.z/2)
+//                let x = sin(deviceData.gyro.x/2) * cos(deviceData.gyro.y/2) * cos(deviceData.gyro.z/2) - cos(deviceData.gyro.x/2) * sin(deviceData.gyro.y/2) * sin(deviceData.gyro.z/2)
+//                let y = cos(deviceData.gyro.x/2) * sin(deviceData.gyro.y/2) * cos(deviceData.gyro.z/2) + sin(deviceData.gyro.x/2) * cos(deviceData.gyro.y/2) * sin(deviceData.gyro.z/2)
+//                let z = cos(deviceData.gyro.x/2) * cos(deviceData.gyro.y/2) * sin(deviceData.gyro.z/2) - sin(deviceData.gyro.x/2) * sin(deviceData.gyro.y/2) * cos(deviceData.gyro.z/2)
+//
+//                deviceData.quat = SCNQuaternion(x: x, y: y, z: z, w: w)
+//                // •• END HACK
+//
+//
+////            case "quat":
+////                // needed to swap order for orientation to work  on node
+////                deviceData.quat = SCNQuaternion(x: values[2] , y: values[3], z: values[1], w: values[0])
+//
+//        case "rrate":
+//                deviceData.rrate = SCNVector3(x: values[0], y: values[1], z: values[2])
+//            case "accel":
+//                deviceData.accel = SCNVector3(x: values[0], y: values[1], z: values[2])
+//
+//            case "amp":
+//                deviceData.amp = values[0]
+//
+//            default:
+//                print("unable to store osc data")
+//        }
     }
     
     func handleJSONString(_ jsonString:String) {
@@ -142,66 +225,5 @@ class DeviceViewController: UIViewController,DeviceViewControllerDelegate {
         }
     }
 
-    
-    func updateDevice(){
-
-        let boxNode = skView.scene?.rootNode.childNode(withName: "box", recursively: true)
-        
-        boxNode?.orientation = deviceData.quat
-    }
-
-    func getJSONString() -> String? {
-        return deviceData.asJSON()[].rawString()
-    }
-    
-    func sendOSCMessage() {
-                
-        if let ip = UserDefaults.standard.string(forKey: "ipAddress"){
-            if let port = UserDefaults.standard.string(forKey: "portAddress"){
-
-                let address = "udp://"+ip+":"+port
-
-                //• should we bundle this up?
-                var msg: OSCMessage = OSCMessage(address: "/gyrosc/gyro", arguments: [deviceData.gyro.x, deviceData.gyro.y, deviceData.gyro.z])
-                DeviceViewController.client.send(msg, to: address)
-                
-                msg = OSCMessage(address: "/gyrosc/rrate", arguments: [deviceData.rrate.x, deviceData.rrate.y, deviceData.rrate.z])
-                DeviceViewController.client.send(msg, to: address)
-                
-                msg = OSCMessage(address: "/gyrosc/accel", arguments: [deviceData.accel.x, deviceData.accel.y, deviceData.accel.z])
-                DeviceViewController.client.send(msg, to: address)
-                
-                msg = OSCMessage(address: "/gyrosc/quat", arguments: [deviceData.quat.w, deviceData.quat.z, deviceData.quat.x, deviceData.quat.y])
-                DeviceViewController.client.send(msg, to: address)
-
-                msg = OSCMessage(address: "/gyrosc/amp", arguments: [deviceData.amp])
-                DeviceViewController.client.send(msg, to: address)
-
-            }
-
-        }
-    }
-    
-    func sendOSCConnect() {
-    
-        //•• SET ADDRESS AND PORT of receiver (laptop)
-//        let address = "udp://10.224.15.22:57120"
-//        let address = "udp://10.1.1.4:57120"
-//        let address = "udp://169.254.50.189:57120"
-//        let address = "udp://169.254.251.179:57120"
-//        let address = "udp://169.254.77.15:57121"
-//        let address = "udp://192.168.10.2:57121"
-
-        if let ip = UserDefaults.standard.string(forKey: "ipAddress"){
-            if let port = UserDefaults.standard.string(forKey: "portAddress"){
-
-                let address = "udp://"+ip+":"+port
-                
-                let msg: OSCMessage = OSCMessage(address: "/gyrosc/button", arguments: [1.0])
-                DeviceViewController.client.send(msg, to: address)
-
-            }
-        }
-    }
-
 }
+
