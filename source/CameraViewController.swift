@@ -13,11 +13,12 @@ import Photos
 import SceneKit
 import OSCKit
 
-class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelegate, CLLocationManagerDelegate, OSCUdpServerDelegate {
+class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelegate, CLLocationManagerDelegate {
  
 
 	
-    let server = OSCUdpServer(port: 57201)
+    let server = OSCServer(port: 57201)
+    
 //    static let client:OSCClient = OSCClient()
 
     var delegate: DeviceViewControllerDelegate?
@@ -54,10 +55,13 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
-		//
-		self.server.delegate = self
-		
+
+        
+        server.setHandler({ message, timeTag in
+            self.delegate?.handleOSCMessage(message)
+        })
+
+        
 		// Disable UI. The UI is enabled if and only if the session starts running.
 		cameraButton.isEnabled = false
 		recordButton.isEnabled = false
@@ -129,7 +133,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 					self.session.startRunning()
 					self.isSessionRunning = self.session.isRunning
                     do {
-                        try self.server.startListening()
+                        try self.server.start()
                     } catch {
                         print(error.localizedDescription)
                     }
@@ -159,7 +163,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 	override func viewDidDisappear(_ animated: Bool) {
 		sessionQueue.async {
 			if self.setupResult == .success {
-                self.server.stopListening()
+                self.server.stop()
 				self.session.stopRunning()
 				self.removeObservers()
 			}
@@ -828,15 +832,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 		}
 	}
     
-    func server(_ server: OSCUdpServer, didReadData data: Data, with error: any Error) {
-        print(data)
-    }
 
-    func server(_ server: OSCUdpServer, socketDidCloseWithError error: (any Error)?) {
-    }
-
-    func server(_ server: OSCUdpServer, didReceivePacket packet: any OSCPacket, fromHost host: String, port: UInt16) {
-    }
     //------------------------------------------------------------------
 	// MARK: OSC Server delegate
     //------------------------------------------------------------------

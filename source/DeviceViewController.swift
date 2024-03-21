@@ -47,27 +47,27 @@ protocol DeviceViewControllerDelegate {
     func sendOSCMessage()
 }
 
-class DeviceViewController: UIViewController, DeviceViewControllerDelegate, OSCUdpClientDelegate {
+class DeviceViewController: UIViewController, DeviceViewControllerDelegate {
     
     @IBOutlet weak var skView: SCNView!
     
     var deviceData = DeviceData()
     
-    let client = OSCUdpClient(host: "127.0.0.1", port: 57120)
+//    let client = OSCUdpClient(host: "127.0.0.1", port: 57120)
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.client.delegate = self
+//        self.client.delegate = self
         
         skView.scene?.background.contents = UIColor.clear
         skView.backgroundColor = UIColor.clear
         
         if let ip = UserDefaults.standard.string(forKey: "ipAddress"){
             let port = UserDefaults.standard.integer(forKey: "portAddress")
-            self.client.host = ip
-            self.client.port = UInt16(port)
+//            self.client.host = ip
+//            self.client.port = UInt16(port)
         }
     }
     
@@ -83,6 +83,8 @@ class DeviceViewController: UIViewController, DeviceViewControllerDelegate, OSCU
         let boxNode = skView.scene?.rootNode.childNode(withName: "box", recursively: true)
         
         boxNode?.orientation = deviceData.quat
+//        print(deviceData.quat)
+
     }
     
     func getJSONString() -> String? {
@@ -116,40 +118,27 @@ class DeviceViewController: UIViewController, DeviceViewControllerDelegate, OSCU
         //
         //        }
         
-        var msg = try! OSCMessage(with: "/gyrosc/gyro", arguments: [deviceData.gyro.x, deviceData.gyro.y, deviceData.gyro.z])
-        try? self.client.send(msg)
-        
-        msg = try! OSCMessage(with: "/gyrosc/rrate", arguments: [deviceData.rrate.x, deviceData.rrate.y, deviceData.rrate.z])
-        try? self.client.send(msg)
-        
-        msg = try! OSCMessage(with: "/gyrosc/accel", arguments: [deviceData.accel.x, deviceData.accel.y, deviceData.accel.z])
-        try? self.client.send(msg)
-        
-        msg = try! OSCMessage(with: "/gyrosc/quat", arguments: [deviceData.quat.w, deviceData.quat.z, deviceData.quat.x, deviceData.quat.y])
-        try? self.client.send(msg)
-        
-        msg = try! OSCMessage(with: "/gyrosc/amp", arguments: [deviceData.amp])
-        try? self.client.send(msg)
+//        var msg = try! OSCMessage(with: "/gyrosc/gyro", arguments: [deviceData.gyro.x, deviceData.gyro.y, deviceData.gyro.z])
+//        try? self.client.send(msg)
+//        
+//        msg = try! OSCMessage(with: "/gyrosc/rrate", arguments: [deviceData.rrate.x, deviceData.rrate.y, deviceData.rrate.z])
+//        try? self.client.send(msg)
+//        
+//        msg = try! OSCMessage(with: "/gyrosc/accel", arguments: [deviceData.accel.x, deviceData.accel.y, deviceData.accel.z])
+//        try? self.client.send(msg)
+//        
+//        msg = try! OSCMessage(with: "/gyrosc/quat", arguments: [deviceData.quat.w, deviceData.quat.z, deviceData.quat.x, deviceData.quat.y])
+//        try? self.client.send(msg)
+//        
+//        msg = try! OSCMessage(with: "/gyrosc/amp", arguments: [deviceData.amp])
+//        try? self.client.send(msg)
     }
     
     func sendOSCConnect() {
-        let msg = try! OSCMessage(with: "/gyrosc/button", arguments: [1.0])
-        try? self.client.send(msg)
+//        let msg = try! OSCMessage(with: "/gyrosc/button", arguments: [1.0])
+//        try? self.client.send(msg)
     }
     
-    
-    // DELEGATE
-    func client(_ client: OSCUdpClient, socketDidCloseWithError error: any Error) {
-        
-    }
-    
-    func client(_ client: OSCUdpClient, didSendPacket packet: any OSCPacket, fromHost host: String?, port: UInt16?) {
-        
-    }
-    
-    func client(_ client: OSCUdpClient, didNotSendPacket packet: any OSCPacket, fromHost host: String?, port: UInt16?, error: (any Error)?) {
-        
-    }
     
     func handleOSCMessage(_ message:OSCMessage){
 
@@ -157,16 +146,18 @@ class DeviceViewController: UIViewController, DeviceViewControllerDelegate, OSCU
         // convert to useful values
         //let values = message.arguments!.map{ Float($0 as! String)!}
 //        let values: Array<Float> = message.arguments!.map({ $0 as! Float })
-//
-//
-//
-///*
-//         https://stackoverflow.com/questions/23503151/how-to-update-quaternion-based-on-3d-gyro-data
-//
-//*/
-//
-//
-//        switch (message.address as NSString).lastPathComponent {
+
+
+
+/*
+         https://stackoverflow.com/questions/23503151/how-to-update-quaternion-based-on-3d-gyro-data
+
+*/
+
+//        let values: Array<Float> = message.values.map({$0.})
+//        
+        
+        switch (message.addressPattern.pathComponents.last) {
 //            case "gyro":
 //                deviceData.gyro = SCNVector3(x: values[0], y: values[1], z: values[2])
 //
@@ -178,12 +169,14 @@ class DeviceViewController: UIViewController, DeviceViewControllerDelegate, OSCU
 //
 //                deviceData.quat = SCNQuaternion(x: x, y: y, z: z, w: w)
 //                // •• END HACK
-//
-//
-////            case "quat":
-////                // needed to swap order for orientation to work  on node
-////                deviceData.quat = SCNQuaternion(x: values[2] , y: values[3], z: values[1], w: values[0])
-//
+
+
+        case "quat":
+            // needed to swap order for orientation to work  on node
+//            print(message.values[0].oscValueToken)
+            guard let (v0,v1,v2,v3) = try? message.values.masked(Double.self, Double.self, Double.self, Double.self) else { return }
+            deviceData.quat = SCNQuaternion(x: Float(v2) , y: Float(v3), z: Float(v1), w: Float(v0))
+
 //        case "rrate":
 //                deviceData.rrate = SCNVector3(x: values[0], y: values[1], z: values[2])
 //            case "accel":
@@ -191,10 +184,12 @@ class DeviceViewController: UIViewController, DeviceViewControllerDelegate, OSCU
 //
 //            case "amp":
 //                deviceData.amp = values[0]
-//
-//            default:
-//                print("unable to store osc data")
-//        }
+
+            default:
+                print("unable to store osc data")
+        }
+        
+        updateDevice()
     }
     
     func handleJSONString(_ jsonString:String) {

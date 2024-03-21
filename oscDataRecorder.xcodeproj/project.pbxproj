@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		F00B4A9D20F25F8C003C513C /* OSCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00B4A9C20F25F8C003C513C /* OSCViewController.swift */; };
-		F04647582BA7DE4800D9685F /* OSCKit in Frameworks */ = {isa = PBXBuildFile; productRef = F04647572BA7DE4800D9685F /* OSCKit */; };
 		F046475B2BA7DE5C00D9685F /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = F046475A2BA7DE5C00D9685F /* SwiftyJSON */; };
 		F0D410F520EFA5B9005468B1 /* DeviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D410F420EFA5B9005468B1 /* DeviceViewController.swift */; };
 		F0F0A58420EF89410033C9C9 /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F0A57720EF89410033C9C9 /* PreviewView.swift */; };
@@ -21,6 +20,8 @@
 		F0F0A58B20EF89410033C9C9 /* AssetGridViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F0A58020EF89410033C9C9 /* AssetGridViewController.swift */; };
 		F0F0A58C20EF89410033C9C9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F0A58120EF89410033C9C9 /* AppDelegate.swift */; };
 		F0F0A58D20EF89410033C9C9 /* SceneKit Scene.scn in Resources */ = {isa = PBXBuildFile; fileRef = F0F0A58220EF89410033C9C9 /* SceneKit Scene.scn */; };
+		F0FB27962BABDAC100C3F0B7 /* OSCKit in Frameworks */ = {isa = PBXBuildFile; productRef = F0FB27952BABDAC100C3F0B7 /* OSCKit */; };
+		F0FB27982BABDAC100C3F0B7 /* OSCKitCore in Frameworks */ = {isa = PBXBuildFile; productRef = F0FB27972BABDAC100C3F0B7 /* OSCKitCore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,7 +47,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				F046475B2BA7DE5C00D9685F /* SwiftyJSON in Frameworks */,
-				F04647582BA7DE4800D9685F /* OSCKit in Frameworks */,
+				F0FB27962BABDAC100C3F0B7 /* OSCKit in Frameworks */,
+				F0FB27982BABDAC100C3F0B7 /* OSCKitCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,8 +116,9 @@
 			);
 			name = oscDataRecorder;
 			packageProductDependencies = (
-				F04647572BA7DE4800D9685F /* OSCKit */,
 				F046475A2BA7DE5C00D9685F /* SwiftyJSON */,
+				F0FB27952BABDAC100C3F0B7 /* OSCKit */,
+				F0FB27972BABDAC100C3F0B7 /* OSCKitCore */,
 			);
 			productName = oscDataRecorder;
 			productReference = F053543520EF88970084370E /* oscDataRecorder.app */;
@@ -146,8 +149,8 @@
 			);
 			mainGroup = F053542C20EF88970084370E;
 			packageReferences = (
-				F04647562BA7DE4800D9685F /* XCRemoteSwiftPackageReference "OSCKit" */,
 				F04647592BA7DE5C00D9685F /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+				F0FB27942BABDAC100C3F0B7 /* XCRemoteSwiftPackageReference "OSCKit" */,
 			);
 			productRefGroup = F053543620EF88980084370E /* Products */;
 			projectDirPath = "";
@@ -390,14 +393,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		F04647562BA7DE4800D9685F /* XCRemoteSwiftPackageReference "OSCKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SammySmallman/OSCKit";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.2.0;
-			};
-		};
 		F04647592BA7DE5C00D9685F /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON.git";
@@ -406,18 +401,31 @@
 				minimumVersion = 5.0.1;
 			};
 		};
+		F0FB27942BABDAC100C3F0B7 /* XCRemoteSwiftPackageReference "OSCKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/orchetect/OSCKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.5.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		F04647572BA7DE4800D9685F /* OSCKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = F04647562BA7DE4800D9685F /* XCRemoteSwiftPackageReference "OSCKit" */;
-			productName = OSCKit;
-		};
 		F046475A2BA7DE5C00D9685F /* SwiftyJSON */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = F04647592BA7DE5C00D9685F /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
 			productName = SwiftyJSON;
+		};
+		F0FB27952BABDAC100C3F0B7 /* OSCKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F0FB27942BABDAC100C3F0B7 /* XCRemoteSwiftPackageReference "OSCKit" */;
+			productName = OSCKit;
+		};
+		F0FB27972BABDAC100C3F0B7 /* OSCKitCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F0FB27942BABDAC100C3F0B7 /* XCRemoteSwiftPackageReference "OSCKit" */;
+			productName = OSCKitCore;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
