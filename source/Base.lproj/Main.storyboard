@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="PDV-RU-4h7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="PDV-RU-4h7">
     <device id="retina4_7" orientation="landscape" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -228,7 +228,7 @@
                     <nil key="simulatedStatusBarMetrics"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="x2G-YY-cY2">
-                        <rect key="frame" x="0.0" y="0.0" width="667" height="32"/>
+                        <rect key="frame" x="0.0" y="0.0" width="667" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="0.8517203283" green="0.79981006499999996" blue="0.058039445410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
@@ -262,7 +262,7 @@
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="32C-3r-ZrH">
-                                <rect key="frame" x="20" y="40" width="627" height="120"/>
+                                <rect key="frame" x="20" y="52" width="627" height="120"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="245" id="CZ9-3B-qND"/>
                                     <constraint firstAttribute="height" constant="31" id="qCc-w2-hv7"/>
@@ -331,7 +331,7 @@
                                 <color key="barTintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </toolbar>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S4j-lh-Xbq">
-                                <rect key="frame" x="0.0" y="32" width="667" height="299"/>
+                                <rect key="frame" x="0.0" y="44" width="667" height="287"/>
                                 <connections>
                                     <segue destination="C1a-Ab-5aP" kind="embed" identifier="devicePlayerSegue" id="9hj-h4-Etn"/>
                                 </connections>
@@ -383,11 +383,11 @@
                         <viewControllerLayoutGuide type="bottom" id="0Kf-pc-wqg"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="tv2-Ga-QGr">
-                        <rect key="frame" x="0.0" y="0.0" width="659" height="254"/>
+                        <rect key="frame" x="0.0" y="0.0" width="667" height="287"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" sceneName="SceneKit Scene.scn" translatesAutoresizingMaskIntoConstraints="NO" id="VMY-ii-HbF">
-                                <rect key="frame" x="0.0" y="0.0" width="659" height="254"/>
+                                <rect key="frame" x="0.0" y="0.0" width="667" height="287"/>
                             </sceneKitView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -462,7 +462,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="7Lq-tt-uig"/>
+        <segue reference="9hj-h4-Etn"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
