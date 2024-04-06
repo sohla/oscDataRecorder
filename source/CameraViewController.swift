@@ -17,7 +17,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
  
 
 	
-    let server = OSCServer(port: 57201)
+    let server = OSCServer(port: 57120)
     
 //    static let client:OSCClient = OSCClient()
 
@@ -49,6 +49,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
     @IBOutlet weak var dataLevel: UIProgressView!
     
 
+    
     //------------------------------------------------------------------
 	// MARK: View Controller Life Cycle
     //------------------------------------------------------------------
@@ -58,7 +59,33 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 
         
         server.setHandler({ message, timeTag in
+
             self.delegate?.handleOSCMessage(message)
+            
+            self.delegate?.updateScene()
+            
+            // if we want to send data thru this app
+            //self.delegate?.sendOSCMessage()
+
+            if self.movieFileOutput.isRecording {
+
+                if let valString = self.delegate?.getJSONString() {
+
+                    let metadataItem = AVMutableMetadataItem()
+                    metadataItem.identifier = AVMetadataIdentifier.quickTimeMetadataLocationISO6709
+                    metadataItem.dataType = kCMMetadataDataType_QuickTimeMetadataLocation_ISO6709 as String
+                    metadataItem.value = valString as NSString
+                    
+                    let metadataItemGroup = AVTimedMetadataGroup(items: [metadataItem], timeRange: CMTimeRangeMake(start: CMClockGetTime(CMClockGetHostTimeClock()), duration: CMTime.invalid))
+                    do {
+                        try self.locationMetadataInput?.append(metadataItemGroup)
+                    }
+                    catch {
+                        print("Could not add timed metadata group: \(error)")
+                    }
+                }
+            }
+
         })
 
         
@@ -590,7 +617,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 		
 		if error != nil {
             print("Movie file finishing error: \(String(describing: error))")
-            success = (((error as! NSError).userInfo[AVErrorRecordingSuccessfullyFinishedKey] as AnyObject).boolValue)!
+            success = (((error! as NSError).userInfo[AVErrorRecordingSuccessfullyFinishedKey] as AnyObject).boolValue)!
 		}
 		
 		if success {
@@ -831,56 +858,6 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 			}
 		}
 	}
-    
-
-    //------------------------------------------------------------------
-	// MARK: OSC Server delegate
-    //------------------------------------------------------------------
-//    func handle(_ message: OSCMessage!) {
-//
-//        
-//        //•• HACK for bees
-//        let values: Array<Float> = message.arguments!.map({ $0 as! Float })
-//        dataLevel.progress = abs(values[0] / 35.0)
-//        //•• end hack
-//        //print(message.address)
-//        delegate?.handleOSCMessage(message)
-//
-//        delegate?.updateDevice()
-//        
-//        // this is amazing! if we connect this device (select Player) to boucne:
-//        // we can pass on all the data THRU this app
-//        
-//        self.delegate?.sendOSCMessage()
-//        
-//        //
-//        //
-//        
-//		if movieFileOutput.isRecording {
-//		
-//            if let valString = delegate?.getJSONString() {
-//
-//                let metadataItem = AVMutableMetadataItem()
-//                metadataItem.identifier = AVMetadataIdentifier.quickTimeMetadataLocationISO6709
-//                metadataItem.dataType = kCMMetadataDataType_QuickTimeMetadataLocation_ISO6709 as String
-//                metadataItem.value = valString as NSString
-//
-//                let metadataItemGroup = AVTimedMetadataGroup(items: [metadataItem], timeRange: CMTimeRangeMake(start: CMClockGetTime(CMClockGetHostTimeClock()), duration: CMTime.invalid))
-//                do {
-//                    try locationMetadataInput?.append(metadataItemGroup)
-//                }
-//                catch {
-//                    print("Could not add timed metadata group: \(error)")
-//                }
-//            }
-//		}
-//	}
-    
-//    func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
-//        //••••
-//    }
-    
-
 }
 
 extension UIDeviceOrientation {

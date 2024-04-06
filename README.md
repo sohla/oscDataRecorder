@@ -19,3 +19,16 @@ iOS (Swift) tool for recording and playing back videos with embedded OSC data
 - [ ] need to refactor recording, OSC server etc.
 - [ ] alternative passing eg. output cvs file
 
+
+
+
+
+### ideas
+- synth folley / interface
+- use in performance / theatre context
+- conductor / meta control
+- realationships between performers / device
+- mapping to Foley
+ 
+- ai motion Foley auto generating
+ 

@@ -309,11 +309,11 @@ class AssetGridViewController: UICollectionViewController, PHPhotoLibraryChangeO
 			}
 		}
 		
-		self.assetRequestID = imageManager.requestAVAsset(forVideo: asset, options: requestOptions, resultHandler: { asset, _, info in
+        self.assetRequestID = self.imageManager.requestAVAsset(forVideo: asset, options: requestOptions, resultHandler: { asset, _, info in
 			DispatchQueue.main.async {
 				if let asset = asset {
 					self.selectedAsset = asset
-					self.performSegue(withIdentifier: "backToPlayer", sender: self)
+                    self.performSegue(withIdentifier: "backToPlayer", sender: self)
 				}
 			}
 		})

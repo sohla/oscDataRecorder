@@ -23,7 +23,6 @@ struct DeviceData {
     var amp: Float = 0
     
     func asJSON () -> JSON {
-        
         let json: JSON = JSON([
             "gyro": [gyro.x, gyro.y, gyro.z],
             "quat": [quat.x, quat.y, quat.z, quat.w],
@@ -38,7 +37,7 @@ struct DeviceData {
 
 protocol DeviceViewControllerDelegate {
     
-    func updateDevice()
+    func updateScene()
     func handleOSCMessage(_ msg:OSCMessage)
     func handleJSONString(_ jsonString:String)
     func getJSONString() -> String?
@@ -52,9 +51,8 @@ class DeviceViewController: UIViewController, DeviceViewControllerDelegate {
     @IBOutlet weak var skView: SCNView!
     
     var deviceData = DeviceData()
-    
+//    let boxNode  = SCNScene(named: "SceneKit Scene.scn")?.rootNode.childNode(withName: "box", recursively: true)
 //    let client = OSCUdpClient(host: "127.0.0.1", port: 57120)
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,15 +74,9 @@ class DeviceViewController: UIViewController, DeviceViewControllerDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    
-    
-    func updateDevice(){
-        
+    func updateScene(){
         let boxNode = skView.scene?.rootNode.childNode(withName: "box", recursively: true)
-        
         boxNode?.orientation = deviceData.quat
-//        print(deviceData.quat)
-
     }
     
     func getJSONString() -> String? {
@@ -142,54 +134,33 @@ class DeviceViewController: UIViewController, DeviceViewControllerDelegate {
     
     func handleOSCMessage(_ message:OSCMessage){
 
-        
-        // convert to useful values
-        //let values = message.arguments!.map{ Float($0 as! String)!}
-//        let values: Array<Float> = message.arguments!.map({ $0 as! Float })
-
-
-
-/*
-         https://stackoverflow.com/questions/23503151/how-to-update-quaternion-based-on-3d-gyro-data
-
-*/
-
-//        let values: Array<Float> = message.values.map({$0.})
-//        
-        
+        // encode message.values to deviceData
         switch (message.addressPattern.pathComponents.last) {
-//            case "gyro":
-//                deviceData.gyro = SCNVector3(x: values[0], y: values[1], z: values[2])
-//
-//                //•• HACK for bee's
-//                let w = cos(deviceData.gyro.x/2) * cos(deviceData.gyro.y/2) * cos(deviceData.gyro.z/2) + sin(deviceData.gyro.x/2) * sin(deviceData.gyro.y/2) * sin(deviceData.gyro.z/2)
-//                let x = sin(deviceData.gyro.x/2) * cos(deviceData.gyro.y/2) * cos(deviceData.gyro.z/2) - cos(deviceData.gyro.x/2) * sin(deviceData.gyro.y/2) * sin(deviceData.gyro.z/2)
-//                let y = cos(deviceData.gyro.x/2) * sin(deviceData.gyro.y/2) * cos(deviceData.gyro.z/2) + sin(deviceData.gyro.x/2) * cos(deviceData.gyro.y/2) * sin(deviceData.gyro.z/2)
-//                let z = cos(deviceData.gyro.x/2) * cos(deviceData.gyro.y/2) * sin(deviceData.gyro.z/2) - sin(deviceData.gyro.x/2) * sin(deviceData.gyro.y/2) * cos(deviceData.gyro.z/2)
-//
-//                deviceData.quat = SCNQuaternion(x: x, y: y, z: z, w: w)
-//                // •• END HACK
+            case "gyro":
+                guard let (v0,v1,v2) = try? message.values.masked(Double.self, Double.self, Double.self) else { return }
+                deviceData.gyro = SCNVector3(x: Float(v0), y: Float(v1), z: Float(v2))
 
+            case "quat":
+                // needed to swap order for orientation to work  on node
+                // print(message.values[0].oscValueToken)
+                guard let (v0,v1,v2,v3) = try? message.values.masked(Double.self, Double.self, Double.self, Double.self) else { return }
+                deviceData.quat = SCNQuaternion(x: Float(v2) , y: Float(v3), z: Float(v1), w: Float(v0))
 
-        case "quat":
-            // needed to swap order for orientation to work  on node
-//            print(message.values[0].oscValueToken)
-            guard let (v0,v1,v2,v3) = try? message.values.masked(Double.self, Double.self, Double.self, Double.self) else { return }
-            deviceData.quat = SCNQuaternion(x: Float(v2) , y: Float(v3), z: Float(v1), w: Float(v0))
+            case "rrate":
+                guard let (v0,v1,v2) = try? message.values.masked(Double.self, Double.self, Double.self) else { return }
+                deviceData.rrate = SCNVector3(x: Float(v0), y: Float(v1), z: Float(v2))
 
-//        case "rrate":
-//                deviceData.rrate = SCNVector3(x: values[0], y: values[1], z: values[2])
-//            case "accel":
-//                deviceData.accel = SCNVector3(x: values[0], y: values[1], z: values[2])
-//
-//            case "amp":
-//                deviceData.amp = values[0]
+            case "accel":
+                guard let (v0,v1,v2) = try? message.values.masked(Double.self, Double.self, Double.self) else { return }
+                deviceData.accel = SCNVector3(x: Float(v0), y: Float(v1), z: Float(v2))
+
+            case "amp":
+                guard let (v0) = try? message.values.masked(Double.self) else { return }
+                deviceData.amp = Float(v0)
 
             default:
                 print("unable to store osc data")
         }
-        
-        updateDevice()
     }
     
     func handleJSONString(_ jsonString:String) {

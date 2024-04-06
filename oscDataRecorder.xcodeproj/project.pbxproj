@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		F00B4A9D20F25F8C003C513C /* OSCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00B4A9C20F25F8C003C513C /* OSCViewController.swift */; };
 		F046475B2BA7DE5C00D9685F /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = F046475A2BA7DE5C00D9685F /* SwiftyJSON */; };
+		F097F7D62BC10C5900C880F7 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = F097F7D52BC10C5900C880F7 /* README.md */; };
 		F0D410F520EFA5B9005468B1 /* DeviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D410F420EFA5B9005468B1 /* DeviceViewController.swift */; };
 		F0F0A58420EF89410033C9C9 /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F0A57720EF89410033C9C9 /* PreviewView.swift */; };
 		F0F0A58520EF89410033C9C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F0F0A57820EF89410033C9C9 /* Assets.xcassets */; };
@@ -27,6 +28,7 @@
 /* Begin PBXFileReference section */
 		F00B4A9C20F25F8C003C513C /* OSCViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSCViewController.swift; sourceTree = "<group>"; };
 		F053543520EF88970084370E /* oscDataRecorder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = oscDataRecorder.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F097F7D52BC10C5900C880F7 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		F0D410F420EFA5B9005468B1 /* DeviceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceViewController.swift; sourceTree = "<group>"; };
 		F0F0A57720EF89410033C9C9 /* PreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
 		F0F0A57820EF89410033C9C9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -58,6 +60,7 @@
 		F053542C20EF88970084370E = {
 			isa = PBXGroup;
 			children = (
+				F097F7D52BC10C5900C880F7 /* README.md */,
 				F0F0A57620EF89410033C9C9 /* source */,
 				F053543620EF88980084370E /* Products */,
 				F390C5AED0140BDD5B056CFE /* Frameworks */,
@@ -168,6 +171,7 @@
 			files = (
 				F0F0A58D20EF89410033C9C9 /* SceneKit Scene.scn in Resources */,
 				F0F0A58920EF89410033C9C9 /* Main.storyboard in Resources */,
+				F097F7D62BC10C5900C880F7 /* README.md in Resources */,
 				F0F0A58520EF89410033C9C9 /* Assets.xcassets in Resources */,
 				F0F0A58820EF89410033C9C9 /* LaunchScreen.storyboard in Resources */,
 			);

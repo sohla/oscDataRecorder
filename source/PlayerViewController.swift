@@ -252,7 +252,8 @@ class PlayerViewController: UIViewController, AVPlayerItemMetadataOutputPushDele
 	}
 	
     func metadataOutput(_ output: AVPlayerItemMetadataOutput, didOutputTimedMetadataGroups groups: [AVTimedMetadataGroup], from track: AVPlayerItemTrack?) {
-		for metadataGroup in groups {
+
+        for metadataGroup in groups {
 			
 			DispatchQueue.main.async {
 				
@@ -294,12 +295,11 @@ class PlayerViewController: UIViewController, AVPlayerItemMetadataOutputPushDele
 										if let itemValue = metdataItem.value as? String {
 
                                             self.delegate?.handleJSONString(itemValue)
-                                            
-                                            self.delegate?.updateDevice()
+                                            self.delegate?.updateScene()
                                             
                                             self.locationOverlayLabel.text = "has data"
                                             
-                                            self.delegate?.sendOSCMessage()
+//                                            self.delegate?.sendOSCMessage()
 										}
 									}
 									
