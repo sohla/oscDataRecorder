@@ -137,26 +137,26 @@ class DeviceViewController: UIViewController, DeviceViewControllerDelegate {
         // encode message.values to deviceData
         switch (message.addressPattern.pathComponents.last) {
             case "gyro":
-                guard let (v0,v1,v2) = try? message.values.masked(Double.self, Double.self, Double.self) else { return }
-                deviceData.gyro = SCNVector3(x: Float(v0), y: Float(v1), z: Float(v2))
+                guard let (v0,v1,v2) = try? message.values.masked(Float.self, Float.self, Float.self) else { return }
+                deviceData.gyro = SCNVector3(x: v0, y: v1, z: v2)
 
             case "quat":
                 // needed to swap order for orientation to work  on node
                 // print(message.values[0].oscValueToken)
-                guard let (v0,v1,v2,v3) = try? message.values.masked(Double.self, Double.self, Double.self, Double.self) else { return }
-                deviceData.quat = SCNQuaternion(x: Float(v2) , y: Float(v3), z: Float(v1), w: Float(v0))
+                guard let (v0,v1,v2,v3) = try? message.values.masked(Float.self, Float.self, Float.self, Float.self) else { return }
+                deviceData.quat = SCNQuaternion(x: v2 , y: v3, z: v1, w: v0)
 
             case "rrate":
-                guard let (v0,v1,v2) = try? message.values.masked(Double.self, Double.self, Double.self) else { return }
-                deviceData.rrate = SCNVector3(x: Float(v0), y: Float(v1), z: Float(v2))
+                guard let (v0,v1,v2) = try? message.values.masked(Float.self, Float.self, Float.self) else { return }
+                deviceData.rrate = SCNVector3(x: v0, y: v1, z: v2)
 
             case "accel":
-                guard let (v0,v1,v2) = try? message.values.masked(Double.self, Double.self, Double.self) else { return }
-                deviceData.accel = SCNVector3(x: Float(v0), y: Float(v1), z: Float(v2))
+                guard let (v0,v1,v2) = try? message.values.masked(Float.self, Float.self, Float.self) else { return }
+                deviceData.accel = SCNVector3(x: v0, y: v1, z: v2)
 
             case "amp":
-                guard let (v0) = try? message.values.masked(Double.self) else { return }
-                deviceData.amp = Float(v0)
+                guard let (v0) = try? message.values.masked(Float.self) else { return }
+                deviceData.amp = v0
 
             default:
                 print("unable to store osc data")

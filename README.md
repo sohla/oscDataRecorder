@@ -18,9 +18,8 @@ iOS (Swift) tool for recording and playing back videos with embedded OSC data
 - [ ] receive and transmitter stored config. 
 - [ ] need to refactor recording, OSC server etc.
 - [ ] alternative passing eg. output cvs file
-
-
-
+- [ ] clear all unused code, facial code etc.
+- [ ] refactor VideoRecorder and VidePlayer out from ViewControlles 
 
 
 ### ideas
