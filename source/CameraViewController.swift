@@ -60,7 +60,8 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
         
         server.setHandler({ message, timeTag in
 
-            self.delegate?.handleOSCMessage(message)
+//            self.delegate?.handleOSCMessage(message)
+            self.delegate?.deviceData.fromOSC(message)
             
             self.delegate?.updateScene()
             

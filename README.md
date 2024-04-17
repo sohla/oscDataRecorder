@@ -13,6 +13,7 @@ iOS (Swift) tool for recording and playing back videos with embedded OSC data
 ### TODO
 
 - [ ] fininish refactor of all data
+    - [ ] remove data from DeviceViewConttoller (Data needs to be prototyped not this controller)
     - [ ] DeviceController : OSC client, send data, pass data
     - [ ] CameraViewController : handle OSC data, embed data into video
 - [ ] receive and transmitter stored config. 

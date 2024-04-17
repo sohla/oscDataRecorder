@@ -60,7 +60,7 @@ class PlayerViewController: UIViewController, AVPlayerItemMetadataOutputPushDele
             let c = segue.destination as! DeviceViewController
             delegate = c
 
-            delegate?.sendOSCConnect()
+//            delegate?.sendOSCConnect()
         }
     }
 
@@ -294,7 +294,8 @@ class PlayerViewController: UIViewController, AVPlayerItemMetadataOutputPushDele
 									if itemDataType == String(kCMMetadataDataType_QuickTimeMetadataLocation_ISO6709) {
 										if let itemValue = metdataItem.value as? String {
 
-                                            self.delegate?.handleJSONString(itemValue)
+//                                            self.delegate?.handleJSONString(itemValue)
+                                            self.delegate?.deviceData.fromJSON(itemValue)
                                             self.delegate?.updateScene()
                                             
                                             self.locationOverlayLabel.text = "has data"
