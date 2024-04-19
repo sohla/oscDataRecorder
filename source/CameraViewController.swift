@@ -60,7 +60,6 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
         
         server.setHandler({ message, timeTag in
 
-//            self.delegate?.handleOSCMessage(message)
             self.delegate?.deviceData.fromOSC(message)
             
             self.delegate?.updateScene()
@@ -70,8 +69,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 
             if self.movieFileOutput.isRecording {
 
-                if let valString = self.delegate?.getJSONString() {
-
+                if let valString = self.delegate?.deviceData.toString() {
                     let metadataItem = AVMutableMetadataItem()
                     metadataItem.identifier = AVMetadataIdentifier.quickTimeMetadataLocationISO6709
                     metadataItem.dataType = kCMMetadataDataType_QuickTimeMetadataLocation_ISO6709 as String

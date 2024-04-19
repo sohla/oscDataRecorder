@@ -11,24 +11,19 @@ import SceneKit
 
 
 protocol DeviceViewControllerDelegate {
-    
+
     var deviceData: DeviceDataProtocol { get set }
-    
+
     func updateScene()
-    func getJSONString() -> String?
     
 }
 
 class DeviceViewController: UIViewController, DeviceViewControllerDelegate {
 
     @IBOutlet weak var skView: SCNView!
-    
-//    var deviceData: any DeviceDataProtocol = MOSCDeviceData()
-    var deviceData: any DeviceDataProtocol = ASDeviceData()
-    
-//        var deviceData = MOSCDeviceData() //DeviceData()
-//    let boxNode  = SCNScene(named: "SceneKit Scene.scn")?.rootNode.childNode(withName: "box", recursively: true)
-//    let client = OSCUdpClient(host: "127.0.0.1", port: 57120)
+
+    var deviceData: any DeviceDataProtocol = MOSCDeviceData()
+//    var deviceData: any DeviceDataProtocol = ASDeviceData()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,16 +43,19 @@ class DeviceViewController: UIViewController, DeviceViewControllerDelegate {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func updateScene(){
         let boxNode = skView.scene?.rootNode.childNode(withName: "box", recursively: true)
         boxNode?.orientation = deviceData.quat
+        
+//        messageLabel.text = deviceData.addressString + "\n"
+        let bar1 = skView.scene?.rootNode.childNode(withName: "bar1", recursively: true)
+        bar1?.scale = SCNVector3(1 + deviceData.quat.x, 1 + deviceData.quat.y, 0)
+        let bar2 = skView.scene?.rootNode.childNode(withName: "bar2", recursively: true)
+        bar2?.scale = SCNVector3(1 + deviceData.quat.z, 1 + deviceData.quat.w, 0)
+
     }
     
-    func getJSONString() -> String? {
-        return deviceData.asJSON()[].rawString()
-    }
 }
 

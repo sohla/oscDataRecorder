@@ -19,11 +19,15 @@ protocol DeviceDataProtocol {
     var rrate: SCNVector3 { get set }
     var accel: SCNVector3 { get set }
     var amp: Float { get set }
-    
+
+    var addressString: String { get }
+
     func asJSON () -> JSON
-    func fromJSON(_ jsonString:String)
+    func fromString(_ jsonString:String)
+    func toString() -> String?
     func fromOSC(_ message:OSCMessage)
     func asOSC() -> OSCMessage
+    
 }
 
 class MOSCDeviceData : DeviceDataProtocol {
@@ -33,6 +37,7 @@ class MOSCDeviceData : DeviceDataProtocol {
     var rrate: SCNVector3 = SCNVector3()
     var accel: SCNVector3 = SCNVector3()
     var amp: Float = 0
+    var addressString: String = ""
     
     func asJSON () -> JSON {
         let json: JSON = JSON([
@@ -46,7 +51,11 @@ class MOSCDeviceData : DeviceDataProtocol {
         return json
     }
     
-    func fromJSON(_ jsonString:String) {
+    func toString() -> String? {
+        return asJSON().rawString()
+    }
+
+    func fromString(_ jsonString:String) {
         
         if let dataFromString = jsonString.data(using: .utf8, allowLossyConversion: false) {
             
@@ -75,6 +84,25 @@ class MOSCDeviceData : DeviceDataProtocol {
     }
     
     func fromOSC(_ message:OSCMessage){
+        
+        addressString = message.addressPattern.stringValue
+        
+/*
+        // turn messgae into comma delimited string hack
+        let addressPattern = message.addressPattern.stringValue
+        let values = message.values.description.replacingOccurrences(of: "[", with: "").replacingOccurrences(of: "]", with: "")
+        let fullStr = addressPattern + ", " + values
+        print(fullStr)
+        
+        // take full string and convert to OSCMessage hack
+        var components = fullStr.components(separatedBy: ",").map{ $0.replacingOccurrences(of: " ", with: "")}
+        let address = components.removeFirst()
+        let vals = components.compactMap{ Float($0) }
+        let msg: OSCMessage = OSCMessage(address, values: vals)
+        print(msg.descriptionPretty)
+*/
+        
+        
         // encode message.values to deviceData
         switch (message.addressPattern.pathComponents.last) {
             case "gyro":
@@ -124,7 +152,8 @@ class ASDeviceData : DeviceDataProtocol {
     var rrate: SCNVector3 = SCNVector3()
     var accel: SCNVector3 = SCNVector3()
     var amp: Float = 0
-    
+    var addressString: String = ""
+
     func asJSON () -> JSON {
         let json: JSON = JSON([
             "gyro": [gyro.x, gyro.y, gyro.z],
@@ -136,8 +165,12 @@ class ASDeviceData : DeviceDataProtocol {
         ])
         return json
     }
-    
-    func fromJSON(_ jsonString:String) {
+    func toString() -> String? {
+        return asJSON().rawString()
+    }
+
+
+    func fromString(_ jsonString:String) {
         
         if let dataFromString = jsonString.data(using: .utf8, allowLossyConversion: false) {
             
