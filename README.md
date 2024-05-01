@@ -32,3 +32,15 @@ iOS (Swift) tool for recording and playing back videos with embedded OSC data
  
 - ai motion Foley auto generating
  
+
+
+
+
+### Networks :
+
+LittleNests
+Router : 192.168.50.1
+Laptop : 192.168.50.48
+iphone : 192.168.50.156
+
+

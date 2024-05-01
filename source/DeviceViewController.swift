@@ -22,8 +22,8 @@ class DeviceViewController: UIViewController, DeviceViewControllerDelegate {
 
     @IBOutlet weak var skView: SCNView!
 
-    var deviceData: any DeviceDataProtocol = MOSCDeviceData()
-//    var deviceData: any DeviceDataProtocol = ASDeviceData()
+//    var deviceData: any DeviceDataProtocol = MOSCDeviceData()
+    var deviceData: any DeviceDataProtocol = ASDeviceData()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,12 +49,6 @@ class DeviceViewController: UIViewController, DeviceViewControllerDelegate {
         let boxNode = skView.scene?.rootNode.childNode(withName: "box", recursively: true)
         boxNode?.orientation = deviceData.quat
         
-//        messageLabel.text = deviceData.addressString + "\n"
-        let bar1 = skView.scene?.rootNode.childNode(withName: "bar1", recursively: true)
-        bar1?.scale = SCNVector3(1 + deviceData.quat.x, 1 + deviceData.quat.y, 0)
-        let bar2 = skView.scene?.rootNode.childNode(withName: "bar2", recursively: true)
-        bar2?.scale = SCNVector3(1 + deviceData.quat.z, 1 + deviceData.quat.w, 0)
-
     }
     
 }
