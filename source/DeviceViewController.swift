@@ -11,11 +11,8 @@ import SceneKit
 
 
 protocol DeviceViewControllerDelegate {
-
     var deviceData: DeviceDataProtocol { get set }
-
     func updateScene()
-    
 }
 
 class DeviceViewController: UIViewController, DeviceViewControllerDelegate {
@@ -28,11 +25,8 @@ class DeviceViewController: UIViewController, DeviceViewControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        self.client.delegate = self
-        
         skView.scene?.background.contents = UIColor.clear
         skView.backgroundColor = UIColor.clear
-        
 //        if let ip = UserDefaults.standard.string(forKey: "ipAddress"){
 //            let port = UserDefaults.standard.integer(forKey: "portAddress")
 //            self.client.host = ip
@@ -48,8 +42,6 @@ class DeviceViewController: UIViewController, DeviceViewControllerDelegate {
     func updateScene(){
         let boxNode = skView.scene?.rootNode.childNode(withName: "box", recursively: true)
         boxNode?.orientation = deviceData.quat
-        
     }
-    
 }
 

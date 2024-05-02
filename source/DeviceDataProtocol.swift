@@ -202,8 +202,8 @@ class ASDeviceData : DeviceDataProtocol {
         // encode message.values to deviceData
         switch (message.addressPattern.pathComponents.last) {
             case "qX":
-                guard let v0 = try? message.values.masked(Double.self) else { return }
-                quat.x = Float(v0)
+                guard let v0 = try? message.values.masked(Float.self) else { return }
+                quat.x = v0
 
             case "qY":
                 guard let v0 = try? message.values.masked(Float.self) else { return }
@@ -211,11 +211,11 @@ class ASDeviceData : DeviceDataProtocol {
     
             case "qZ":
                 guard let v0 = try? message.values.masked(Float.self) else { return }
-                quat.z = -v0
+                quat.z = v0
 
             case "qW":
                 guard let v0 = try? message.values.masked(Float.self) else { return }
-                quat.w = -v0
+                quat.w = v0
 
             
 //            case "rrate":
@@ -229,6 +229,13 @@ class ASDeviceData : DeviceDataProtocol {
 //            case "amp":
 //                guard let (v0) = try? message.values.masked(Float.self) else { return }
 //                amp = v0
+            
+            case "rollCorrection":
+                let _ = 0
+            
+            case "yawCorrection":
+                let _ = 0
+
 
             default:
                 print("unable to store osc data")
