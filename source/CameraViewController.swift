@@ -64,8 +64,8 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
             
             self.delegate?.updateScene()
 
-            
-            print(self.delegate?.deviceData.quat ?? 0)
+            print(message)
+//            print(self.delegate?.deviceData.quat ?? 0)
 
             // if we want to send data thru this app
             //self.delegate?.sendOSCMessage()

@@ -27,6 +27,11 @@ class DeviceViewController: UIViewController, DeviceViewControllerDelegate {
         
         skView.scene?.background.contents = UIColor.clear
         skView.backgroundColor = UIColor.clear
+        
+//        let boxNode = skView.scene?.rootNode.childNode(withName: "box", recursively: true)?.clone()
+//        boxNode?.name = "box2"
+//        skView.scene?.rootNode.addChildNode(boxNode!)
+        
 //        if let ip = UserDefaults.standard.string(forKey: "ipAddress"){
 //            let port = UserDefaults.standard.integer(forKey: "portAddress")
 //            self.client.host = ip
