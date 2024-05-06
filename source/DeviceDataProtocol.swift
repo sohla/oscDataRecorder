@@ -28,6 +28,21 @@ protocol DeviceDataProtocol {
     func fromOSC(_ message:OSCMessage)
     func asOSC() -> OSCMessage
     
+    /*
+     
+        buffer of OSC messages
+        addMsg : add a single OSC message to the buffer
+        convert buffer messages to JSON
+        save JSON string file
+
+     
+        sync issues :
+            OSC coming in 10ms / 100 fps
+            * not guarenteed
+     
+        video
+            16.6ms / 60 fps
+     */
 }
 
 class MOSCDeviceData : DeviceDataProtocol {

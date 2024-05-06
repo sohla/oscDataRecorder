@@ -412,7 +412,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 			if let videoDevice = newVideoDevice {
 				do {
 					let videoDeviceInput = try AVCaptureDeviceInput(device: videoDevice)
-					
+                    
 					self.session.beginConfiguration()
 					
 					// Remove the existing device input first, since using the front and back camera simultaneously is not supported.
