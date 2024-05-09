@@ -57,15 +57,20 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
+        print("staret")
         
         server.setHandler({ message, timeTag in
 
+//            print(message)
             self.delegate?.deviceData.fromOSC(message)
             
             self.delegate?.updateScene()
 
-            print(message)
-//            print(self.delegate?.deviceData.quat ?? 0)
+//            let date = Date()
+//            let formatter = DateFormatter()
+//            formatter.dateFormat = "yyyy-MM-dd hh:mm:ss.SSSS a"
+//            let result = formatter.string(from: date)
+//            print("time: \(result) msg: \(message)")
 
             // if we want to send data thru this app
             //self.delegate?.sendOSCMessage()
