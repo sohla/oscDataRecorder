@@ -232,6 +232,10 @@ class ASDeviceData : DeviceDataProtocol {
                 guard let v0 = try? message.values.masked(Float.self) else { return }
                 quat.w = v0
 
+            case "IMUFusedData":
+            guard let (_,_,_,v3, v4, v5, v6) = try? message.values.masked(Float.self, Float.self, Float.self, Float.self, Float.self, Float.self, Float.self) else { return }
+                quat = SCNQuaternion(x: v3 , y: v4, z: v5, w: v6)
+
             
 //            case "rrate":
 //                guard let (v0,v1,v2) = try? message.values.masked(Float.self, Float.self, Float.self) else { return }

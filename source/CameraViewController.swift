@@ -21,6 +21,10 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
     
 //    static let client:OSCClient = OSCClient()
 
+    //    var deviceData: any DeviceDataProtocol = MOSCDeviceData()
+    var deviceData: any DeviceDataProtocol = ASDeviceData()
+
+    
     var delegate: DeviceViewControllerDelegate?
     
 
@@ -48,8 +52,9 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 
     @IBOutlet weak var dataLevel: UIProgressView!
     
-
-    
+//    sohla7
+//    !ZXzxzxzx72!
+//    
     //------------------------------------------------------------------
 	// MARK: View Controller Life Cycle
     //------------------------------------------------------------------
@@ -61,10 +66,10 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
         
         server.setHandler({ message, timeTag in
 
-//            print(message)
-            self.delegate?.deviceData.fromOSC(message)
+            print(message)
+            self.deviceData.fromOSC(message)
             
-            self.delegate?.updateScene()
+            self.delegate?.updateScene(data: self.deviceData)
 
 //            let date = Date()
 //            let formatter = DateFormatter()
@@ -77,7 +82,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 
             if self.movieFileOutput.isRecording {
 
-                if let valString = self.delegate?.deviceData.toString() {
+                if let valString = self.deviceData.toString() {
                     let metadataItem = AVMutableMetadataItem()
                     metadataItem.identifier = AVMetadataIdentifier.quickTimeMetadataLocationISO6709
                     metadataItem.dataType = kCMMetadataDataType_QuickTimeMetadataLocation_ISO6709 as String

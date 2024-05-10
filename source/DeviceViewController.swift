@@ -11,8 +11,8 @@ import SceneKit
 
 
 protocol DeviceViewControllerDelegate {
-    var deviceData: DeviceDataProtocol { get set }
-    func updateScene()
+//    var deviceData: DeviceDataProtocol { get set }
+    func updateScene(data: DeviceDataProtocol)
 }
 
 class DeviceViewController: UIViewController, DeviceViewControllerDelegate {
@@ -20,7 +20,7 @@ class DeviceViewController: UIViewController, DeviceViewControllerDelegate {
     @IBOutlet weak var skView: SCNView!
 
 //    var deviceData: any DeviceDataProtocol = MOSCDeviceData()
-    var deviceData: any DeviceDataProtocol = ASDeviceData()
+//    var deviceData: any DeviceDataProtocol = ASDeviceData()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,9 +44,9 @@ class DeviceViewController: UIViewController, DeviceViewControllerDelegate {
         super.didReceiveMemoryWarning()
     }
     
-    func updateScene(){
+    func updateScene(data: DeviceDataProtocol){
         let boxNode = skView.scene?.rootNode.childNode(withName: "box", recursively: true)
-        boxNode?.orientation = deviceData.quat
+        boxNode?.orientation = data.quat
     }
 }
 

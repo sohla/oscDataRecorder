@@ -296,8 +296,8 @@ class PlayerViewController: UIViewController, AVPlayerItemMetadataOutputPushDele
 
 //                                            self.delegate?.handleJSONString(itemValue)
                                             print(itemValue)
-                                            self.delegate?.deviceData.fromString(itemValue)
-                                            self.delegate?.updateScene()
+//                                            self.delegate?.deviceData.fromString(itemValue)
+//                                            self.delegate?.updateScene()
                                             
                                             self.locationOverlayLabel.text = "has data"
                                             
