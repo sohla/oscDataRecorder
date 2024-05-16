@@ -28,6 +28,13 @@
 
 /* Begin PBXFileReference section */
 		F00B4A9C20F25F8C003C513C /* OSCViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSCViewController.swift; sourceTree = "<group>"; };
+		F04126D12BF5DAF800CF3664 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		F04126D32BF5DAF800CF3664 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		F04126D52BF5DAF800CF3664 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F04126D82BF5DAF800CF3664 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F04126DA2BF5DAF900CF3664 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F04126DD2BF5DAF900CF3664 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		F04126DF2BF5DAF900CF3664 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F053543520EF88970084370E /* oscDataRecorder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = oscDataRecorder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F097F7D52BC10C5900C880F7 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		F097F7D72BCBB6A400C880F7 /* DeviceDataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceDataProtocol.swift; sourceTree = "<group>"; };
@@ -59,11 +66,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F04126D02BF5DAF800CF3664 /* oscRecorder */ = {
+			isa = PBXGroup;
+			children = (
+				F04126D12BF5DAF800CF3664 /* AppDelegate.swift */,
+				F04126D32BF5DAF800CF3664 /* SceneDelegate.swift */,
+				F04126D52BF5DAF800CF3664 /* ViewController.swift */,
+				F04126D72BF5DAF800CF3664 /* Main.storyboard */,
+				F04126DA2BF5DAF900CF3664 /* Assets.xcassets */,
+				F04126DC2BF5DAF900CF3664 /* LaunchScreen.storyboard */,
+				F04126DF2BF5DAF900CF3664 /* Info.plist */,
+			);
+			path = oscRecorder;
+			sourceTree = "<group>";
+		};
 		F053542C20EF88970084370E = {
 			isa = PBXGroup;
 			children = (
 				F097F7D52BC10C5900C880F7 /* README.md */,
 				F0F0A57620EF89410033C9C9 /* source */,
+				F04126D02BF5DAF800CF3664 /* oscRecorder */,
 				F053543620EF88980084370E /* Products */,
 				F390C5AED0140BDD5B056CFE /* Frameworks */,
 			);
@@ -136,7 +158,7 @@
 		F053542D20EF88970084370E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0930;
+				LastSwiftUpdateCheck = 1530;
 				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = "Stephen OHara";
 				TargetAttributes = {
@@ -202,6 +224,22 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		F04126D72BF5DAF800CF3664 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F04126D82BF5DAF800CF3664 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		F04126DC2BF5DAF900CF3664 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F04126DD2BF5DAF900CF3664 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
 		F0F0A57B20EF89410033C9C9 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

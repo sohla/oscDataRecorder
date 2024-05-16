@@ -389,6 +389,13 @@
                             <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" sceneName="SceneKit Scene.scn" translatesAutoresizingMaskIntoConstraints="NO" id="VMY-ii-HbF">
                                 <rect key="frame" x="0.0" y="0.0" width="659" height="254"/>
                             </sceneKitView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ARy-en-CZi">
+                                <rect key="frame" x="10" y="10" width="629" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -400,6 +407,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="N8e-mn-bdx"/>
                     <connections>
+                        <outlet property="label" destination="ARy-en-CZi" id="9os-h4-Yd6"/>
                         <outlet property="skView" destination="VMY-ii-HbF" id="i0g-76-EyB"/>
                     </connections>
                 </viewController>

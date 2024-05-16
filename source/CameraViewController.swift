@@ -17,7 +17,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
  
 
 	
-    let server = OSCServer(port: 57120)
+    let server = OSCServer(port: 57121)
     
 //    static let client:OSCClient = OSCClient()
 
@@ -28,7 +28,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
     var delegate: DeviceViewControllerDelegate?
     
 
-    private let session = AVCaptureSession()
+    private let session = AVCaptureSession()	
     private var isSessionRunning = false
     private let sessionQueue = DispatchQueue(label: "session queue", attributes: [], target: nil) // Communicate with the session and other session objects on this queue.
     private var setupResult: SessionSetupResult = .success
@@ -62,7 +62,6 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
-        print("staret")
         
         server.setHandler({ message, timeTag in
 
@@ -173,6 +172,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 					self.isSessionRunning = self.session.isRunning
                     do {
                         try self.server.start()
+                        print("server started")
                     } catch {
                         print(error.localizedDescription)
                     }

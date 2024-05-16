@@ -18,8 +18,8 @@ protocol DeviceViewControllerDelegate {
 class DeviceViewController: UIViewController, DeviceViewControllerDelegate {
 
     @IBOutlet weak var skView: SCNView!
-
-//    var deviceData: any DeviceDataProtocol = MOSCDeviceData()
+    @IBOutlet weak var label: UILabel!
+    //    var deviceData: any DeviceDataProtocol = MOSCDeviceData()
 //    var deviceData: any DeviceDataProtocol = ASDeviceData()
     
     override func viewDidLoad() {
@@ -47,6 +47,7 @@ class DeviceViewController: UIViewController, DeviceViewControllerDelegate {
     func updateScene(data: DeviceDataProtocol){
         let boxNode = skView.scene?.rootNode.childNode(withName: "box", recursively: true)
         boxNode?.orientation = data.quat
+        label.text = "\(data.quat)"
     }
 }
 
