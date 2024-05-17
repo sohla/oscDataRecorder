@@ -21,7 +21,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
     
 //    static let client:OSCClient = OSCClient()
 
-    //    var deviceData: any DeviceDataProtocol = MOSCDeviceData()
+//    var deviceData: any DeviceDataProtocol = MOSCDeviceData()
     var deviceData: any DeviceDataProtocol = ASDeviceData()
 
     
@@ -65,7 +65,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
         
         server.setHandler({ message, timeTag in
 
-            print(message)
+//            print(message)
             self.deviceData.fromOSC(message)
             
             self.delegate?.updateScene(data: self.deviceData)
