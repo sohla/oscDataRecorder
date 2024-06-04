@@ -216,24 +216,25 @@ class ASDeviceData : DeviceDataProtocol {
     func fromOSC(_ message:OSCMessage){
         // encode message.values to deviceData
         switch (message.addressPattern.pathComponents.last) {
-            case "qX":
-                guard let v0 = try? message.values.masked(Float.self) else { return }
-                quat.x = v0
-
-            case "qY":
-                guard let v0 = try? message.values.masked(Float.self) else { return }
-                quat.y = v0
-    
-            case "qZ":
-                guard let v0 = try? message.values.masked(Float.self) else { return }
-                quat.z = v0
-
-            case "qW":
-                guard let v0 = try? message.values.masked(Float.self) else { return }
-                quat.w = v0
+//            case "qX":
+//                guard let v0 = try? message.values.masked(Float.self) else { return }
+//                quat.x = v0
+//
+//            case "qY":
+//                guard let v0 = try? message.values.masked(Float.self) else { return }
+//                quat.y = v0
+//    
+//            case "qZ":
+//                guard let v0 = try? message.values.masked(Float.self) else { return }
+//                quat.z = v0
+//
+//            case "qW":
+//                guard let v0 = try? message.values.masked(Float.self) else { return }
+//                quat.w = v0
 
             case "IMUFusedData":
-            guard let (_,_,_,v3, v4, v5, v6) = try? message.values.masked(Float.self, Float.self, Float.self, Float.self, Float.self, Float.self, Float.self) else { return }
+                guard let (v0, v1, v2, v3, v4, v5, v6) = try? message.values.masked(Float.self, Float.self, Float.self, Float.self, Float.self, Float.self, Float.self) else { return }
+                accel = SCNVector3(x: v0, y: v1, z: v2)
                 quat = SCNQuaternion(x: v3 , y: v4, z: v5, w: v6)
 
             
@@ -268,7 +269,13 @@ class ASDeviceData : DeviceDataProtocol {
 
 }
 
-
+/*
+ 
+ try? self.client.send(.message("/gyrosc/quat", values: [deviceData.quat.w, deviceData.quat.z, deviceData.quat.x, deviceData.quat.y]),
+//                              to: "192.168.1.11",
+                       to: "127.0.0.1",
+                      port: 3333) // need user to set
+*/
 
 //    func sendOSCMessage() {
     

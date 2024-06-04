@@ -12,9 +12,12 @@ import CoreMedia
 import ImageIO
 import SceneKit
 import SwiftyJSON
+import OSCKit
 
 class PlayerViewController: UIViewController, AVPlayerItemMetadataOutputPushDelegate {
 	
+    let client = OSCClient(localPort: 57220)
+    var deviceData: any DeviceDataProtocol = ASDeviceData()
     
     private var player: AVPlayer?
     private var seekToZeroBeforePlay = false
@@ -294,14 +297,22 @@ class PlayerViewController: UIViewController, AVPlayerItemMetadataOutputPushDele
 									if itemDataType == String(kCMMetadataDataType_QuickTimeMetadataLocation_ISO6709) {
 										if let itemValue = metdataItem.value as? String {
 
-//                                            self.delegate?.handleJSONString(itemValue)
-                                            print(itemValue)
-//                                            self.delegate?.deviceData.fromString(itemValue)
-//                                            self.delegate?.updateScene()
-                                            
+                                            self.deviceData.fromString(itemValue)
+                                            self.delegate?.updateScene(data: self.deviceData)
                                             self.locationOverlayLabel.text = "has data"
                                             
-//                                            self.delegate?.sendOSCMessage()
+                                            try? self.client.send(.message("/1/IMUFusedData", values: [
+                                                self.deviceData.accel.x,
+                                                self.deviceData.accel.y,
+                                                self.deviceData.accel.z,
+                                                self.deviceData.quat.w,
+                                                self.deviceData.quat.z,
+                                                self.deviceData.quat.x,
+                                                self.deviceData.quat.y
+                                            ]),
+                                              to: " ",
+                                             port: 57120) // need user to set
+
 										}
 									}
 									
