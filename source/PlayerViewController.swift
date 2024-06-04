@@ -301,17 +301,7 @@ class PlayerViewController: UIViewController, AVPlayerItemMetadataOutputPushDele
                                             self.delegate?.updateScene(data: self.deviceData)
                                             self.locationOverlayLabel.text = "has data"
                                             
-                                            try? self.client.send(.message("/1/IMUFusedData", values: [
-                                                self.deviceData.accel.x,
-                                                self.deviceData.accel.y,
-                                                self.deviceData.accel.z,
-                                                self.deviceData.quat.w,
-                                                self.deviceData.quat.z,
-                                                self.deviceData.quat.x,
-                                                self.deviceData.quat.y
-                                            ]),
-                                              to: " ",
-                                             port: 57120) // need user to set
+                                            try? self.client.send(self.deviceData.asOSC(),to: "49.127.41.99",port: 57120)
 
 										}
 									}

@@ -263,7 +263,17 @@ class ASDeviceData : DeviceDataProtocol {
     }
     
     func asOSC() -> OSCKitCore.OSCMessage {
-        let msg: OSCMessage = OSCMessage("/TO/DO", values: [0,0,0])
+        let msg: OSCMessage = OSCMessage("/1/IMUFusedData", values: [
+            accel.x,
+            accel.y,
+            accel.z,
+            quat.w,
+            quat.z,
+            quat.x,
+            quat.y
+            ])
+        
+        
         return msg
     }
 
