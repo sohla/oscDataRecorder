@@ -21,8 +21,8 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
     
 //    static let client:OSCClient = OSCClient()
 
-    var deviceData: any DeviceDataProtocol = MOSCDeviceData()
-//    var deviceData: any DeviceDataProtocol = ASDeviceData()
+//    var deviceData: any DeviceDataProtocol = MOSCDeviceData()
+    var deviceData: any DeviceDataProtocol = ASDeviceData()
 
     
     var delegate: DeviceViewControllerDelegate?
@@ -575,7 +575,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
         if let ip = UserDefaults.standard.string(forKey: "ipAddress"){
             if let port = UserDefaults.standard.string(forKey: "portAddress"){
                 
-                let address = "udp://"+ip+":"+port
+//                let address = "udp://"+ip+":"+port
                 
 //                let msg: OSCMessage = OSCMessage(address: "/bounce", arguments: ["motionReset"])
 //                //•• SET ADDRESS and PORT of the touch device you want to reset NOT TESTED

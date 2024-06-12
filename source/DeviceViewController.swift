@@ -28,9 +28,9 @@ class DeviceViewController: UIViewController, DeviceViewControllerDelegate {
         skView.scene?.background.contents = UIColor.clear
         skView.backgroundColor = UIColor.clear
         
-//        let boxNode = skView.scene?.rootNode.childNode(withName: "box", recursively: true)?.clone()
-//        boxNode?.name = "box2"
-//        skView.scene?.rootNode.addChildNode(boxNode!)
+        let boxNode = skView.scene?.rootNode.childNode(withName: "box", recursively: true)?.clone()
+        boxNode?.name = "box2"
+        skView.scene?.rootNode.addChildNode(boxNode!)
         
 //        if let ip = UserDefaults.standard.string(forKey: "ipAddress"){
 //            let port = UserDefaults.standard.integer(forKey: "portAddress")
@@ -45,9 +45,24 @@ class DeviceViewController: UIViewController, DeviceViewControllerDelegate {
     }
     
     func updateScene(data: DeviceDataProtocol){
-        let boxNode = skView.scene?.rootNode.childNode(withName: "box", recursively: true)
-        boxNode?.orientation = data.quat
-        label.text = "\(data.quat)"
+        
+        switch (data.deviceID){
+            
+        case "1":
+            let boxNode = skView.scene?.rootNode.childNode(withName: "box", recursively: true)
+            boxNode?.orientation = data.quat
+            label.text = "\(data.deviceID)"
+            break;
+        case "2":
+            let boxNode = skView.scene?.rootNode.childNode(withName: "box2", recursively: true)
+            boxNode?.orientation = data.quat
+            label.text = "\(data.deviceID)"
+            break;
+            
+        default:
+            print("no device")
+        }
+        
     }
 }
 

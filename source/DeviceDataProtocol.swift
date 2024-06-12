@@ -21,7 +21,8 @@ protocol DeviceDataProtocol {
     var amp: Float { get set }
 
     var addressString: String { get }
-
+    var deviceID: String { get }
+    
     func asJSON () -> JSON
     func fromString(_ jsonString:String)
     func toString() -> String?
@@ -53,6 +54,7 @@ class MOSCDeviceData : DeviceDataProtocol {
     var accel: SCNVector3 = SCNVector3()
     var amp: Float = 0
     var addressString: String = ""
+    var deviceID: String = ""
     
     func asJSON () -> JSON {
         let json: JSON = JSON([
@@ -168,9 +170,12 @@ class ASDeviceData : DeviceDataProtocol {
     var accel: SCNVector3 = SCNVector3()
     var amp: Float = 0
     var addressString: String = ""
+    
+    var deviceID: String = ""
 
     func asJSON () -> JSON {
         let json: JSON = JSON([
+            "deviceID": deviceID,
             "gyro": [gyro.x, gyro.y, gyro.z],
             "quat": [quat.x, quat.y, quat.z, quat.w],
             "rrate": [rrate.x, rrate.y, rrate.z],
@@ -190,6 +195,8 @@ class ASDeviceData : DeviceDataProtocol {
         if let dataFromString = jsonString.data(using: .utf8, allowLossyConversion: false) {
             
             let json = try! JSON(data: dataFromString)
+            
+            deviceID = json["deviceID"].stringValue
             
             quat.x = json["quat"][0].floatValue
             quat.y = json["quat"][1].floatValue
@@ -236,7 +243,9 @@ class ASDeviceData : DeviceDataProtocol {
                 guard let (v0, v1, v2, v3, v4, v5, v6) = try? message.values.masked(Float.self, Float.self, Float.self, Float.self, Float.self, Float.self, Float.self) else { return }
                 accel = SCNVector3(x: v0, y: v1, z: v2)
                 quat = SCNQuaternion(x: v3 , y: v4, z: v5, w: v6)
-
+                if let id = message.addressPattern.pathComponents.first {
+                    deviceID = String(id)
+                }
             
 //            case "rrate":
 //                guard let (v0,v1,v2) = try? message.values.masked(Float.self, Float.self, Float.self) else { return }
@@ -263,7 +272,10 @@ class ASDeviceData : DeviceDataProtocol {
     }
     
     func asOSC() -> OSCKitCore.OSCMessage {
-        let msg: OSCMessage = OSCMessage("/1/IMUFusedData", values: [
+        // not sending id!!
+        
+        let id = deviceID
+        let msg: OSCMessage = OSCMessage("/\(id)/IMUFusedData", values: [
             accel.x,
             accel.y,
             accel.z,
