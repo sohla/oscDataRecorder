@@ -28,10 +28,14 @@ class DeviceViewController: UIViewController, DeviceViewControllerDelegate {
         skView.scene?.background.contents = UIColor.clear
         skView.backgroundColor = UIColor.clear
         
-        let boxNode = skView.scene?.rootNode.childNode(withName: "box", recursively: true)?.clone()
-        boxNode?.name = "box2"
-        skView.scene?.rootNode.addChildNode(boxNode!)
-        
+        let boxNode2 = skView.scene?.rootNode.childNode(withName: "box", recursively: true)?.clone()
+        boxNode2?.name = "box2"
+        skView.scene?.rootNode.addChildNode(boxNode2!)
+
+        let boxNode3 = skView.scene?.rootNode.childNode(withName: "box", recursively: true)?.clone()
+        boxNode3?.name = "box3"
+        skView.scene?.rootNode.addChildNode(boxNode3!)
+
 //        if let ip = UserDefaults.standard.string(forKey: "ipAddress"){
 //            let port = UserDefaults.standard.integer(forKey: "portAddress")
 //            self.client.host = ip
@@ -51,14 +55,22 @@ class DeviceViewController: UIViewController, DeviceViewControllerDelegate {
         case "1":
             let boxNode = skView.scene?.rootNode.childNode(withName: "box", recursively: true)
             boxNode?.orientation = data.quat
+            boxNode?.position = SCNVector3(-2,0,-2)
             label.text = "\(data.deviceID)"
             break;
         case "2":
             let boxNode = skView.scene?.rootNode.childNode(withName: "box2", recursively: true)
             boxNode?.orientation = data.quat
+            boxNode?.position = SCNVector3(0,0,-2)
             label.text = "\(data.deviceID)"
             break;
-            
+        case "3":
+            let boxNode = skView.scene?.rootNode.childNode(withName: "box3", recursively: true)
+            boxNode?.orientation = data.quat
+            boxNode?.position = SCNVector3(2,0,-2)
+            label.text = "\(data.deviceID)"
+            break;
+
         default:
             print("no device")
         }
