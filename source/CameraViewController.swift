@@ -19,8 +19,6 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 	
     let server = OSCServer(port: 3333)
     
-//    static let client:OSCClient = OSCClient()
-
 //    var deviceData: any DeviceDataProtocol = MOSCDeviceData()
     var deviceData: any DeviceDataProtocol = ASDeviceData()
 

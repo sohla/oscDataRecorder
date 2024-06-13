@@ -21,13 +21,15 @@ class OSCViewController: UIViewController {
 
         ipAddressTextField.delegate = ipAddressDelegate
         portTextField.delegate = portDelegate
+        
+        ipAddressTextField.keyboardType = .decimalPad
+        portTextField.keyboardType = .decimalPad
 
         ipAddressTextField.text = "no port address"
         ipAddressTextField.text = "no ip address"
 
         if let ip = UserDefaults.standard.string(forKey: "ipAddress"){
             if let port = UserDefaults.standard.string(forKey: "portAddress"){
-
                 ipAddressTextField.text = ip
                 portTextField.text = port
             }

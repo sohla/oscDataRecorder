@@ -300,10 +300,10 @@ class PlayerViewController: UIViewController, AVPlayerItemMetadataOutputPushDele
                                             self.deviceData.fromString(itemValue)
                                             self.delegate?.updateScene(data: self.deviceData)
                                             self.locationOverlayLabel.text = "has data"
-                                            
-                                            try? self.client.send(self.deviceData.asOSC(),to: "49.127.43.179",port: 57120)
-//                                            print(self.deviceData.asOSC())
-
+                                            if let ip = UserDefaults.standard.string(forKey: "ipAddress"){
+                                                let port = UserDefaults.standard.integer(forKey: "portAddress")
+                                                try? self.client.send(self.deviceData.asOSC(),to: ip,port: UInt16(port))
+                                            }
 										}
 									}
 									
