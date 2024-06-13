@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -22,11 +23,12 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sVI-mX-69Q" customClass="PreviewView" customModule="oscDataRecorder" customModuleProvider="target">
                                 <rect key="frame" x="-4" y="0.0" width="675" height="375"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f4y-iM-g40">
-                                        <rect key="frame" x="393.5" y="327" width="249.5" height="36"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f4y-iM-g40">
+                                        <rect key="frame" x="393.5" y="341" width="249.5" height="22"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <state key="normal" title="Camera">
+                                        <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" image="video.fill" catalog="system">
+                                            <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -38,11 +40,13 @@
                                             <action selector="changeCamera:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="2Lf-Vl-wCY"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ghq-cJ-efm">
-                                        <rect key="frame" x="32" y="327" width="249.5" height="36"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ghq-cJ-efm">
+                                        <rect key="frame" x="32" y="341" width="249.5" height="22"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <state key="normal" title="Record">
+                                        <color key="tintColor" systemColor="systemRedColor"/>
+                                        <inset key="titleEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal" title="Record" image="record.circle.fill" catalog="system">
+                                            <color key="titleColor" systemColor="systemRedColor"/>
                                             <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -80,11 +84,9 @@
                                             <segue destination="C1a-Ab-5aP" kind="embed" identifier="deviceRecorderSegue" id="7Lq-tt-uig"/>
                                         </connections>
                                     </containerView>
-                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="bUX-kl-s5X">
-                                        <rect key="frame" x="32" y="363" width="150" height="4"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="150" id="iw4-9j-Lqd"/>
-                                        </constraints>
+                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bUX-kl-s5X">
+                                        <rect key="frame" x="32" y="329" width="611" height="4"/>
+                                        <color key="tintColor" systemColor="systemBlueColor"/>
                                     </progressView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -95,8 +97,9 @@
                                     <constraint firstItem="f4y-iM-g40" firstAttribute="leading" secondItem="ghq-cJ-efm" secondAttribute="trailing" constant="112" id="7Pw-Wr-5HB"/>
                                     <constraint firstAttribute="bottom" secondItem="f4y-iM-g40" secondAttribute="bottom" constant="12" id="BA6-dJ-gYh"/>
                                     <constraint firstItem="yjI-HS-4pY" firstAttribute="leading" secondItem="sVI-mX-69Q" secondAttribute="leading" constant="8" id="CvR-71-3sp"/>
-                                    <constraint firstAttribute="bottom" secondItem="bUX-kl-s5X" secondAttribute="bottom" constant="8" id="EoN-Wy-jTl"/>
+                                    <constraint firstAttribute="bottom" secondItem="bUX-kl-s5X" secondAttribute="bottom" constant="42" id="EoN-Wy-jTl"/>
                                     <constraint firstAttribute="trailing" secondItem="yjI-HS-4pY" secondAttribute="trailing" constant="8" id="JPL-zM-rP7"/>
+                                    <constraint firstAttribute="trailing" secondItem="bUX-kl-s5X" secondAttribute="trailing" constant="32" id="Kgw-xn-KEK"/>
                                     <constraint firstItem="bUX-kl-s5X" firstAttribute="leading" secondItem="sVI-mX-69Q" secondAttribute="leading" constant="32" id="PEQ-2C-KPK"/>
                                     <constraint firstItem="ghq-cJ-efm" firstAttribute="bottom" secondItem="f4y-iM-g40" secondAttribute="bottom" id="Pcp-Mf-qun"/>
                                     <constraint firstItem="Vm0-Ha-odG" firstAttribute="centerX" secondItem="sVI-mX-69Q" secondAttribute="centerX" id="Q24-Dg-okF"/>
@@ -131,12 +134,14 @@
                     <navigationItem key="navigationItem" id="F9h-8I-BVW">
                         <barButtonItem key="backBarButtonItem" title="Camera" id="Dcw-Ao-32Z"/>
                         <leftBarButtonItems>
-                            <barButtonItem title="Reset" id="Oni-a8-gho">
+                            <barButtonItem title="Reset" width="120" id="Oni-a8-gho">
+                                <color key="tintColor" systemColor="systemRedColor"/>
                                 <connections>
                                     <action selector="onResetButton:" destination="vXZ-lx-hvc" id="XQG-Pi-4nS"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem title="OSC" id="j2g-KZ-30e">
+                            <barButtonItem title="OSC" width="120" id="j2g-KZ-30e">
+                                <color key="tintColor" systemColor="systemGreenColor"/>
                                 <connections>
                                     <action selector="onOSCButton:" destination="vXZ-lx-hvc" id="IfG-Uc-QhN"/>
                                     <segue destination="9uh-4L-7FB" kind="show" id="FcU-jk-Wse"/>
@@ -166,7 +171,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="747" y="-42"/>
+            <point key="canvasLocation" x="746.17691154422789" y="-42.399999999999999"/>
         </scene>
         <!--OSC-->
         <scene sceneID="0ZO-XF-ghQ">
@@ -473,4 +478,17 @@
         <segue reference="7Lq-tt-uig"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+    <resources>
+        <image name="record.circle.fill" catalog="system" width="128" height="123"/>
+        <image name="video.fill" catalog="system" width="128" height="81"/>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
 </document>
