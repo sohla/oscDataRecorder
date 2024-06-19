@@ -72,7 +72,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 //            let formatter = DateFormatter()
 //            formatter.dateFormat = "yyyy-MM-dd hh:mm:ss.SSSS a"
 //            let result = formatter.string(from: date)
-//            print("time: \(result) msg: \(message)")
+//            print("time: \(result) msg: \(message)")  
 
             // if we want to send data thru this app
             //self.delegate?.sendOSCMessage()
