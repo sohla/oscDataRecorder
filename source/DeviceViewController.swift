@@ -55,20 +55,46 @@ class DeviceViewController: UIViewController, DeviceViewControllerDelegate {
         case "1":
             let boxNode = skView.scene?.rootNode.childNode(withName: "box", recursively: true)
             boxNode?.orientation = data.quat
-            boxNode?.position = SCNVector3(-2,0,-2)
+            boxNode?.position = SCNVector3(-5,0,-4)
             label.text = "\(data.deviceID)"
+            
+            let x = boxNode?.childNode(withName: "x", recursively: true)
+            x?.scale = SCNVector3(data.accel.x * 0.25,1,1)
+            let y = boxNode?.childNode(withName: "y", recursively: true)
+            y?.scale = SCNVector3(1,data.accel.y * 0.25,1)
+            let z = boxNode?.childNode(withName: "z", recursively: true)
+            z?.scale = SCNVector3(1,1,data.accel.z * 0.25)
+
             break;
+
         case "2":
             let boxNode = skView.scene?.rootNode.childNode(withName: "box2", recursively: true)
             boxNode?.orientation = data.quat
-            boxNode?.position = SCNVector3(0,0,-2)
+            boxNode?.position = SCNVector3(0,0,-4)
             label.text = "\(data.deviceID)"
+
+            let x = boxNode?.childNode(withName: "x", recursively: true)
+            x?.scale = SCNVector3(data.accel.x * 0.25,1,1)
+            let y = boxNode?.childNode(withName: "y", recursively: true)
+            y?.scale = SCNVector3(1,data.accel.y * 0.25,1)
+            let z = boxNode?.childNode(withName: "z", recursively: true)
+            z?.scale = SCNVector3(1,1,data.accel.z * 0.25)
+
             break;
+
         case "3":
             let boxNode = skView.scene?.rootNode.childNode(withName: "box3", recursively: true)
             boxNode?.orientation = data.quat
-            boxNode?.position = SCNVector3(2,0,-2)
+            boxNode?.position = SCNVector3(5,0,-4)
             label.text = "\(data.deviceID)"
+
+            let x = boxNode?.childNode(withName: "x", recursively: true)
+            x?.scale = SCNVector3(data.accel.x * 0.25,1,1)
+            let y = boxNode?.childNode(withName: "y", recursively: true)
+            y?.scale = SCNVector3(1,data.accel.y * 0.25,1)
+            let z = boxNode?.childNode(withName: "z", recursively: true)
+            z?.scale = SCNVector3(1,1,data.accel.z * 0.25)
+
             break;
 
         default:

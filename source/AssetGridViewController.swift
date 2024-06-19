@@ -263,6 +263,7 @@ class AssetGridViewController: UICollectionViewController, PHPhotoLibraryChangeO
 		let asset = assetsFetchResult[indexPath.item]
 		
 		let requestOptions = PHVideoRequestOptions()
+        
 		requestOptions.isNetworkAccessAllowed = true
 		requestOptions.progressHandler = { progress, error, _, info in
 			if let error = error {
