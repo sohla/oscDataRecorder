@@ -308,7 +308,6 @@ class PlayerViewController: UIViewController, AVPlayerItemMetadataOutputPushDele
                                 case AVMetadataIdentifier.quickTimeMetadataLocationISO6709:
 									if itemDataType == String(kCMMetadataDataType_QuickTimeMetadataLocation_ISO6709) {
 										if let itemValue = metdataItem.value as? String {
-
                                             self.deviceData.fromString(itemValue)
                                             self.delegate?.updateScene(data: self.deviceData)
                                             self.locationOverlayLabel.text = "has data"
