@@ -24,20 +24,21 @@ class PlayerViewController: UIViewController, AVPlayerItemMetadataOutputPushDele
     private var playerAsset: AVAsset?
     private var playerLayer: AVPlayerLayer?
     private var defaultVideoTransform = CGAffineTransform.identity
-
+    
     var delegate: DeviceViewControllerDelegate?
     private let itemMetadataOutput = AVPlayerItemMetadataOutput(identifiers: nil)
     private var honorTimedMetadataTracksDuringPlayback = true
-    @IBOutlet private weak var honorTimedMetadataTracksSwitch: UISwitch!
-
+    private var periodicObserver: Any?
+    
+    
     //------------------------------------------------------------------
     
+    @IBOutlet private weak var honorTimedMetadataTracksSwitch: UISwitch!
     @IBOutlet private weak var playerView: UIView!
     @IBOutlet private weak var locationOverlayLabel: UILabel!
-
-    @IBOutlet private weak var pauseButton: UIBarButtonItem!
     @IBOutlet private weak var playButton: UIBarButtonItem!
 
+    @IBOutlet weak var progressView: UIProgressView!
     
     
     //------------------------------------------------------------------
@@ -45,13 +46,10 @@ class PlayerViewController: UIViewController, AVPlayerItemMetadataOutputPushDele
     //------------------------------------------------------------------
 
 	override func viewDidLoad() {
-		super.viewDidLoad()
 		
+        super.viewDidLoad()
 		
-		playButton.isEnabled = false
-		pauseButton.isEnabled = false
-		
-		playerView.layer.backgroundColor = UIColor.darkGray.cgColor
+        playerView.layer.backgroundColor = UIColor.darkGray.cgColor
 		
 		let metadataQueue = DispatchQueue(label: "com.example.metadataqueue", attributes: [])
 		itemMetadataOutput.setDelegate(self, queue: metadataQueue)
@@ -73,8 +71,6 @@ class PlayerViewController: UIViewController, AVPlayerItemMetadataOutputPushDele
 		// Pause the player and start from the beginning if the view reappears.
 		player?.pause()
 		if playerAsset != nil {
-			playButton.isEnabled = true
-			pauseButton.isEnabled = false
 			seekToZeroBeforePlay = false
             player?.seek(to: CMTime.zero)
 		}
@@ -118,94 +114,107 @@ class PlayerViewController: UIViewController, AVPlayerItemMetadataOutputPushDele
 				currentItem.remove(self.itemMetadataOutput)
 			}
 			self.setUpPlayer(for: asset)
-			self.playButton.isEnabled = true
-			self.pauseButton.isEnabled = false
 //            self.removeAllSublayers(from: self.facesLayer)
 		}
 	}
 	
-	private func setUpPlayer(for asset: AVAsset) {
-		let mutableComposition = AVMutableComposition()
-		
-		// Create a mutableComposition for all the tracks present in the asset.
+    private func setUpPlayer(for asset: AVAsset) {
+        let mutableComposition = AVMutableComposition()
+        
+        // Create a mutableComposition for all the tracks present in the asset.
         guard let sourceVideoTrack = asset.tracks(withMediaType: AVMediaType.video).first else {
-			print("Could not get video track from asset")
-			return
-		}
-		defaultVideoTransform = sourceVideoTrack.preferredTransform
-		
+            print("Could not get video track from asset")
+            return
+        }
+        defaultVideoTransform = sourceVideoTrack.preferredTransform
+        
         let sourceAudioTrack = asset.tracks(withMediaType: AVMediaType.audio).first
         let mutableCompositionVideoTrack = mutableComposition.addMutableTrack(withMediaType: AVMediaType.video, preferredTrackID: kCMPersistentTrackID_Invalid)
         let mutableCompositionAudioTrack = mutableComposition.addMutableTrack(withMediaType: AVMediaType.audio, preferredTrackID: kCMPersistentTrackID_Invalid)
-		
-		do {
+        
+        do {
             try mutableCompositionVideoTrack?.insertTimeRange(CMTimeRangeMake(start: CMTime.zero, duration: asset.duration), of: sourceVideoTrack, at: CMTime.zero)
-			if let sourceAudioTrack = sourceAudioTrack {
+            if let sourceAudioTrack = sourceAudioTrack {
                 try mutableCompositionAudioTrack?.insertTimeRange(CMTimeRangeMake(start: CMTime.zero, duration: asset.duration), of: sourceAudioTrack, at: CMTime.zero)
-			}
-		}
-		catch {
-			print("Could not insert time range into video/audio mutable composition: \(error)")
-		}
-		
+            }
+        }
+        catch {
+            print("Could not insert time range into video/audio mutable composition: \(error)")
+        }
+        
         for metadataTrack in asset.tracks(withMediaType: AVMediaType.metadata) {
             if track(metadataTrack, hasMetadataIdentifier:AVMetadataIdentifier.quickTimeMetadataDetectedFace.rawValue) ||
                 track(metadataTrack, hasMetadataIdentifier:AVMetadataIdentifier.quickTimeMetadataVideoOrientation.rawValue) ||
                 track(metadataTrack, hasMetadataIdentifier:AVMetadataIdentifier.quickTimeMetadataLocationISO6709.rawValue) {
-				
+                
                 let mutableCompositionMetadataTrack = mutableComposition.addMutableTrack(withMediaType: AVMediaType.metadata, preferredTrackID: kCMPersistentTrackID_Invalid)
-				
-				do {
+                
+                do {
                     try mutableCompositionMetadataTrack?.insertTimeRange(CMTimeRangeMake(start: CMTime.zero, duration: asset.duration), of: metadataTrack, at: CMTime.zero)
-				}
-				catch let error as NSError {
-					print("Could not insert time range into metadata mutable composition: \(error)")
-				}
-			}
-		}
-		
-		// Get an instance of AVPlayerItem for the generated mutableComposition.
-		// let playerItem = AVPlayerItem(asset: asset) // This doesn't support video orientation hence we use a mutable composition.
-		let playerItem = AVPlayerItem(asset: mutableComposition)
-		playerItem.add(itemMetadataOutput)
+                }
+                catch let error as NSError {
+                    print("Could not insert time range into metadata mutable composition: \(error)")
+                }
+            }
+        }
+        
+        // Get an instance of AVPlayerItem for the generated mutableComposition.
+        // let playerItem = AVPlayerItem(asset: asset) // This doesn't support video orientation hence we use a mutable composition.
+        let playerItem = AVPlayerItem(asset: mutableComposition)
+        playerItem.add(itemMetadataOutput)
+        
+        if let player = player {
+            player.replaceCurrentItem(with: playerItem)
+        }
+        else {
+            // Create AVPlayer with the generated instance of playerItem. Also add the facesLayer as subLayer to this playLayer.
+            player = AVPlayer(playerItem: playerItem)
+            player?.actionAtItemEnd = .none
+            
+            let playerLayer = AVPlayerLayer(player: player)
+            playerLayer.backgroundColor = UIColor.darkGray.cgColor
+            playerView.layer.addSublayer(playerLayer)
+            self.playerLayer = playerLayer
 
-		if let player = player {
-			player.replaceCurrentItem(with: playerItem)
-		}
-		else {
-			// Create AVPlayer with the generated instance of playerItem. Also add the facesLayer as subLayer to this playLayer.
-			player = AVPlayer(playerItem: playerItem)
-			player?.actionAtItemEnd = .none
-			
-			let playerLayer = AVPlayerLayer(player: player)
-			playerLayer.backgroundColor = UIColor.darkGray.cgColor
-			playerView.layer.addSublayer(playerLayer)
-			self.playerLayer = playerLayer
-		}
-		
-		// Update the player layer to match the video's default transform. Disable animation so the transform applies immediately.
-		CATransaction.begin()
-		CATransaction.setDisableActions(true)
-		playerLayer?.transform = CATransform3DMakeAffineTransform(defaultVideoTransform)
-		playerLayer?.frame = playerView.layer.bounds
-		CATransaction.commit()
-		
-		// When the player item has played to its end time we'll toggle the movie controller Pause button to be the Play button.
-		NotificationCenter.default.addObserver(self, selector: #selector(playerItemDidReachEnd(_:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: player?.currentItem)
-		
-		seekToZeroBeforePlay = false
-	}
+            
+            let totalTime: Double = CMTimeGetSeconds((player?.currentItem?.duration)!)
+            periodicObserver = player?.addPeriodicTimeObserver(forInterval: CMTimeMake(value: 60, timescale: CMTimeScale(exactly: 1000)!) , queue: DispatchQueue.main ) { [unowned self] (time) in
+                    let current: Double = CMTimeGetSeconds(time)
+                    var progress: Double = current / totalTime
+
+                    if progress.isNaN {progress = 0}
+                    self.progressView.progress = Float(progress)
+                    self.progressView.setNeedsDisplay()
+            }
+        }
+        
+        // Update the player layer to match the video's default transform. Disable animation so the transform applies immediately.
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+        playerLayer?.transform = CATransform3DMakeAffineTransform(defaultVideoTransform)
+        playerLayer?.frame = playerView.layer.bounds
+        CATransaction.commit()
+        
+        // When the player item has played to its end time we'll toggle the movie controller Pause button to be the Play button.
+        NotificationCenter.default.addObserver(self, selector: #selector(playerItemDidReachEnd(_:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: player?.currentItem)
+        seekToZeroBeforePlay = false
+    }
 	
 	/// Called when the player item has played to its end time.
     @objc func playerItemDidReachEnd(_ notification: Notification) {
 		// After the movie has played to its end time, seek back to time zero to play it again.
 		seekToZeroBeforePlay = true
-		playButton.isEnabled = true
-		pauseButton.isEnabled = false
-		//removeAllSublayers(from: facesLayer)
-        playButtonTapped(playButton)
+        player?.seek(to: CMTime.zero)
+        player?.play()
 	}
 	
+
+    @IBAction func onForwardButtonTapped(_ sender: Any) {
+        let current = player?.currentTime()
+        let jump = CMTimeMakeWithSeconds(10.0, preferredTimescale: (player?.currentTime().timescale)!)
+        let newTime = CMTimeAdd(current!, jump)
+        player?.seek(to: newTime)
+    }
     
     
     @IBAction func backButtonTapped(_ sender: Any) {
@@ -218,26 +227,29 @@ class PlayerViewController: UIViewController, AVPlayerItemMetadataOutputPushDele
     }
 	
 	@IBAction private func playButtonTapped(_ sender: AnyObject) {
-		if seekToZeroBeforePlay {
-			seekToZeroBeforePlay = false
-            player?.seek(to: CMTime.zero)
-			
-			// Update the player layer to match the video's default transform.
-			playerLayer?.transform = CATransform3DMakeAffineTransform(defaultVideoTransform)
-			playerLayer?.frame = playerView.layer.bounds
-		}
-		
-		player?.play()
-		playButton.isEnabled = false
-		pauseButton.isEnabled = true
+        if(playerLayer?.player?.timeControlStatus == .playing) {
+            player?.pause()
+            playButton.image = UIImage(systemName:"play.fill")
+        }else{
+            player?.play()
+            playButton.image = UIImage(systemName:"pause.fill")
+        }
+        
+//		if seekToZeroBeforePlay {
+//			seekToZeroBeforePlay = false
+//            player?.seek(to: CMTime.zero)
+//			
+//			// Update the player layer to match the video's default transform.
+//			playerLayer?.transform = CATransform3DMakeAffineTransform(defaultVideoTransform)
+//			playerLayer?.frame = playerView.layer.bounds
+//		}
+//		
+//		player?.play()
+//        
+//		playButton.isEnabled = false
+//		pauseButton.isEnabled = true
 	}
 	
-	
-	@IBAction private func pauseButtonTapped(_ sender: AnyObject) {
-		player?.pause()
-		playButton.isEnabled = true
-		pauseButton.isEnabled = false
-	}
 	
     //------------------------------------------------------------------
 	// MARK: Timed Metadata

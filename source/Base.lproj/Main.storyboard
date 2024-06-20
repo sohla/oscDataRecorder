@@ -24,7 +24,7 @@
                                 <rect key="frame" x="-4" y="0.0" width="675" height="375"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f4y-iM-g40">
-                                        <rect key="frame" x="393.5" y="331" width="249.5" height="42"/>
+                                        <rect key="frame" x="393.5" y="321" width="249.5" height="52"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" image="video.fill" catalog="system">
@@ -41,10 +41,10 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ghq-cJ-efm">
-                                        <rect key="frame" x="32" y="331" width="249.5" height="42"/>
+                                        <rect key="frame" x="32" y="321" width="249.5" height="52"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="42" id="UPc-GF-2LN"/>
+                                            <constraint firstAttribute="height" constant="52" id="UPc-GF-2LN"/>
                                         </constraints>
                                         <color key="tintColor" systemColor="systemRedColor"/>
                                         <inset key="titleEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -85,34 +85,27 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yjI-HS-4pY">
-                                        <rect key="frame" x="8" y="72" width="659" height="254"/>
+                                        <rect key="frame" x="8" y="40" width="659" height="275"/>
                                         <connections>
                                             <segue destination="C1a-Ab-5aP" kind="embed" identifier="deviceRecorderSegue" id="7Lq-tt-uig"/>
                                         </connections>
                                     </containerView>
-                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bUX-kl-s5X">
-                                        <rect key="frame" x="8" y="325" width="659" height="4"/>
-                                        <color key="tintColor" systemColor="systemBlueColor"/>
-                                    </progressView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <gestureRecognizers/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="yjI-HS-4pY" secondAttribute="bottom" constant="49" id="01j-3Z-CT0"/>
+                                    <constraint firstAttribute="bottom" secondItem="yjI-HS-4pY" secondAttribute="bottom" constant="60" id="01j-3Z-CT0"/>
                                     <constraint firstItem="ghq-cJ-efm" firstAttribute="leading" secondItem="sVI-mX-69Q" secondAttribute="leading" constant="32" id="0nI-0S-hWy"/>
                                     <constraint firstItem="f4y-iM-g40" firstAttribute="leading" secondItem="ghq-cJ-efm" secondAttribute="trailing" constant="112" id="7Pw-Wr-5HB"/>
                                     <constraint firstAttribute="bottom" secondItem="f4y-iM-g40" secondAttribute="bottom" constant="2" id="BA6-dJ-gYh"/>
                                     <constraint firstItem="yjI-HS-4pY" firstAttribute="leading" secondItem="sVI-mX-69Q" secondAttribute="leading" constant="8" id="CvR-71-3sp"/>
-                                    <constraint firstAttribute="bottom" secondItem="bUX-kl-s5X" secondAttribute="bottom" constant="46" id="EoN-Wy-jTl"/>
                                     <constraint firstAttribute="trailing" secondItem="yjI-HS-4pY" secondAttribute="trailing" constant="8" id="JPL-zM-rP7"/>
-                                    <constraint firstAttribute="trailing" secondItem="bUX-kl-s5X" secondAttribute="trailing" constant="8" id="Kgw-xn-KEK"/>
-                                    <constraint firstItem="bUX-kl-s5X" firstAttribute="leading" secondItem="sVI-mX-69Q" secondAttribute="leading" constant="8" id="PEQ-2C-KPK"/>
                                     <constraint firstItem="ghq-cJ-efm" firstAttribute="bottom" secondItem="f4y-iM-g40" secondAttribute="bottom" id="Pcp-Mf-qun"/>
                                     <constraint firstItem="Vm0-Ha-odG" firstAttribute="centerX" secondItem="sVI-mX-69Q" secondAttribute="centerX" id="Q24-Dg-okF"/>
                                     <constraint firstItem="Vm0-Ha-odG" firstAttribute="centerX" secondItem="sVI-mX-69Q" secondAttribute="centerX" id="TM4-W5-F4l"/>
                                     <constraint firstItem="ghq-cJ-efm" firstAttribute="top" secondItem="f4y-iM-g40" secondAttribute="top" id="UgL-8V-UzF"/>
                                     <constraint firstAttribute="bottom" secondItem="ghq-cJ-efm" secondAttribute="bottom" constant="2" id="Yv9-cm-jU1"/>
-                                    <constraint firstItem="yjI-HS-4pY" firstAttribute="top" secondItem="sVI-mX-69Q" secondAttribute="top" constant="72" id="kdX-kJ-SRY"/>
+                                    <constraint firstItem="yjI-HS-4pY" firstAttribute="top" secondItem="sVI-mX-69Q" secondAttribute="top" constant="40" id="kdX-kJ-SRY"/>
                                     <constraint firstItem="ghq-cJ-efm" firstAttribute="width" secondItem="f4y-iM-g40" secondAttribute="width" id="kzL-MU-qDu"/>
                                     <constraint firstAttribute="trailing" secondItem="f4y-iM-g40" secondAttribute="trailing" constant="32" id="m6q-ES-gu8"/>
                                     <constraint firstItem="wc9-zH-fpT" firstAttribute="centerY" secondItem="sVI-mX-69Q" secondAttribute="centerY" id="oLu-OE-D08"/>
@@ -163,7 +156,6 @@
                     <connections>
                         <outlet property="cameraButton" destination="f4y-iM-g40" id="UG1-1g-xMf"/>
                         <outlet property="cameraUnavailableLabel" destination="Vm0-Ha-odG" id="b1a-ue-V4u"/>
-                        <outlet property="dataLevel" destination="bUX-kl-s5X" id="V8q-Ta-ni7"/>
                         <outlet property="playerButton" destination="dYu-hh-zbV" id="50L-Ii-5sk"/>
                         <outlet property="previewView" destination="sVI-mX-69Q" id="UGh-um-teZ"/>
                         <outlet property="recordButton" destination="ghq-cJ-efm" id="Tcb-VB-crw"/>
@@ -309,28 +301,28 @@
                                 <rect key="frame" x="0.0" y="343" width="667" height="32"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <items>
-                                    <barButtonItem title="⟲" id="qeC-RY-LPh">
+                                    <barButtonItem image="backward" catalog="system" id="qeC-RY-LPh">
                                         <connections>
                                             <action selector="backButtonTapped:" destination="xUS-yO-GIr" id="vhW-Pc-9oF"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="wzE-QL-qKg"/>
-                                    <barButtonItem systemItem="play" id="zdW-cY-8y7">
+                                    <barButtonItem image="play.fill" catalog="system" id="zdW-cY-8y7">
                                         <connections>
                                             <action selector="playButtonTapped:" destination="xUS-yO-GIr" id="4CT-uF-mbG"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="3af-O1-cXS"/>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="BGR-HY-Wh4"/>
-                                    <barButtonItem systemItem="pause" id="Unk-Wh-6gy">
+                                    <barButtonItem image="forward" catalog="system" id="kNp-Wm-PXB">
                                         <connections>
-                                            <action selector="pauseButtonTapped:" destination="xUS-yO-GIr" id="0Yh-72-JeE"/>
+                                            <action selector="onForwardButtonTapped:" destination="xUS-yO-GIr" id="Lvr-Kx-Pzm"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="3nm-oj-nbO"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="IB0-Zm-3aV"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="xcO-5D-2cI"/>
                                     <barButtonItem style="plain" id="x7r-jh-Hd3">
                                         <view key="customView" contentMode="scaleToFill" id="nou-Zu-Bhb">
-                                            <rect key="frame" x="373" y="0.0" width="181" height="32"/>
+                                            <rect key="frame" x="415" y="0.0" width="181" height="32"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Metadata " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="puJ-KS-O9U">
@@ -343,11 +335,10 @@
                                             </subviews>
                                         </view>
                                     </barButtonItem>
-                                    <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="teG-21-9ck"/>
                                     <barButtonItem style="plain" id="3xN-Yy-3MO">
-                                        <switch key="customView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="xnR-vK-2mQ" userLabel="honorTimedMetadataTracksSwitch">
-                                            <rect key="frame" x="596" y="0.5" width="51" height="31"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <switch key="customView" opaque="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="xnR-vK-2mQ" userLabel="honorTimedMetadataTracksSwitch">
+                                            <rect key="frame" x="596" y="1" width="51" height="31"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                             <connections>
                                                 <action selector="toggleHonorTimedMetadataTracksDuringPlayback:" destination="xUS-yO-GIr" eventType="valueChanged" id="fWw-d7-bhq"/>
                                             </connections>
@@ -363,13 +354,18 @@
                                     <segue destination="C1a-Ab-5aP" kind="embed" identifier="devicePlayerSegue" id="9hj-h4-Etn"/>
                                 </connections>
                             </containerView>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Uq2-72-NoP">
+                                <rect key="frame" x="0.0" y="323" width="667" height="4"/>
+                            </progressView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="32C-3r-ZrH" firstAttribute="leading" secondItem="PuO-6Q-VB0" secondAttribute="leadingMargin" id="1uY-2t-KiU"/>
                             <constraint firstAttribute="trailing" secondItem="S4j-lh-Xbq" secondAttribute="trailing" id="1y6-bM-jwP"/>
                             <constraint firstItem="frV-sr-hfx" firstAttribute="trailing" secondItem="VPX-gO-AEB" secondAttribute="trailing" id="6Y3-jT-joS"/>
+                            <constraint firstItem="Uq2-72-NoP" firstAttribute="top" secondItem="S4j-lh-Xbq" secondAttribute="bottom" constant="-8" id="BBh-Hv-MPC"/>
                             <constraint firstAttribute="bottom" secondItem="frV-sr-hfx" secondAttribute="bottom" id="Btd-8o-hwr"/>
+                            <constraint firstItem="Uq2-72-NoP" firstAttribute="leading" secondItem="PuO-6Q-VB0" secondAttribute="leading" id="CiG-Ua-dag"/>
                             <constraint firstItem="DcQ-8C-zsN" firstAttribute="top" secondItem="S4j-lh-Xbq" secondAttribute="bottom" constant="44" id="E6E-et-OUg"/>
                             <constraint firstItem="S4j-lh-Xbq" firstAttribute="top" secondItem="SB1-ax-C8k" secondAttribute="bottom" id="T1U-uf-s0C"/>
                             <constraint firstItem="32C-3r-ZrH" firstAttribute="trailing" secondItem="PuO-6Q-VB0" secondAttribute="trailingMargin" id="Vp6-E1-IHq"/>
@@ -379,6 +375,7 @@
                             <constraint firstItem="32C-3r-ZrH" firstAttribute="top" secondItem="SB1-ax-C8k" secondAttribute="bottom" constant="8" id="f0h-6k-d8m"/>
                             <constraint firstItem="S4j-lh-Xbq" firstAttribute="leading" secondItem="PuO-6Q-VB0" secondAttribute="leading" id="hNB-yY-VAQ"/>
                             <constraint firstItem="DcQ-8C-zsN" firstAttribute="top" secondItem="VPX-gO-AEB" secondAttribute="bottom" id="ie2-2O-cuB"/>
+                            <constraint firstAttribute="trailing" secondItem="Uq2-72-NoP" secondAttribute="trailing" id="nAL-He-0NJ"/>
                             <constraint firstItem="frV-sr-hfx" firstAttribute="leading" secondItem="PuO-6Q-VB0" secondAttribute="leading" id="r0C-d8-Ozc"/>
                         </constraints>
                     </view>
@@ -392,9 +389,9 @@
                     <connections>
                         <outlet property="honorTimedMetadataTracksSwitch" destination="xnR-vK-2mQ" id="NU7-tI-2Xt"/>
                         <outlet property="locationOverlayLabel" destination="32C-3r-ZrH" id="YY6-JM-6xr"/>
-                        <outlet property="pauseButton" destination="Unk-Wh-6gy" id="tj8-aB-14p"/>
                         <outlet property="playButton" destination="zdW-cY-8y7" id="VHd-K6-Uk9"/>
                         <outlet property="playerView" destination="VPX-gO-AEB" id="K0m-zX-lEE"/>
+                        <outlet property="progressView" destination="Uq2-72-NoP" id="pSW-c1-zes"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l0Q-Yw-gVs" sceneMemberID="firstResponder"/>
@@ -416,9 +413,9 @@
                             <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" sceneName="SceneKit Scene.scn" translatesAutoresizingMaskIntoConstraints="NO" id="VMY-ii-HbF">
                                 <rect key="frame" x="0.0" y="0.0" width="667" height="287"/>
                             </sceneKitView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ARy-en-CZi">
-                                <rect key="frame" x="10" y="10" width="629" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ARy-en-CZi">
+                                <rect key="frame" x="25" y="196" width="617" height="21"/>
+                                <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -426,10 +423,14 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="VMY-ii-HbF" firstAttribute="bottom" secondItem="0Kf-pc-wqg" secondAttribute="top" id="BTh-Yc-Xgh"/>
-                            <constraint firstAttribute="trailing" secondItem="VMY-ii-HbF" secondAttribute="trailing" id="Hmg-bm-Z1N"/>
-                            <constraint firstItem="VMY-ii-HbF" firstAttribute="top" secondItem="tv2-Ga-QGr" secondAttribute="top" id="fQa-US-lmf"/>
-                            <constraint firstItem="VMY-ii-HbF" firstAttribute="leading" secondItem="tv2-Ga-QGr" secondAttribute="leading" id="sKt-ax-mAx"/>
+                            <constraint firstItem="0Kf-pc-wqg" firstAttribute="top" secondItem="VMY-ii-HbF" secondAttribute="bottom" id="4FR-YF-EQf"/>
+                            <constraint firstItem="VMY-ii-HbF" firstAttribute="leading" secondItem="tv2-Ga-QGr" secondAttribute="leading" id="5Yu-b7-ZdQ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ARy-en-CZi" secondAttribute="trailing" constant="5" id="FCM-1V-Gzo"/>
+                            <constraint firstItem="0Kf-pc-wqg" firstAttribute="top" secondItem="ARy-en-CZi" secondAttribute="bottom" constant="5" id="NeI-pZ-WRX"/>
+                            <constraint firstItem="ARy-en-CZi" firstAttribute="centerX" secondItem="tv2-Ga-QGr" secondAttribute="centerX" id="Orf-J8-Hkb"/>
+                            <constraint firstItem="VMY-ii-HbF" firstAttribute="top" secondItem="dEe-8F-0lP" secondAttribute="bottom" id="TQ4-uJ-Dgh"/>
+                            <constraint firstItem="ARy-en-CZi" firstAttribute="leading" secondItem="tv2-Ga-QGr" secondAttribute="leadingMargin" constant="5" id="dsN-i1-LXS"/>
+                            <constraint firstAttribute="trailing" secondItem="VMY-ii-HbF" secondAttribute="trailing" id="tGB-qZ-cMC"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="N8e-mn-bdx"/>
@@ -440,7 +441,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dB6-sc-W50" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1401.9490254872564" y="990.39999999999998"/>
+            <point key="canvasLocation" x="1401.9490254872564" y="989.60000000000002"/>
         </scene>
         <!--Videos-->
         <scene sceneID="CYb-UJ-EVE">
@@ -501,11 +502,11 @@
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
     <resources>
+        <image name="backward" catalog="system" width="128" height="77"/>
+        <image name="forward" catalog="system" width="128" height="77"/>
+        <image name="play.fill" catalog="system" width="117" height="128"/>
         <image name="record.circle.fill" catalog="system" width="128" height="123"/>
         <image name="video.fill" catalog="system" width="128" height="81"/>
-        <systemColor name="systemBlueColor">
-            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
         <systemColor name="systemGreenColor">
             <color red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

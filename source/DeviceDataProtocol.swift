@@ -30,7 +30,6 @@ protocol DeviceDataProtocol {
     func asOSC() -> OSCMessage
     
     /*
-     
         buffer of OSC messages
         addMsg : add a single OSC message to the buffer
         convert buffer messages to JSON
@@ -103,23 +102,7 @@ class MOSCDeviceData : DeviceDataProtocol {
     func fromOSC(_ message:OSCMessage){
         
         addressString = message.addressPattern.stringValue
-        
-/*
-        // turn messgae into comma delimited string hack
-        let addressPattern = message.addressPattern.stringValue
-        let values = message.values.description.replacingOccurrences(of: "[", with: "").replacingOccurrences(of: "]", with: "")
-        let fullStr = addressPattern + ", " + values
-        print(fullStr)
-        
-        // take full string and convert to OSCMessage hack
-        var components = fullStr.components(separatedBy: ",").map{ $0.replacingOccurrences(of: " ", with: "")}
-        let address = components.removeFirst()
-        let vals = components.compactMap{ Float($0) }
-        let msg: OSCMessage = OSCMessage(address, values: vals)
-        print(msg.descriptionPretty)
-*/
-        
-        
+                
         // encode message.values to deviceData
         switch (message.addressPattern.pathComponents.last) {
             case "gyro":
@@ -128,8 +111,6 @@ class MOSCDeviceData : DeviceDataProtocol {
 
             case "quat":
                 // needed to swap order for orientation to work  on node
-                // print(message.values[0].oscValueToken)
-            
                 guard let (v0,v1,v2,v3) = try? message.values.masked(Double.self, Double.self, Double.self, Double.self) else { return }
                 quat = SCNQuaternion(x: Float(v2) , y: Float(v3), z: Float(v1), w: Float(v0))
 
@@ -156,10 +137,6 @@ class MOSCDeviceData : DeviceDataProtocol {
     }
 
 }
-
-
-
-
 
 
 class ASDeviceData : DeviceDataProtocol {

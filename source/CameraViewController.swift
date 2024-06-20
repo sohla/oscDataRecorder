@@ -48,7 +48,6 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
     @IBOutlet private weak var resumeButton: UIButton!
     @IBOutlet private weak var playerButton: UIBarButtonItem!
 
-    @IBOutlet weak var dataLevel: UIProgressView!
     
 //    sohla7
 //    !ZXzxzxzx72!
