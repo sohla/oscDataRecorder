@@ -354,7 +354,7 @@
                                     <segue destination="C1a-Ab-5aP" kind="embed" identifier="devicePlayerSegue" id="9hj-h4-Etn"/>
                                 </connections>
                             </containerView>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Uq2-72-NoP">
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Uq2-72-NoP">
                                 <rect key="frame" x="0.0" y="323" width="667" height="4"/>
                             </progressView>
                         </subviews>
