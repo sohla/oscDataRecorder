@@ -183,7 +183,7 @@ class PlayerViewController: UIViewController, AVPlayerItemMetadataOutputPushDele
                     var progress: Double = current / totalTime
 
                     if progress.isNaN {progress = 0}
-                    self.progressView.progress = Float(progress)
+                    self.progressView.progress = Float(progress)//BUG!
                     self.progressView.setNeedsDisplay()
             }
         }
