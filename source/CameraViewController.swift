@@ -65,6 +65,8 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
             
             self.deviceData.fromOSC(message)
             
+//            print(self.deviceData.asOSC().description)
+            
             self.delegate?.updateScene(data: self.deviceData)
 
 //            let date = Date()

@@ -28,18 +28,23 @@ class DeviceViewController: UIViewController, DeviceViewControllerDelegate {
         skView.backgroundColor = UIColor.clear
         
         let boxNode = skView.scene?.rootNode.childNode(withName: "box", recursively: true)
-        boxNode?.position = SCNVector3(-5,0,-4)
+        boxNode?.position = SCNVector3(-6,0,-6)
         
         let boxNode2 = skView.scene?.rootNode.childNode(withName: "box", recursively: true)?.clone()
         boxNode2?.name = "box2"
         skView.scene?.rootNode.addChildNode(boxNode2!)
-        boxNode2?.position = SCNVector3(0,0,-4)
+        boxNode2?.position = SCNVector3(-2,0,-6)
 
         let boxNode3 = skView.scene?.rootNode.childNode(withName: "box", recursively: true)?.clone()
         boxNode3?.name = "box3"
         skView.scene?.rootNode.addChildNode(boxNode3!)
-        boxNode3?.position = SCNVector3(5,0,-4)
-        
+        boxNode3?.position = SCNVector3(2,0,-6)
+
+        let boxNode4 = skView.scene?.rootNode.childNode(withName: "box", recursively: true)?.clone()
+        boxNode4?.name = "box4"
+        skView.scene?.rootNode.addChildNode(boxNode4!)
+        boxNode4?.position = SCNVector3(6,0,-6)
+
         label.text = "no device detected"
     }
     
@@ -53,7 +58,7 @@ class DeviceViewController: UIViewController, DeviceViewControllerDelegate {
             case "1":
                 let boxNode = skView.scene?.rootNode.childNode(withName: "box", recursively: true)
                 boxNode?.orientation = data.quat
-                boxNode?.position = SCNVector3(-5,0,-4)
+                boxNode?.position = SCNVector3(-6,0,-6)
             label.text = "\(data.asOSC().description)"
 
                 let x = boxNode?.childNode(withName: "x", recursively: true)
@@ -67,7 +72,7 @@ class DeviceViewController: UIViewController, DeviceViewControllerDelegate {
             case "2":
                 let boxNode = skView.scene?.rootNode.childNode(withName: "box2", recursively: true)
                 boxNode?.orientation = data.quat
-                boxNode?.position = SCNVector3(0,0,-4)
+                boxNode?.position = SCNVector3(-2,0,-6)
             label.text = "\(data.asOSC().description)"
 
                 let x = boxNode?.childNode(withName: "x", recursively: true)
@@ -81,8 +86,20 @@ class DeviceViewController: UIViewController, DeviceViewControllerDelegate {
             case "3":
                 let boxNode = skView.scene?.rootNode.childNode(withName: "box3", recursively: true)
                 boxNode?.orientation = data.quat
-                boxNode?.position = SCNVector3(5,0,-4)
-            label.text = "\(data.asOSC().description)"
+                boxNode?.position = SCNVector3(2,0,-6)
+
+                let x = boxNode?.childNode(withName: "x", recursively: true)
+                x?.scale = SCNVector3(data.accel.x * accelScale,1,1)
+                let y = boxNode?.childNode(withName: "y", recursively: true)
+                y?.scale = SCNVector3(1,data.accel.y * accelScale,1)
+                let z = boxNode?.childNode(withName: "z", recursively: true)
+                z?.scale = SCNVector3(1,1,data.accel.z * accelScale)
+            break;
+
+            case "4":
+                let boxNode = skView.scene?.rootNode.childNode(withName: "box4", recursively: true)
+                boxNode?.orientation = data.quat
+                boxNode?.position = SCNVector3(6,0,-6)
 
                 let x = boxNode?.childNode(withName: "x", recursively: true)
                 x?.scale = SCNVector3(data.accel.x * accelScale,1,1)
