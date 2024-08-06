@@ -202,6 +202,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 		sessionQueue.async {
 			if self.setupResult == .success {
                 self.server.stop()
+                print("server stopped")
 				self.session.stopRunning()
 				self.removeObservers()
 			}
@@ -571,8 +572,8 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
     @IBAction func onResetButton(_ sender: Any) {
     
 
-        if let ip = UserDefaults.standard.string(forKey: "ipAddress"){
-            if let port = UserDefaults.standard.string(forKey: "portAddress"){
+//        if let ip = UserDefaults.standard.string(forKey: "ipAddress"){
+//            if let port = UserDefaults.standard.string(forKey: "portAddress"){
                 
 //                let address = "udp://"+ip+":"+port
                 
@@ -580,8 +581,8 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 //                //•• SET ADDRESS and PORT of the touch device you want to reset NOT TESTED
 //                CameraViewController.client.send(msg, to: address)
 
-            }
-        }
+//            }
+//        }
     }
 
     func fileOutput(_ output: AVCaptureFileOutput, didStartRecordingTo fileURL: URL, from connections: [AVCaptureConnection]) {
