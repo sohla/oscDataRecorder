@@ -216,26 +216,22 @@ class ASDeviceData : DeviceDataProtocol {
 //                guard let v0 = try? message.values.masked(Float.self) else { return }
 //                quat.w = v0
 
-            case "IMUFusedData":
-                guard let (v0, v1, v2, v3, v4, v5, v6) = try? message.values.masked(Float.self, Float.self, Float.self, Float.self, Float.self, Float.self, Float.self) else { return }
-                accel = SCNVector3(x: v0, y: v1, z: v2)
-                quat = SCNQuaternion(x: v3 , y: v4, z: v5, w: v6)
-                if let id = message.addressPattern.pathComponents.first {
-                    deviceID = String(id)
-                }
-            
-//            case "rrate":
-//                guard let (v0,v1,v2) = try? message.values.masked(Float.self, Float.self, Float.self) else { return }
-//                rrate = SCNVector3(x: v0, y: v1, z: v2)
-//
-//            case "accel":
-//                guard let (v0,v1,v2) = try? message.values.masked(Float.self, Float.self, Float.self) else { return }
-//                accel = SCNVector3(x: v0, y: v1, z: v2)
-//
-//            case "amp":
-//                guard let (v0) = try? message.values.masked(Float.self) else { return }
-//                amp = v0
-            
+//        case "IMUFusedData":
+        case "CombinedDataPacket":
+
+            // need to unpack the values out of message as an array of floats
+            var values = [Float](repeating: 0.0, count:message.values.count)
+            for (index, _) in message.values.enumerated() {
+                guard let value = message.values[index] as? Float else { return }
+                values[index] = value
+            }
+            // pass all the data
+            accel = SCNVector3(x: values[0], y: values[1], z: values[2])
+            quat = SCNQuaternion(x: values[3] , y: values[4], z: values[5], w: values[6])
+            if let id = message.addressPattern.pathComponents.first {
+                deviceID = String(id)
+            }
+
             case "rollCorrection":
                 let _ = 0
             
@@ -252,7 +248,8 @@ class ASDeviceData : DeviceDataProtocol {
         // not sending id!!
         
         let id = deviceID
-        let msg: OSCMessage = OSCMessage("/\(id)/IMUFusedData", values: [
+//        let msg: OSCMessage = OSCMessage("/\(id)/IMUFusedData", values: [
+        let msg: OSCMessage = OSCMessage("/\(id)/CombinedDataPacket", values: [
             accel.x,
             accel.y,
             accel.z,
