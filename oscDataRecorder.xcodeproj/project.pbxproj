@@ -28,6 +28,7 @@
 
 /* Begin PBXFileReference section */
 		F00B4A9C20F25F8C003C513C /* OSCViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSCViewController.swift; sourceTree = "<group>"; };
+		F03C15092CCB0E7E006DFEE8 /* oscDataRecorder.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = oscDataRecorder.entitlements; sourceTree = "<group>"; };
 		F04126D12BF5DAF800CF3664 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F04126D32BF5DAF800CF3664 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		F04126D52BF5DAF800CF3664 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -83,6 +84,7 @@
 		F053542C20EF88970084370E = {
 			isa = PBXGroup;
 			children = (
+				F03C15092CCB0E7E006DFEE8 /* oscDataRecorder.entitlements */,
 				F097F7D52BC10C5900C880F7 /* README.md */,
 				F0F0A57620EF89410033C9C9 /* source */,
 				F04126D02BF5DAF800CF3664 /* oscRecorder */,
@@ -377,7 +379,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = oscDataRecorder.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G9C3VREPPJ;
 				INFOPLIST_FILE = "$(SRCROOT)/source/Info.plist";
@@ -389,6 +393,10 @@
 				PRODUCT_BUNDLE_IDENTIFIER = oscDataRecorder.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -398,7 +406,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = oscDataRecorder.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G9C3VREPPJ;
 				INFOPLIST_FILE = "$(SRCROOT)/source/Info.plist";
@@ -410,6 +420,10 @@
 				PRODUCT_BUNDLE_IDENTIFIER = oscDataRecorder.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
