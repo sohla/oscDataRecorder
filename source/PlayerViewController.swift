@@ -1,3 +1,4 @@
+
 /*
 	Copyright (C) 2017 Apple Inc. All Rights Reserved.
 	See LICENSE.txt for this sample’s licensing information
@@ -53,6 +54,7 @@ class PlayerViewController: UIViewController, AVPlayerItemMetadataOutputPushDele
 		
 		let metadataQueue = DispatchQueue(label: "com.example.metadataqueue", attributes: [])
 		itemMetadataOutput.setDelegate(self, queue: metadataQueue)
+        
 	}
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -178,13 +180,13 @@ class PlayerViewController: UIViewController, AVPlayerItemMetadataOutputPushDele
 
             
             let totalTime: Double = CMTimeGetSeconds((player?.currentItem?.duration)!)
-            periodicObserver = player?.addPeriodicTimeObserver(forInterval: CMTimeMake(value: 60, timescale: CMTimeScale(exactly: 1000)!) , queue: DispatchQueue.main ) { [unowned self] (time) in
+            periodicObserver = player?.addPeriodicTimeObserver(forInterval: CMTimeMake(value: 60, timescale: CMTimeScale(exactly: 1000)!) , queue: DispatchQueue.main ) { [weak self] (time) in
                     let current: Double = CMTimeGetSeconds(time)
                     var progress: Double = current / totalTime
 
                     if progress.isNaN {progress = 0}
-                    self.progressView.progress = Float(progress)//BUG!
-                    self.progressView.setNeedsDisplay()
+                    self?.progressView.progress = Float(progress)//BUG!
+                    self?.progressView.setNeedsDisplay()
             }
         }
         
