@@ -172,6 +172,7 @@ class PlayerViewController: UIViewController, AVPlayerItemMetadataOutputPushDele
             // Create AVPlayer with the generated instance of playerItem. Also add the facesLayer as subLayer to this playLayer.
             player = AVPlayer(playerItem: playerItem)
             player?.actionAtItemEnd = .none
+            player?.volume = 0.0
             
             let playerLayer = AVPlayerLayer(player: player)
             playerLayer.backgroundColor = UIColor.darkGray.cgColor

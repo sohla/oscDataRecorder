@@ -253,61 +253,67 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 		
 		// Add video input.
 		do {
-			var defaultVideoDevice: AVCaptureDevice?
-			
-			// Choose the back dual camera if available, otherwise default to a wide angle camera.
-            if let dualCameraDevice = AVCaptureDevice.default(.builtInDualCamera, for: AVMediaType.video, position: .back) {
-				defaultVideoDevice = dualCameraDevice
-			}
-            else if let backCameraDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: AVMediaType.video, position: .back) {
-				// If the back dual camera is not available, default to the back wide angle camera.
-				defaultVideoDevice = backCameraDevice
-			}
-            else if let frontCameraDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: AVMediaType.video, position: .front) {
-				// In some cases where users break their phones, the back wide angle camera is not available. In this case, we should default to the front wide angle camera.
-				defaultVideoDevice = frontCameraDevice
-			}
             
-            let videoDeviceInput = try AVCaptureDeviceInput(device: defaultVideoDevice!)
+            
+            // Get the best available camera using a cleaner fallback approach
+            let defaultVideoDevice: AVCaptureDevice? = AVCaptureDevice.default(.builtInDualCamera, for: .video, position: .back) ??
+                                                      AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back) ??
+                                                      AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .front)
+
+            // Safely create video input only if we have a device
+            guard let videoDevice = defaultVideoDevice else {
+                print("Error: No video capture devices available")
+                // Handle the error appropriately, perhaps showing an alert to the user
+                setupResult = .configurationFailed
+                session.commitConfiguration()
+                return
+            }
+
+            // Create the capture device input
+            do {
+                let videoDeviceInput = try AVCaptureDeviceInput(device: videoDevice)
+
+                if session.canAddInput(videoDeviceInput) {
+                    session.addInput(videoDeviceInput)
+                    self.videoDeviceInput = videoDeviceInput
+                    
+                    DispatchQueue.main.async {
+                        /*
+                            Why are we dispatching this to the main queue?
+                            Because AVCaptureVideoPreviewLayer is the backing layer for PreviewView and UIView
+                            can only be manipulated on the main thread.
+                            Note: As an exception to the above rule, it is not necessary to serialize video orientation changes
+                            on the AVCaptureVideoPreviewLayer’s connection with other session manipulation.
+                        
+                            Use the status bar orientation as the initial video orientation. Subsequent orientation changes are
+                            handled by CameraViewController.viewWillTransition(to:with:).
+                        */
+                        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+                            let statusBarOrientation = windowScene.interfaceOrientation
+                            var initialVideoOrientation: AVCaptureVideoOrientation = .portrait
+                            if statusBarOrientation != .unknown {
+                                if let videoOrientation = statusBarOrientation.videoOrientation {
+                                    initialVideoOrientation = videoOrientation
+                                }
+                            }
+                            self.previewView.videoPreviewLayer.connection!.videoOrientation = initialVideoOrientation
+                        }
+                    }
+                }
+                else {
+                    print("Could not add video device input to the session")
+                    setupResult = .configurationFailed
+                    session.commitConfiguration()
+                    return
+                }
+
+            } catch {
+                print("Error creating video device input: \(error.localizedDescription)")
+                // Handle the error appropriately
+                return
+            }
 			
-			if session.canAddInput(videoDeviceInput) {
-				session.addInput(videoDeviceInput)
-				self.videoDeviceInput = videoDeviceInput
-				
-				DispatchQueue.main.async {
-					/*
-						Why are we dispatching this to the main queue?
-						Because AVCaptureVideoPreviewLayer is the backing layer for PreviewView and UIView
-						can only be manipulated on the main thread.
-						Note: As an exception to the above rule, it is not necessary to serialize video orientation changes
-						on the AVCaptureVideoPreviewLayer’s connection with other session manipulation.
-					
-						Use the status bar orientation as the initial video orientation. Subsequent orientation changes are
-						handled by CameraViewController.viewWillTransition(to:with:).
-					*/
-					let statusBarOrientation = UIApplication.shared.statusBarOrientation
-					var initialVideoOrientation: AVCaptureVideoOrientation = .portrait
-					if statusBarOrientation != .unknown {
-						if let videoOrientation = statusBarOrientation.videoOrientation {
-							initialVideoOrientation = videoOrientation
-						}
-					}
-					
-                    self.previewView.videoPreviewLayer.connection!.videoOrientation = initialVideoOrientation
-				}
-			}
-			else {
-				print("Could not add video device input to the session")
-				setupResult = .configurationFailed
-				session.commitConfiguration()
-				return
-			}
-		}
-		catch {
-			print("Could not create video device input: \(error)")
-			setupResult = .configurationFailed
-			session.commitConfiguration()
-			return
+			
 		}
 		
 		// Add audio input.
