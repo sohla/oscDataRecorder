@@ -216,8 +216,8 @@ class ASDeviceData : DeviceDataProtocol {
 //                guard let v0 = try? message.values.masked(Float.self) else { return }
 //                quat.w = v0
 
-//        case "IMUFusedData":
-        case "CombinedDataPacket":
+        case "IMUFusedData":
+//        case "CombinedDataPacket":
 
             // need to unpack the values out of message as an array of floats
             var values = [Float](repeating: 0.0, count:message.values.count)
