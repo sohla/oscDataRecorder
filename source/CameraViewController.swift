@@ -503,7 +503,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 					device.isSubjectAreaChangeMonitoringEnabled = monitorSubjectAreaChange
 					device.unlockForConfiguration()
 				}
-				catch {
+				catch { 
 					print("Could not lock device for configuration: \(error)")
 				}
 			}

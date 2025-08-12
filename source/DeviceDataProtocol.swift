@@ -248,8 +248,8 @@ class ASDeviceData : DeviceDataProtocol {
         // not sending id!!
         
         let id = deviceID
-//        let msg: OSCMessage = OSCMessage("/\(id)/IMUFusedData", values: [
-        let msg: OSCMessage = OSCMessage("/\(id)/CombinedDataPacket", values: [
+        let msg: OSCMessage = OSCMessage("/\(id)/IMUFusedData", values: [
+//        let msg: OSCMessage = OSCMessage("/\(id)/CombinedDataPacket", values: [
             accel.x,
             accel.y,
             accel.z,
