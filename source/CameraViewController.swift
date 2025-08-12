@@ -416,6 +416,8 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 			
             let devices = self.videoDeviceDiscoverySession.devices
 			var newVideoDevice: AVCaptureDevice? = nil
+            
+            print(devices)
 			
 			// First, look for a device with both the preferred position and device type. Otherwise, look for a device with only the preferred position.
 			if let device = devices.filter({ $0.position == preferredPosition && $0.deviceType == preferredDeviceType }).first {
